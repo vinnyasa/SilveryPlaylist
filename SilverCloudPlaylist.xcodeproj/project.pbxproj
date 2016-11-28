@@ -1,0 +1,623 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		2755B12C1DEB925C00CB486E /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2755B12B1DEB925C00CB486E /* LoginViewController.swift */; };
+		2755B12D1DEB925C00CB486E /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2755B12B1DEB925C00CB486E /* LoginViewController.swift */; };
+		2755B12F1DEBACDF00CB486E /* SpotifyAuthentication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2755B12E1DEBACDF00CB486E /* SpotifyAuthentication.framework */; };
+		2755B1301DEBACDF00CB486E /* SpotifyAuthentication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2755B12E1DEBACDF00CB486E /* SpotifyAuthentication.framework */; };
+		27D43D2A1DE8FB980034DA05 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D43D291DE8FB980034DA05 /* AppDelegate.swift */; };
+		27D43D2C1DE8FB980034DA05 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D43D2B1DE8FB980034DA05 /* ViewController.swift */; };
+		27D43D2F1DE8FB980034DA05 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 27D43D2D1DE8FB980034DA05 /* Main.storyboard */; };
+		27D43D311DE8FB980034DA05 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 27D43D301DE8FB980034DA05 /* Assets.xcassets */; };
+		27D43D341DE8FB980034DA05 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 27D43D321DE8FB980034DA05 /* LaunchScreen.storyboard */; };
+		27D43D3F1DE8FB9A0034DA05 /* SilverCloudPlaylistTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D43D3E1DE8FB9A0034DA05 /* SilverCloudPlaylistTests.swift */; };
+		27D43D4A1DE8FB9A0034DA05 /* SilverCloudPlaylistUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D43D491DE8FB9A0034DA05 /* SilverCloudPlaylistUITests.swift */; };
+		27D43D591DE8FE890034DA05 /* Track.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D43D581DE8FE890034DA05 /* Track.swift */; };
+		27D43D5B1DE8FEF50034DA05 /* CoverArt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D43D5A1DE8FEF50034DA05 /* CoverArt.swift */; };
+		27D43D5E1DE94E8A0034DA05 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27D43D5D1DE94E890034DA05 /* SystemConfiguration.framework */; };
+		27E2FC651DECAB9500E3251A /* AuthParam.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27E2FC641DECAB9500E3251A /* AuthParam.swift */; };
+		27E2FC661DECAB9500E3251A /* AuthParam.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27E2FC641DECAB9500E3251A /* AuthParam.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		27D43D3B1DE8FB9A0034DA05 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 27D43D1E1DE8FB970034DA05 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 27D43D251DE8FB970034DA05;
+			remoteInfo = SilverCloudPlaylist;
+		};
+		27D43D461DE8FB9A0034DA05 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 27D43D1E1DE8FB970034DA05 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 27D43D251DE8FB970034DA05;
+			remoteInfo = SilverCloudPlaylist;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		2755B1241DEB82D000CB486E /* SilverCloudPlaylist-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SilverCloudPlaylist-Bridging-Header.h"; sourceTree = "<group>"; };
+		2755B12B1DEB925C00CB486E /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		2755B12E1DEBACDF00CB486E /* SpotifyAuthentication.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SpotifyAuthentication.framework; sourceTree = "<group>"; };
+		27D43D261DE8FB980034DA05 /* SilverCloudPlaylist.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SilverCloudPlaylist.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		27D43D291DE8FB980034DA05 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		27D43D2B1DE8FB980034DA05 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		27D43D2E1DE8FB980034DA05 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		27D43D301DE8FB980034DA05 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		27D43D331DE8FB980034DA05 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		27D43D351DE8FB980034DA05 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		27D43D3A1DE8FB9A0034DA05 /* SilverCloudPlaylistTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SilverCloudPlaylistTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		27D43D3E1DE8FB9A0034DA05 /* SilverCloudPlaylistTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SilverCloudPlaylistTests.swift; sourceTree = "<group>"; };
+		27D43D401DE8FB9A0034DA05 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		27D43D451DE8FB9A0034DA05 /* SilverCloudPlaylistUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SilverCloudPlaylistUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		27D43D491DE8FB9A0034DA05 /* SilverCloudPlaylistUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SilverCloudPlaylistUITests.swift; sourceTree = "<group>"; };
+		27D43D4B1DE8FB9A0034DA05 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		27D43D581DE8FE890034DA05 /* Track.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Track.swift; sourceTree = "<group>"; };
+		27D43D5A1DE8FEF50034DA05 /* CoverArt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoverArt.swift; sourceTree = "<group>"; };
+		27D43D5D1DE94E890034DA05 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		27E2FC641DECAB9500E3251A /* AuthParam.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthParam.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		27D43D231DE8FB970034DA05 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				27D43D5E1DE94E8A0034DA05 /* SystemConfiguration.framework in Frameworks */,
+				2755B12F1DEBACDF00CB486E /* SpotifyAuthentication.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		27D43D371DE8FB9A0034DA05 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2755B1301DEBACDF00CB486E /* SpotifyAuthentication.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		27D43D421DE8FB9A0034DA05 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		2755B12A1DEB922200CB486E /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				27D43D2B1DE8FB980034DA05 /* ViewController.swift */,
+				2755B12B1DEB925C00CB486E /* LoginViewController.swift */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		27D43D1D1DE8FB970034DA05 = {
+			isa = PBXGroup;
+			children = (
+				27D43D281DE8FB980034DA05 /* SilverCloudPlaylist */,
+				27D43D3D1DE8FB9A0034DA05 /* SilverCloudPlaylistTests */,
+				27D43D481DE8FB9A0034DA05 /* SilverCloudPlaylistUITests */,
+				27D43D271DE8FB980034DA05 /* Products */,
+				27D43D5C1DE94E880034DA05 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		27D43D271DE8FB980034DA05 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				27D43D261DE8FB980034DA05 /* SilverCloudPlaylist.app */,
+				27D43D3A1DE8FB9A0034DA05 /* SilverCloudPlaylistTests.xctest */,
+				27D43D451DE8FB9A0034DA05 /* SilverCloudPlaylistUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		27D43D281DE8FB980034DA05 /* SilverCloudPlaylist */ = {
+			isa = PBXGroup;
+			children = (
+				2755B12A1DEB922200CB486E /* Controller */,
+				27D43D571DE8FE6C0034DA05 /* Model */,
+				27D43D291DE8FB980034DA05 /* AppDelegate.swift */,
+				27D43D2D1DE8FB980034DA05 /* Main.storyboard */,
+				27D43D301DE8FB980034DA05 /* Assets.xcassets */,
+				27D43D321DE8FB980034DA05 /* LaunchScreen.storyboard */,
+				27D43D351DE8FB980034DA05 /* Info.plist */,
+			);
+			path = SilverCloudPlaylist;
+			sourceTree = "<group>";
+		};
+		27D43D3D1DE8FB9A0034DA05 /* SilverCloudPlaylistTests */ = {
+			isa = PBXGroup;
+			children = (
+				27D43D3E1DE8FB9A0034DA05 /* SilverCloudPlaylistTests.swift */,
+				27D43D401DE8FB9A0034DA05 /* Info.plist */,
+			);
+			path = SilverCloudPlaylistTests;
+			sourceTree = "<group>";
+		};
+		27D43D481DE8FB9A0034DA05 /* SilverCloudPlaylistUITests */ = {
+			isa = PBXGroup;
+			children = (
+				27D43D491DE8FB9A0034DA05 /* SilverCloudPlaylistUITests.swift */,
+				27D43D4B1DE8FB9A0034DA05 /* Info.plist */,
+			);
+			path = SilverCloudPlaylistUITests;
+			sourceTree = "<group>";
+		};
+		27D43D571DE8FE6C0034DA05 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				27E2FC631DECAA8800E3251A /* New Group */,
+				27D43D581DE8FE890034DA05 /* Track.swift */,
+				27D43D5A1DE8FEF50034DA05 /* CoverArt.swift */,
+				27E2FC641DECAB9500E3251A /* AuthParam.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		27D43D5C1DE94E880034DA05 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				2755B12E1DEBACDF00CB486E /* SpotifyAuthentication.framework */,
+				27D43D5D1DE94E890034DA05 /* SystemConfiguration.framework */,
+				2755B1241DEB82D000CB486E /* SilverCloudPlaylist-Bridging-Header.h */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		27E2FC631DECAA8800E3251A /* New Group */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "New Group";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		27D43D251DE8FB970034DA05 /* SilverCloudPlaylist */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 27D43D4E1DE8FB9A0034DA05 /* Build configuration list for PBXNativeTarget "SilverCloudPlaylist" */;
+			buildPhases = (
+				27D43D221DE8FB970034DA05 /* Sources */,
+				27D43D231DE8FB970034DA05 /* Frameworks */,
+				27D43D241DE8FB970034DA05 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SilverCloudPlaylist;
+			productName = SilverCloudPlaylist;
+			productReference = 27D43D261DE8FB980034DA05 /* SilverCloudPlaylist.app */;
+			productType = "com.apple.product-type.application";
+		};
+		27D43D391DE8FB9A0034DA05 /* SilverCloudPlaylistTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 27D43D511DE8FB9A0034DA05 /* Build configuration list for PBXNativeTarget "SilverCloudPlaylistTests" */;
+			buildPhases = (
+				27D43D361DE8FB9A0034DA05 /* Sources */,
+				27D43D371DE8FB9A0034DA05 /* Frameworks */,
+				27D43D381DE8FB9A0034DA05 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				27D43D3C1DE8FB9A0034DA05 /* PBXTargetDependency */,
+			);
+			name = SilverCloudPlaylistTests;
+			productName = SilverCloudPlaylistTests;
+			productReference = 27D43D3A1DE8FB9A0034DA05 /* SilverCloudPlaylistTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		27D43D441DE8FB9A0034DA05 /* SilverCloudPlaylistUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 27D43D541DE8FB9A0034DA05 /* Build configuration list for PBXNativeTarget "SilverCloudPlaylistUITests" */;
+			buildPhases = (
+				27D43D411DE8FB9A0034DA05 /* Sources */,
+				27D43D421DE8FB9A0034DA05 /* Frameworks */,
+				27D43D431DE8FB9A0034DA05 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				27D43D471DE8FB9A0034DA05 /* PBXTargetDependency */,
+			);
+			name = SilverCloudPlaylistUITests;
+			productName = SilverCloudPlaylistUITests;
+			productReference = 27D43D451DE8FB9A0034DA05 /* SilverCloudPlaylistUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		27D43D1E1DE8FB970034DA05 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0810;
+				LastUpgradeCheck = 0810;
+				ORGANIZATIONNAME = TrhUArrayLUV;
+				TargetAttributes = {
+					27D43D251DE8FB970034DA05 = {
+						CreatedOnToolsVersion = 8.1;
+						LastSwiftMigration = 0810;
+						ProvisioningStyle = Automatic;
+					};
+					27D43D391DE8FB9A0034DA05 = {
+						CreatedOnToolsVersion = 8.1;
+						LastSwiftMigration = 0810;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 27D43D251DE8FB970034DA05;
+					};
+					27D43D441DE8FB9A0034DA05 = {
+						CreatedOnToolsVersion = 8.1;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 27D43D251DE8FB970034DA05;
+					};
+				};
+			};
+			buildConfigurationList = 27D43D211DE8FB970034DA05 /* Build configuration list for PBXProject "SilverCloudPlaylist" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 27D43D1D1DE8FB970034DA05;
+			productRefGroup = 27D43D271DE8FB980034DA05 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				27D43D251DE8FB970034DA05 /* SilverCloudPlaylist */,
+				27D43D391DE8FB9A0034DA05 /* SilverCloudPlaylistTests */,
+				27D43D441DE8FB9A0034DA05 /* SilverCloudPlaylistUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		27D43D241DE8FB970034DA05 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				27D43D341DE8FB980034DA05 /* LaunchScreen.storyboard in Resources */,
+				27D43D311DE8FB980034DA05 /* Assets.xcassets in Resources */,
+				27D43D2F1DE8FB980034DA05 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		27D43D381DE8FB9A0034DA05 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		27D43D431DE8FB9A0034DA05 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		27D43D221DE8FB970034DA05 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				27D43D2C1DE8FB980034DA05 /* ViewController.swift in Sources */,
+				27D43D2A1DE8FB980034DA05 /* AppDelegate.swift in Sources */,
+				27D43D591DE8FE890034DA05 /* Track.swift in Sources */,
+				2755B12C1DEB925C00CB486E /* LoginViewController.swift in Sources */,
+				27D43D5B1DE8FEF50034DA05 /* CoverArt.swift in Sources */,
+				27E2FC651DECAB9500E3251A /* AuthParam.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		27D43D361DE8FB9A0034DA05 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2755B12D1DEB925C00CB486E /* LoginViewController.swift in Sources */,
+				27D43D3F1DE8FB9A0034DA05 /* SilverCloudPlaylistTests.swift in Sources */,
+				27E2FC661DECAB9500E3251A /* AuthParam.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		27D43D411DE8FB9A0034DA05 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				27D43D4A1DE8FB9A0034DA05 /* SilverCloudPlaylistUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		27D43D3C1DE8FB9A0034DA05 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 27D43D251DE8FB970034DA05 /* SilverCloudPlaylist */;
+			targetProxy = 27D43D3B1DE8FB9A0034DA05 /* PBXContainerItemProxy */;
+		};
+		27D43D471DE8FB9A0034DA05 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 27D43D251DE8FB970034DA05 /* SilverCloudPlaylist */;
+			targetProxy = 27D43D461DE8FB9A0034DA05 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		27D43D2D1DE8FB980034DA05 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				27D43D2E1DE8FB980034DA05 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		27D43D321DE8FB980034DA05 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				27D43D331DE8FB980034DA05 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		27D43D4C1DE8FB9A0034DA05 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		27D43D4D1DE8FB9A0034DA05 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		27D43D4F1DE8FB9A0034DA05 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				INFOPLIST_FILE = SilverCloudPlaylist/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_BUNDLE_IDENTIFIER = com.trhuarrayluv.SilverCloudPlaylist;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "SilverCloudPlaylist-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		27D43D501DE8FB9A0034DA05 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				INFOPLIST_FILE = SilverCloudPlaylist/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_BUNDLE_IDENTIFIER = com.trhuarrayluv.SilverCloudPlaylist;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "SilverCloudPlaylist-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+		27D43D521DE8FB9A0034DA05 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				INFOPLIST_FILE = SilverCloudPlaylistTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.trhuarrayluv.SilverCloudPlaylistTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "SilverCloudPlaylistTests-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SilverCloudPlaylist.app/SilverCloudPlaylist";
+			};
+			name = Debug;
+		};
+		27D43D531DE8FB9A0034DA05 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				INFOPLIST_FILE = SilverCloudPlaylistTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.trhuarrayluv.SilverCloudPlaylistTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "SilverCloudPlaylistTests-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SilverCloudPlaylist.app/SilverCloudPlaylist";
+			};
+			name = Release;
+		};
+		27D43D551DE8FB9A0034DA05 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				INFOPLIST_FILE = SilverCloudPlaylistUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.trhuarrayluv.SilverCloudPlaylistUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_TARGET_NAME = SilverCloudPlaylist;
+			};
+			name = Debug;
+		};
+		27D43D561DE8FB9A0034DA05 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				INFOPLIST_FILE = SilverCloudPlaylistUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.trhuarrayluv.SilverCloudPlaylistUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_TARGET_NAME = SilverCloudPlaylist;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		27D43D211DE8FB970034DA05 /* Build configuration list for PBXProject "SilverCloudPlaylist" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				27D43D4C1DE8FB9A0034DA05 /* Debug */,
+				27D43D4D1DE8FB9A0034DA05 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		27D43D4E1DE8FB9A0034DA05 /* Build configuration list for PBXNativeTarget "SilverCloudPlaylist" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				27D43D4F1DE8FB9A0034DA05 /* Debug */,
+				27D43D501DE8FB9A0034DA05 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		27D43D511DE8FB9A0034DA05 /* Build configuration list for PBXNativeTarget "SilverCloudPlaylistTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				27D43D521DE8FB9A0034DA05 /* Debug */,
+				27D43D531DE8FB9A0034DA05 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		27D43D541DE8FB9A0034DA05 /* Build configuration list for PBXNativeTarget "SilverCloudPlaylistUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				27D43D551DE8FB9A0034DA05 /* Debug */,
+				27D43D561DE8FB9A0034DA05 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 27D43D1E1DE8FB970034DA05 /* Project object */;
+}
