@@ -10,8 +10,10 @@ import UIKit
 
 class SilverCloudPlaylistTableViewController: UITableViewController {
     
-    let session = false
+    //var hasSession = UserDefaults.standard.bool(forKey: Session.hasSession.rawValue)
+    var hasSession = UserDefaults.standard.data(forKey: Session.userDefaultsKey.rawValue) != nil
     var playlists = [Any]()
+    var sptSession: SPTSession?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,15 +23,39 @@ class SilverCloudPlaylistTableViewController: UITableViewController {
         self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
     override func viewDidAppear(_ animated: Bool) {
-        guard session else {
-            performSegue(withIdentifier: SegueIdentifier.showLogin.rawValue, sender: self)
-            return
-        }
+        print("callingViewDidAppear")
+        confirmSessionStatus()
+        
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func confirmSessionStatus() {
+        guard let sessionData = UserDefaults.standard.data(forKey: Session.userDefaultsKey.rawValue) else {
+            performSegue(withIdentifier: SegueIdentifier.showLogin.rawValue, sender: self)
+            return
+        }
+        // firstLoginDidHappen
+        if let session = NSKeyedUnarchiver.unarchiveObject(with: sessionData) as? SPTSession {
+            guard session.isValid() else {
+                //handle not valid session, renew session
+                SPTAuth.defaultInstance().renewSession(session) { (error, session)
+                    in
+                    guard error == nil else {
+                        //FIXME: unable to renew, trigger login again
+                        return
+                    }
+                    //sdk should be saving session to defaults, test
+                    self.sptSession = session
+                }
+                return
+            }
+            // have valid session: good to go
+            //updatePlaylists()
+        }
     }
 
     // MARK: - Table view data source
@@ -89,6 +115,7 @@ class SilverCloudPlaylistTableViewController: UITableViewController {
     }
     */
     @IBAction func loginSuccessFul(_ segue:UIStoryboardSegue) {
+        //hasSession = true
         let loginVC = segue.source as? LoginViewController
         if let _ = loginVC?.hasSession {
             

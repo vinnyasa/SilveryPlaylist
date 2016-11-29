@@ -12,7 +12,7 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+    
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -27,15 +27,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         SPTAuth.defaultInstance().handleAuthCallback(withTriggeredAuthURL: url, callback: {
             (error, session) in
-            guard let sptSession = session, error == nil else {
+            guard error == nil else {
+                //FIXME: handle error in callback
                 print("error in callBack: \(error)")
                 return
             }
+            /* save session, I am pretty sure sdk is doing this
             let userDefaults = UserDefaults.standard
-            //userDefaults.set(true, forKey: AuthParam.sessionUserDefaultsKey.rawValue)
             let sessionData = NSKeyedArchiver.archivedData(withRootObject: sptSession)
-            userDefaults.set(sessionData, forKey: AuthParam.sessionUserDefaultsKey.rawValue)
-            userDefaults.synchronize()
+            userDefaults.set(sessionData, forKey: Session.userDefaultsKey.rawValue)
+            //userDefaults.set(true, forKey: Session.hasSession.rawValue)
+            userDefaults.synchronize()*/
+            let loginCallback = NSNotification.Name(rawValue: NotificationIdentifier.loginCallback.rawValue)
+            NotificationCenter.default.post(name: loginCallback, object: nil)
         })
         return false
     }

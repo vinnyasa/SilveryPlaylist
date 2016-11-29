@@ -16,12 +16,12 @@ class LoginViewController: UIViewController {
     //let tokenSwapURL = "https://silvercloudswap.herokuapp.com/swap"
     //let tokenRefreshURL = "https://silvercloudswap.herokuapp.com/refresh"
     let silverCloudAuth = SilverCloudAuth()
+    //usingFroTestingsegue delete before sending
     var hasSession = false {
         didSet { if hasSession { performSegue(withIdentifier: SegueIdentifier.loginComplete.rawValue, sender: nil)}
         }
     }
-    //let callbackNotification = NotificationIdentifier.callback.rawValue
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         //
@@ -38,17 +38,14 @@ class LoginViewController: UIViewController {
     func addCallbackObserver() {
         //NotificationCenter.default.addObserver(self, selector: #selector(handleNotification), name: Notification.Name(callbackNotification), object: nil)
         //NotificationCenter.default.addObserver(forName: Notification.Name(callbackNotification), object: nil, queue: nil, using: handleNotification)
-        let callbackNotification = NotificationIdentifier.callback.rawValue
-        NotificationCenter.default.addObserver(forName: Notification.Name(callbackNotification), object: nil, queue: nil) {
+        let loginCallback = NotificationIdentifier.loginCallback.rawValue
+        NotificationCenter.default.addObserver(forName: Notification.Name(loginCallback), object: nil, queue: nil) {
             (_) in
-            //self.performSegue(withIdentifier: "loginSuccesful", sender: nil)
-            self.hasSession = true
+            self.performSegue(withIdentifier: "loginSuccesful", sender: nil)
+            //self.hasSession = true
         }
     }
     
-    func handleNotification(notification: Notification) {
-    
-    }
     
     @IBAction func loginToSpotify() {
         print("requestingLoginUrl")
@@ -68,7 +65,7 @@ class LoginViewController: UIViewController {
         //openSpotifyLogin(url: URL(string: "https://www.google.com")!)
         
         //testingSegue
-        //hasSession = true
+        hasSession = true
     }
     
     func openSpotifyLogin(url: URL) {
@@ -201,8 +198,6 @@ extension UIViewController {
         case showLogin = "showLogin"
         case loginComplete = "loginComplete"
     }
-    enum NotificationIdentifier: String {
-        case callback = "callback"
-    }
+    
 }
 

@@ -14,8 +14,13 @@ enum AuthParam: String {
     case tokenSwapURL = "https://silvercloudswap.herokuapp.com/swap"
     case tokenRefreshURL = "https://silvercloudswap.herokuapp.com/refresh"
     case responseType = "code"
-    case sessionUserDefaultsKey = "SpotifySession"
+    
 
+}
+
+enum Session: String {
+    case userDefaultsKey = "spotifySession"
+    case hasSession = "hasSPTSession"
 }
 
 struct SilverCloudAuth {
@@ -25,7 +30,7 @@ struct SilverCloudAuth {
     let tokenRefreshURL = AuthParam.tokenRefreshURL.rawValue
     let responseType = AuthParam.responseType.rawValue
     let scopes = [SPTAuthPlaylistModifyPrivateScope, SPTAuthPlaylistModifyPublicScope, SPTAuthPlaylistReadPrivateScope, SPTAuthPlaylistReadCollaborativeScope]
-    let sessionUserDefaultsKey = AuthParam.sessionUserDefaultsKey.rawValue
+    let sessionUserDefaultsKey = Session.userDefaultsKey.rawValue
     let clientId = AuthParam.clientId.rawValue
 }
 
@@ -34,4 +39,8 @@ enum AuthError: Error {
     case invalidScopes
     case badCallbackUri
     
+}
+
+enum NotificationIdentifier: String {
+    case loginCallback = "loginCallback"
 }
