@@ -13,12 +13,25 @@ enum AuthParam: String {
     case redirectURI = "silvercloudlogin://spotify/callback"
     case tokenSwapURL = "https://silvercloudswap.herokuapp.com/swap"
     case tokenRefreshURL = "https://silvercloudswap.herokuapp.com/refresh"
+    case responseType = "code"
+    case sessionUserDefaultsKey = "SpotifySession"
 
 }
 
 struct SilverCloudAuth {
-    let clientId = AuthParam.clientId.rawValue
+    
     let redirectURI = AuthParam.redirectURI.rawValue
     let tokenSwapURL = AuthParam.tokenSwapURL.rawValue
     let tokenRefreshURL = AuthParam.tokenRefreshURL.rawValue
+    let responseType = AuthParam.responseType.rawValue
+    let scopes = [SPTAuthPlaylistModifyPrivateScope, SPTAuthPlaylistModifyPublicScope, SPTAuthPlaylistReadPrivateScope, SPTAuthPlaylistReadCollaborativeScope]
+    let sessionUserDefaultsKey = AuthParam.sessionUserDefaultsKey.rawValue
+    let clientId = AuthParam.clientId.rawValue
+}
+
+enum AuthError: Error {
+    case unableToCreateLoginUrl
+    case invalidScopes
+    case badCallbackUri
+    
 }

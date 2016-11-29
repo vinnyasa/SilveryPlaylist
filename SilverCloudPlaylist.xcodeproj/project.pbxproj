@@ -21,8 +21,10 @@
 		27D43D591DE8FE890034DA05 /* Track.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D43D581DE8FE890034DA05 /* Track.swift */; };
 		27D43D5B1DE8FEF50034DA05 /* CoverArt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D43D5A1DE8FEF50034DA05 /* CoverArt.swift */; };
 		27D43D5E1DE94E8A0034DA05 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27D43D5D1DE94E890034DA05 /* SystemConfiguration.framework */; };
-		27E2FC651DECAB9500E3251A /* AuthParam.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27E2FC641DECAB9500E3251A /* AuthParam.swift */; };
-		27E2FC661DECAB9500E3251A /* AuthParam.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27E2FC641DECAB9500E3251A /* AuthParam.swift */; };
+		27E2FC651DECAB9500E3251A /* SilverCloudAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27E2FC641DECAB9500E3251A /* SilverCloudAuth.swift */; };
+		27E2FC661DECAB9500E3251A /* SilverCloudAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27E2FC641DECAB9500E3251A /* SilverCloudAuth.swift */; };
+		27E2FC681DED5BB300E3251A /* SilverCloudPlaylistTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27E2FC671DED5BB200E3251A /* SilverCloudPlaylistTableViewController.swift */; };
+		27E2FC691DED5BB300E3251A /* SilverCloudPlaylistTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27E2FC671DED5BB200E3251A /* SilverCloudPlaylistTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,7 +64,8 @@
 		27D43D581DE8FE890034DA05 /* Track.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Track.swift; sourceTree = "<group>"; };
 		27D43D5A1DE8FEF50034DA05 /* CoverArt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoverArt.swift; sourceTree = "<group>"; };
 		27D43D5D1DE94E890034DA05 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
-		27E2FC641DECAB9500E3251A /* AuthParam.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthParam.swift; sourceTree = "<group>"; };
+		27E2FC641DECAB9500E3251A /* SilverCloudAuth.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SilverCloudAuth.swift; sourceTree = "<group>"; };
+		27E2FC671DED5BB200E3251A /* SilverCloudPlaylistTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SilverCloudPlaylistTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +101,7 @@
 			children = (
 				27D43D2B1DE8FB980034DA05 /* ViewController.swift */,
 				2755B12B1DEB925C00CB486E /* LoginViewController.swift */,
+				27E2FC671DED5BB200E3251A /* SilverCloudPlaylistTableViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -161,7 +165,7 @@
 				27E2FC631DECAA8800E3251A /* New Group */,
 				27D43D581DE8FE890034DA05 /* Track.swift */,
 				27D43D5A1DE8FEF50034DA05 /* CoverArt.swift */,
-				27E2FC641DECAB9500E3251A /* AuthParam.swift */,
+				27E2FC641DECAB9500E3251A /* SilverCloudAuth.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -323,8 +327,9 @@
 				27D43D2A1DE8FB980034DA05 /* AppDelegate.swift in Sources */,
 				27D43D591DE8FE890034DA05 /* Track.swift in Sources */,
 				2755B12C1DEB925C00CB486E /* LoginViewController.swift in Sources */,
+				27E2FC681DED5BB300E3251A /* SilverCloudPlaylistTableViewController.swift in Sources */,
 				27D43D5B1DE8FEF50034DA05 /* CoverArt.swift in Sources */,
-				27E2FC651DECAB9500E3251A /* AuthParam.swift in Sources */,
+				27E2FC651DECAB9500E3251A /* SilverCloudAuth.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -332,9 +337,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				27E2FC691DED5BB300E3251A /* SilverCloudPlaylistTableViewController.swift in Sources */,
 				2755B12D1DEB925C00CB486E /* LoginViewController.swift in Sources */,
 				27D43D3F1DE8FB9A0034DA05 /* SilverCloudPlaylistTests.swift in Sources */,
-				27E2FC661DECAB9500E3251A /* AuthParam.swift in Sources */,
+				27E2FC661DECAB9500E3251A /* SilverCloudAuth.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

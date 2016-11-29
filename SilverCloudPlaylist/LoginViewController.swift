@@ -11,14 +11,16 @@ import UIKit
 class LoginViewController: UIViewController {
     
     @IBOutlet weak var loginButton: UIButton?
-    let clientId = "80c010b7d70b4ae39d75bf5a1f0bc791"
-    let callbackUri = "silvercloudlogin://spotify/callback"
-    let tokenSwapURL = "https://silvercloudswap.herokuapp.com/swap"
-    let tokenRefreshURL = "https://silvercloudswap.herokuapp.com/refresh"
-    var webView = UIWebView()
-    let scopes = [SPTAuthPlaylistModifyPrivateScope, SPTAuthPlaylistModifyPublicScope, SPTAuthPlaylistReadPrivateScope, SPTAuthPlaylistReadCollaborativeScope]
-    let responseType = "code"
-
+    //let clientId = "80c010b7d70b4ae39d75bf5a1f0bc791"
+    //let callbackUri = "silvercloudlogin://spotify/callback"
+    //let tokenSwapURL = "https://silvercloudswap.herokuapp.com/swap"
+    //let tokenRefreshURL = "https://silvercloudswap.herokuapp.com/refresh"
+    let silverCloudAuth = SilverCloudAuth()
+    var hasSession = false {
+        didSet { if hasSession { performSegue(withIdentifier: SegueIdentifier.loginComplete.rawValue, sender: nil)}
+        }
+    }
+    //let callbackNotification = NotificationIdentifier.callback.rawValue
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,32 +28,47 @@ class LoginViewController: UIViewController {
         if let loginButton = loginButton  {
             configureButtonLayout(loginButton)
         }
+        addCallbackObserver()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    func addCallbackObserver() {
+        //NotificationCenter.default.addObserver(self, selector: #selector(handleNotification), name: Notification.Name(callbackNotification), object: nil)
+        //NotificationCenter.default.addObserver(forName: Notification.Name(callbackNotification), object: nil, queue: nil, using: handleNotification)
+        let callbackNotification = NotificationIdentifier.callback.rawValue
+        NotificationCenter.default.addObserver(forName: Notification.Name(callbackNotification), object: nil, queue: nil) {
+            (_) in
+            //self.performSegue(withIdentifier: "loginSuccesful", sender: nil)
+            self.hasSession = true
+        }
+    }
+    
+    func handleNotification(notification: Notification) {
+    
+    }
     
     @IBAction func loginToSpotify() {
-        setUpAuth()
-        print("requestingCreateLoginUrl")
-        /*
+        print("requestingLoginUrl")
+        /* manual url:
         guard let manualLoginUrl =  try? createLoginUrl(sptClientId: clientId, scopes: scopes, redirectUri: callbackUri) else {
             //FIXME: handle error
             print ("have authError")
             return
         }
-        print("have loginUrl")
-        //let request = URLRequest(url: loginUrl!)
-        
-        //webView.loadRequest(request)
         */
-        guard let loginUrl = SPTAuth.loginURL(forClientId: clientId, withRedirectURL: URL(string: callbackUri)!, scopes: scopes, responseType: "code") else {
+        
+        guard let loginUrl = SPTAuth.loginURL(forClientId: silverCloudAuth.clientId, withRedirectURL: URL(string: silverCloudAuth.redirectURI)!, scopes: silverCloudAuth.scopes, responseType: silverCloudAuth.responseType) else {
             return
         }
+        setUpAuth()
         openSpotifyLogin(url: loginUrl)
         //openSpotifyLogin(url: URL(string: "https://www.google.com")!)
+        
+        //testingSegue
+        //hasSession = true
     }
     
     func openSpotifyLogin(url: URL) {
@@ -66,24 +83,22 @@ class LoginViewController: UIViewController {
             UIApplication.shared.openURL(url)
             print("Opened from olded iOS")
         }
-
     }
     
     func setUpAuth() {
-        
-        SPTAuth.defaultInstance().clientID = clientId
-        SPTAuth.defaultInstance().redirectURL = URL(string: callbackUri)
-        SPTAuth.defaultInstance().requestedScopes = scopes
-        SPTAuth.defaultInstance().tokenSwapURL = URL(string: tokenSwapURL)
-        SPTAuth.defaultInstance().tokenRefreshURL = URL(string: tokenRefreshURL)
-        SPTAuth.defaultInstance().sessionUserDefaultsKey = "SpotifySession"
+        //SPTAuth.defaultInstance().clientID = silverCloudAuth.clientId
+        //SPTAuth.defaultInstance().redirectURL = URL(string: silverCloudAuth.redirectURI)
+        //SPTAuth.defaultInstance().requestedScopes = silverCloudAuth.scopes
+        SPTAuth.defaultInstance().tokenSwapURL = URL(string: silverCloudAuth.tokenSwapURL)
+        SPTAuth.defaultInstance().tokenRefreshURL = URL(string: silverCloudAuth.tokenRefreshURL)
+        SPTAuth.defaultInstance().sessionUserDefaultsKey = silverCloudAuth.sessionUserDefaultsKey
     }
     
     func configureLoginUrl() throws -> URL {
-        guard let redirectURL = URL(string: callbackUri) else {
+        guard let redirectURL = URL(string: silverCloudAuth.redirectURI) else {
             throw AuthError.badCallbackUri
         }
-        guard let loginUrl = SPTAuth.loginURL(forClientId: clientId, withRedirectURL: redirectURL, scopes: scopes, responseType: responseType) else {
+        guard let loginUrl = SPTAuth.loginURL(forClientId: silverCloudAuth.clientId, withRedirectURL: redirectURL, scopes: silverCloudAuth.scopes, responseType: silverCloudAuth.responseType) else {
             throw AuthError.unableToCreateLoginUrl
         }
         return loginUrl
@@ -153,11 +168,9 @@ extension LoginViewController {
     func configureButtonLayout(_ button: UIButton) {
         button.layer.borderWidth = 0.8
         button.layer.cornerRadius = 8.0
-        
     }
     
     func createLoginUrl(sptClientId: String, scopes: [Any], redirectUri: String) throws -> URL? {
-        
         var scopesString = ""
         var count = scopes.count - 1
         
@@ -183,9 +196,13 @@ extension LoginViewController {
     }
 }
 
-enum AuthError: Error {
-    case unableToCreateLoginUrl
-    case invalidScopes
-    case badCallbackUri
-    
+extension UIViewController {
+    enum SegueIdentifier: String {
+        case showLogin = "showLogin"
+        case loginComplete = "loginComplete"
+    }
+    enum NotificationIdentifier: String {
+        case callback = "callback"
+    }
 }
+

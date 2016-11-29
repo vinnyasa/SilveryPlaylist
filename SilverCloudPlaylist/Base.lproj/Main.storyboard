@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="hqZ-Z9-7Tj">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -52,17 +52,53 @@
                             <constraint firstItem="A38-hY-nBM" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="16" id="2YZ-Ta-Nwh"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="A38-hY-nBM" secondAttribute="bottom" constant="77" id="8p5-NA-uV7"/>
                             <constraint firstItem="A38-hY-nBM" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="C6Q-8y-sfo"/>
+                            <constraint firstItem="A38-hY-nBM" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="16" id="dFn-u7-AUg"/>
                             <constraint firstAttribute="trailingMargin" secondItem="A38-hY-nBM" secondAttribute="trailing" constant="16" id="erJ-gK-GaN"/>
                             <constraint firstItem="NgS-4R-WZY" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="47" id="s3B-cp-kJR"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="loginButton" destination="A38-hY-nBM" id="P4U-vQ-m3L"/>
+                        <segue destination="mNu-zq-V5o" kind="unwind" identifier="loginComplete" unwindAction="loginSuccessFul:" id="aWB-sS-Uyi"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <exit id="mNu-zq-V5o" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="136.80000000000001" y="138.98050974512745"/>
+            <point key="canvasLocation" x="-54" y="-492"/>
+        </scene>
+        <!--Silver Cloud Playlist Table View Controller-->
+        <scene sceneID="KCy-gR-Meb">
+            <objects>
+                <tableViewController id="hqZ-Z9-7Tj" customClass="SilverCloudPlaylistTableViewController" customModule="SilverCloudPlaylist" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="DRj-f6-Pt5">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="separatorColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SilverCloudCell" id="PYJ-09-qAx">
+                                <rect key="frame" x="0.0" y="56" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="PYJ-09-qAx" id="GgW-p1-An1">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="hqZ-Z9-7Tj" id="DTh-GI-6qu"/>
+                            <outlet property="delegate" destination="hqZ-Z9-7Tj" id="Y1g-Vv-JtA"/>
+                        </connections>
+                    </tableView>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="presentation" identifier="showLogin" id="Dle-ul-lyC"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nnP-ky-732" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-58" y="200"/>
         </scene>
     </scenes>
 </document>
