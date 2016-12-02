@@ -8,19 +8,21 @@
 
 import UIKit
 
-class LoginViewController: UIViewController {
+class LoginViewController: UIViewController, AuthDelegate {
     
     @IBOutlet weak var loginButton: UIButton?
     //let clientId = "80c010b7d70b4ae39d75bf5a1f0bc791"
     //let callbackUri = "silvercloudlogin://spotify/callback"
     //let tokenSwapURL = "https://silvercloudswap.herokuapp.com/swap"
     //let tokenRefreshURL = "https://silvercloudswap.herokuapp.com/refresh"
-    let silverCloudAuth = SilverCloudAuth()
-    //usingFroTestingsegue delete before sending
+    var silverCloudAuth = SilverCloudAuth()
+    var auth: SPTAuth = SPTAuth.defaultInstance()
+    
+    /*
     var hasSession = false {
         didSet { if hasSession { performSegue(withIdentifier: SegueIdentifier.loginComplete.rawValue, sender: nil)}
         }
-    }
+    }*/
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,6 +31,7 @@ class LoginViewController: UIViewController {
             configureButtonLayout(loginButton)
         }
         addCallbackObserver()
+        setUpAuth()
     }
 
     override func didReceiveMemoryWarning() {
@@ -41,13 +44,14 @@ class LoginViewController: UIViewController {
         let loginCallback = NotificationIdentifier.loginCallback.rawValue
         NotificationCenter.default.addObserver(forName: Notification.Name(loginCallback), object: nil, queue: nil) {
             (_) in
-            self.performSegue(withIdentifier: "loginSuccesful", sender: nil)
+            self.performSegue(withIdentifier: SegueIdentifier.loginComplete.rawValue, sender: nil)
             //self.hasSession = true
         }
     }
     
     
     @IBAction func loginToSpotify() {
+        
         print("requestingLoginUrl")
         /* manual url:
         guard let manualLoginUrl =  try? createLoginUrl(sptClientId: clientId, scopes: scopes, redirectUri: callbackUri) else {
@@ -55,17 +59,20 @@ class LoginViewController: UIViewController {
             print ("have authError")
             return
         }
+         guard let loginUrl = SPTAuth.loginURL(forClientId: silverCloudAuth.clientId, withRedirectURL: URL(string: silverCloudAuth.redirectURI)!, scopes: silverCloudAuth.scopes, responseType: silverCloudAuth.responseType) else {
+         return
+         }
         */
         
-        guard let loginUrl = SPTAuth.loginURL(forClientId: silverCloudAuth.clientId, withRedirectURL: URL(string: silverCloudAuth.redirectURI)!, scopes: silverCloudAuth.scopes, responseType: silverCloudAuth.responseType) else {
+        guard let loginUrl = auth.spotifyWebAuthenticationURL() else {
+            print("don't have spotifyWebAuthenticationURL() ")
             return
         }
-        setUpAuth()
         openSpotifyLogin(url: loginUrl)
-        //openSpotifyLogin(url: URL(string: "https://www.google.com")!)
+        
         
         //testingSegue
-        hasSession = true
+        //hasSession = true
     }
     
     func openSpotifyLogin(url: URL) {
@@ -81,16 +88,12 @@ class LoginViewController: UIViewController {
             print("Opened from olded iOS")
         }
     }
+    //https://accounts.spotify.com/authorize?nolinks=true&nosignup=false&response_type=code&scope=playlist-modify-private%20playlist-modify-public%20playlist-read-private%20playlist-read-collaborative%20user-read-private%20user-read-email&utm_source=spotify-sdk&utm_medium=ios-sdk&utm_campaign=ios-sdk&redirect_uri=silvercloudlogin%3A%2F%2Fspotify%2Fcallback&show_dialog=true&client_id=80c010b7d70b4ae39d75bf5a1f0bc791
+
+    ///authorize/?client_id=80c010b7d70b4ae39d75bf5a1f0bc791&response_type=code&redirect_uri=silvercloudlogin:%2F%2Fspotify%2Fcallback&scope=playlist-modify-private%20playlist-modify-public%20playlist-read-private%20playlist-read-collaborative&show_dialog=false 
     
-    func setUpAuth() {
-        //SPTAuth.defaultInstance().clientID = silverCloudAuth.clientId
-        //SPTAuth.defaultInstance().redirectURL = URL(string: silverCloudAuth.redirectURI)
-        //SPTAuth.defaultInstance().requestedScopes = silverCloudAuth.scopes
-        SPTAuth.defaultInstance().tokenSwapURL = URL(string: silverCloudAuth.tokenSwapURL)
-        SPTAuth.defaultInstance().tokenRefreshURL = URL(string: silverCloudAuth.tokenRefreshURL)
-        SPTAuth.defaultInstance().sessionUserDefaultsKey = silverCloudAuth.sessionUserDefaultsKey
-    }
-    
+
+    /*
     func configureLoginUrl() throws -> URL {
         guard let redirectURL = URL(string: silverCloudAuth.redirectURI) else {
             throw AuthError.badCallbackUri
@@ -99,74 +102,18 @@ class LoginViewController: UIViewController {
             throw AuthError.unableToCreateLoginUrl
         }
         return loginUrl
-    }
+    }*/
 
-    /*
-    // MARK: - Navigation
+    
+   
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-    
-    // MARK: WebView Delegate
-    /*
-    func webView(_ webView: UIWebView, shouldStartLoadWith request: URLRequest, navigationType: UIWebViewNavigationType) -> Bool {
-        /*if request.URLString.hasPrefix(SpotifyRedirectURI) {
-            // Example of a correct response::
-            // projectName://spotify/callback?code=AQCY0mycN16svdc7Edj3jH1BUw...
-            if let fragment = request.URL!.query,
-                code = parameterValue(CodeKey, fragment: fragment) {
-                // Now transfer URL to Spotify sessions’ constructor
-                SPTAuth.defaultInstance().handleAuthCallbackWithTriggeredAuthURL(request.URL, callback: { (error: NSError!, session: SPTSession!) -> Void in
-                    if session != nil {
-                        // Notification about the login’s success
-                        self.dismissViewControllerAnimated(true, completion: nil)
-                    } else {
-                        // Notification about the login’s mistake
-                        self.dismissViewControllerAnimated(true, completion: nil)
-                    }
-                })
-            } else if let fragment = request.URL!.query,
-                error = parameterValue(ErrorKey, fragment: fragment) {
-                if error == "access_denied" {
-                    // Cancel
-                    self.dismissViewControllerAnimated(true, completion: nil)
-                } else {
-                    self.presentViewController(Alert.alertWithText(error, cancelAction: {
-                        self.dismissViewControllerAnimated(true, completion: nil)
-                    }), animated: true, completion: nil)
-                }
-            }
-        }*/
-        print(request)
-        if let _ = request.url?.absoluteString.hasPrefix(callbackUri) {
-            if let path = request.url?.query, let code = parameterValue(name: CodeKey, path: path)
-        }
-        
-        return true
-    }
-    
-    private func parameterValue(name: String, path: String) -> String? {
-        let pairs = fragment.componentsSeparatedByString("&")
-        for pair in pairs {
-            let components = pair.componentsSeparatedByString("=")
-            if components.first == name {
-                return components.last
-            }
-        }
-        return nil
-    }
-    */
 }
 extension LoginViewController {
     func configureButtonLayout(_ button: UIButton) {
         button.layer.borderWidth = 0.8
         button.layer.cornerRadius = 8.0
     }
-    
+    /*
     func createLoginUrl(sptClientId: String, scopes: [Any], redirectUri: String) throws -> URL? {
         var scopesString = ""
         var count = scopes.count - 1
@@ -190,14 +137,33 @@ extension LoginViewController {
             throw AuthError.unableToCreateLoginUrl
         }
         return url
-    }
+    }*/
 }
 
-extension UIViewController {
-    enum SegueIdentifier: String {
-        case showLogin = "showLogin"
-        case loginComplete = "loginComplete"
+enum SegueIdentifier: String {
+    case showLogin = "showLogin"
+    case loginComplete = "loginComplete"
+}
+
+extension AuthDelegate {
+    func setUpAuth() {
+        print("settingAuth")
+        /*
+         SPTAuth.defaultInstance().clientID = silverCloudAuth.clientId
+         SPTAuth.defaultInstance().redirectURL = URL(string: silverCloudAuth.redirectURI)
+         SPTAuth.defaultInstance().requestedScopes = silverCloudAuth.scopes
+         
+         SPTAuth.defaultInstance().tokenSwapURL = URL(string: silverCloudAuth.tokenSwapURL)
+         SPTAuth.defaultInstance().tokenRefreshURL = URL(string: silverCloudAuth.tokenRefreshURL)
+         SPTAuth.defaultInstance().sessionUserDefaultsKey = silverCloudAuth.sessionUserDefaultsKey
+         */
+        //auth = SPTAuth.defaultInstance()
+        auth.clientID = silverCloudAuth.clientId
+        auth.redirectURL = URL(string: silverCloudAuth.redirectURI)
+        auth.requestedScopes = silverCloudAuth.scopes
+        auth.tokenSwapURL = URL(string: silverCloudAuth.tokenSwapURL)
+        auth.tokenRefreshURL = URL(string: silverCloudAuth.tokenRefreshURL)
+        auth.sessionUserDefaultsKey = silverCloudAuth.sessionUserDefaultsKey
     }
-    
 }
 

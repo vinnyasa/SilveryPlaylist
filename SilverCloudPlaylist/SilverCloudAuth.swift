@@ -19,7 +19,6 @@ enum AuthParam: String {
 }
 
 enum Session: String {
-    case userDefaultsKey = "spotifySession"
     case hasSession = "hasSPTSession"
 }
 
@@ -29,8 +28,8 @@ struct SilverCloudAuth {
     let tokenSwapURL = AuthParam.tokenSwapURL.rawValue
     let tokenRefreshURL = AuthParam.tokenRefreshURL.rawValue
     let responseType = AuthParam.responseType.rawValue
-    let scopes = [SPTAuthPlaylistModifyPrivateScope, SPTAuthPlaylistModifyPublicScope, SPTAuthPlaylistReadPrivateScope, SPTAuthPlaylistReadCollaborativeScope]
-    let sessionUserDefaultsKey = Session.userDefaultsKey.rawValue
+    let scopes = [SPTAuthPlaylistModifyPrivateScope, SPTAuthPlaylistModifyPublicScope, SPTAuthPlaylistReadPrivateScope, SPTAuthPlaylistReadCollaborativeScope, SPTAuthUserReadPrivateScope, SPTAuthUserReadEmailScope]
+    let sessionUserDefaultsKey = UserDefaultsKey.spotifySession.rawValue
     let clientId = AuthParam.clientId.rawValue
 }
 
@@ -43,4 +42,24 @@ enum AuthError: Error {
 
 enum NotificationIdentifier: String {
     case loginCallback = "loginCallback"
+}
+
+
+
+extension UIViewController {
+    var spotifySession: SPTSession? {
+        guard let data = UserDefaults.standard.data(forKey: UserDefaultsKey.spotifySession.rawValue) else { return nil }
+        guard let session = NSKeyedUnarchiver.unarchiveObject(with: data) as? SPTSession else { return nil }
+        return session
+    }
+    var spotifyUserName: String? {
+        guard let userName = UserDefaults.standard.string(forKey: UserDefaultsKey.user.rawValue) else {
+            print("no unarchivedUserName")
+            return nil
+        }
+        print("unarchivedUserName")
+        return userName
+    }
+    
+    
 }

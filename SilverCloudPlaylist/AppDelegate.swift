@@ -12,7 +12,7 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    
+    //var auth: SPTAuth?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -24,10 +24,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             //filtered Url
             return false
         }
-        
+        //may need to close authntication window
         SPTAuth.defaultInstance().handleAuthCallback(withTriggeredAuthURL: url, callback: {
             (error, session) in
-            guard error == nil else {
+            guard let sptSession = session, error == nil else {
                 //FIXME: handle error in callback
                 print("error in callBack: \(error)")
                 return
@@ -38,11 +38,42 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             userDefaults.set(sessionData, forKey: Session.userDefaultsKey.rawValue)
             //userDefaults.set(true, forKey: Session.hasSession.rawValue)
             userDefaults.synchronize()*/
+            
             let loginCallback = NSNotification.Name(rawValue: NotificationIdentifier.loginCallback.rawValue)
             NotificationCenter.default.post(name: loginCallback, object: nil)
+            self.handleSCPUser(session: sptSession)
         })
-        return false
+        return true
     }
+    
+    func handleSCPUser(session: SPTSession) {
+        print("getting user")
+        SPTUser.requestCurrentUser(withAccessToken: session.accessToken) {
+            (error, userResponse) in
+            //userObjectDictionary
+            guard error == nil else {
+                print("didn't get user")
+                //FIXME: handle error
+                return
+            }
+            if let user = userResponse as? SPTUser {
+                //self.id = user.canonicalUserName
+                print("haveUserFromRequest")
+                self.userToUserDefaults(user: user)
+            }
+        }
+    }
+    
+    func userToUserDefaults(user: SPTUser) {
+        //demo only
+        print("userToUD")
+        let userString = user.canonicalUserName
+        let userDefaults = UserDefaults.standard
+        userDefaults.set(userString, forKey: UserDefaultsKey.user.rawValue)
+        userDefaults.synchronize()
+        print("ud syncronized")
+    }
+
 
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

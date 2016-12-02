@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -59,7 +60,7 @@
                     </view>
                     <connections>
                         <outlet property="loginButton" destination="A38-hY-nBM" id="P4U-vQ-m3L"/>
-                        <segue destination="mNu-zq-V5o" kind="unwind" identifier="loginComplete" unwindAction="loginSuccessFul:" id="aWB-sS-Uyi"/>
+                        <segue destination="mNu-zq-V5o" kind="unwind" identifier="loginComplete" unwindAction="loginSuccessFul:" id="zfX-v9-VMZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -67,24 +68,50 @@
             </objects>
             <point key="canvasLocation" x="-54" y="-492"/>
         </scene>
-        <!--Silver Cloud Playlist Table View Controller-->
+        <!--List Table View Controller-->
         <scene sceneID="KCy-gR-Meb">
             <objects>
-                <tableViewController id="hqZ-Z9-7Tj" customClass="SilverCloudPlaylistTableViewController" customModule="SilverCloudPlaylist" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="hqZ-Z9-7Tj" customClass="SCPListTableViewController" customModule="SilverCloudPlaylist" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="DRj-f6-Pt5">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="separatorColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SilverCloudCell" id="PYJ-09-qAx">
-                                <rect key="frame" x="0.0" y="56" width="375" height="44"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SilverCloudCell" rowHeight="77" id="PYJ-09-qAx" customClass="SCPListTableViewCell" customModule="SilverCloudPlaylist" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="56" width="375" height="77"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="PYJ-09-qAx" id="GgW-p1-An1">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="76"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="jej-vh-YWv">
+                                            <rect key="frame" x="0.0" y="0.0" width="77" height="77"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" secondItem="jej-vh-YWv" secondAttribute="height" multiplier="1:1" id="GxG-Dd-S5y"/>
+                                            </constraints>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="playlist name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7NE-3J-Jxp">
+                                            <rect key="frame" x="93" y="28" width="266" height="20.5"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="jej-vh-YWv" firstAttribute="leading" secondItem="GgW-p1-An1" secondAttribute="leadingMargin" constant="-8" id="7zu-rq-SFR"/>
+                                        <constraint firstItem="jej-vh-YWv" firstAttribute="height" secondItem="GgW-p1-An1" secondAttribute="height" id="Hq1-f2-UOa"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="7NE-3J-Jxp" secondAttribute="trailing" constant="8" id="Nzt-xJ-xUe"/>
+                                        <constraint firstItem="7NE-3J-Jxp" firstAttribute="leading" secondItem="jej-vh-YWv" secondAttribute="trailing" constant="16" id="UXF-XJ-YSb"/>
+                                        <constraint firstItem="7NE-3J-Jxp" firstAttribute="centerY" secondItem="GgW-p1-An1" secondAttribute="centerY" id="W60-dZ-ZWb"/>
+                                        <constraint firstItem="jej-vh-YWv" firstAttribute="centerY" secondItem="GgW-p1-An1" secondAttribute="centerY" id="o7H-Sz-Nsg"/>
+                                    </constraints>
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="scpImageView" destination="jej-vh-YWv" id="W0E-P0-Bk7"/>
+                                    <outlet property="scpNameLabel" destination="7NE-3J-Jxp" id="D5P-zm-8Sq"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -92,7 +119,9 @@
                             <outlet property="delegate" destination="hqZ-Z9-7Tj" id="Y1g-Vv-JtA"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="e6g-17-MHv"/>
+                    <navigationItem key="navigationItem" id="e6g-17-MHv">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="bU6-J5-paB"/>
+                    </navigationItem>
                     <connections>
                         <segue destination="BYZ-38-t0r" kind="presentation" identifier="showLogin" id="Dle-ul-lyC"/>
                     </connections>
@@ -106,9 +135,11 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="atj-x1-vyx" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="w2z-zP-pyq">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" id="w2z-zP-pyq">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="barTintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
