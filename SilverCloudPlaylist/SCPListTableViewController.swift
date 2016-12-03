@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SCPListTableViewController: UITableViewController, AuthDelegate {
+class SCPListTableViewController: UITableViewController, SessionHandler {
 
     var playlists = [SCPlaylist]()
     
@@ -25,7 +25,7 @@ class SCPListTableViewController: UITableViewController, AuthDelegate {
     
     override func viewDidAppear(_ animated: Bool) {
         print("callingViewDidAppear")
-        handleSession()
+        sessionUpdate()
     }
     
     override func didReceiveMemoryWarning() {
@@ -35,12 +35,13 @@ class SCPListTableViewController: UITableViewController, AuthDelegate {
     
     // MARK: Session
     
-    func handleSession() {
-        guard let scpSession = spotifySession else {
+    func sessionUpdate() {
+        guard let _ = spotifySession else {
             performSegue(withIdentifier: SegueIdentifier.showLogin.rawValue, sender: self)
             return
         }
         // firstLoginDidHappen
+        /*
         guard scpSession.isValid() else {
             print("session not valid")
             setUpAuth()
@@ -64,39 +65,24 @@ class SCPListTableViewController: UITableViewController, AuthDelegate {
         // have valid session: good to go done with authentication
         //self.handleSCPUser(session: scpSession)
         self.updatePlaylists(token: scpSession.accessToken)
-    }
-    //for testing: func handleSCPUser(session: SPTSession) {
-    func handleSCPUser(session: SPTSession) {
-        print("getting user")
-        SPTUser.requestCurrentUser(withAccessToken: session.accessToken) {
-            (error, userResponse) in
-            //userObjectDictionary
-            guard error == nil else {
-                print("didn't get user")
-                //FIXME: handle error
+        */
+        
+        handleSession() {
+            (error, accessToken) in
+            guard error == nil, let token = accessToken else {
                 return
             }
-            if let user = userResponse as? SPTUser {
-                //self.id = user.canonicalUserName
-                print("haveUserFromRequest")
-                self.userToUserDefaults(user: user)
-            }
+            self.updatePlaylists(withtoken: token)
         }
+        
     }
-
-    func userToUserDefaults(user: SPTUser) {
-        //demo only
-        print("userToUD")
-        let userString = user.canonicalUserName
-        let userDefaults = UserDefaults.standard
-        userDefaults.set(userString, forKey: UserDefaultsKey.user.rawValue)
-        userDefaults.synchronize()
-        print("ud syncronized")
-    }
+    
 
     // MARK: - Playlists
+    
+    
 
-    func updatePlaylists(token: String) {
+    func updatePlaylists(withtoken token: String) {
         
         if let sptUser = spotifyUserName {
             print("have user in UD: \(sptUser), getting playlists")
@@ -104,15 +90,20 @@ class SCPListTableViewController: UITableViewController, AuthDelegate {
             service.updateSCPList(withToken: token) {
                 (error, playlists) in
                 guard let scpList = playlists else {
-                    //FIXME: handle error
+                    //handle errors
                     print("scpServiceHandler has error: \(error)")
-                    if let playlistError = error as? PlaylistError {
-                        switch playlistError {
-                        case .missing(let identifier):
-                            print("scpServiceHandler has error at: \(identifier)")
-                            //could have if identifier == "items", invite them to create playlist feature
+                    guard  let playlistError = error as? PlaylistError else {
+                        print ("error in request, error: \(error)")
+                        return
+                    }
+                    switch playlistError {
+                    case .missing(let identifier):
+                        print("scpServiceHandler has error at: \(identifier)")
+                        //could have if identifier == "items", invite them to create playlist feature
+                        if identifier == ErrorIdentifier.sptPlaylistListItems.rawValue {
+                            self.playlistCreateInvite()
                         }
-                    } else { print ("error in request, error: \(error)")}
+                    }
                     return
                 }
                 print("have Playlists: count: \(scpList.playlists.count) ")
@@ -120,6 +111,11 @@ class SCPListTableViewController: UITableViewController, AuthDelegate {
                 self.tableView.reloadData()
             }
         }
+    }
+    
+    func playlistCreateInvite() {
+        // a tour or something to teach them how to add playlists
+        print("inviting user to create playlists")
     }
     
     // MARK: - configure view

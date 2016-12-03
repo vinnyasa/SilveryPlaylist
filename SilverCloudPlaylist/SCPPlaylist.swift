@@ -38,7 +38,7 @@ enum PlaylistError: Error {
 
 enum ErrorIdentifier: String {
     case sptPlaylistList = "sptPlaylistList"
-    case items = "items"
+    case sptPlaylistListItems = "sptPlaylistListItems"
     case partialList = "partialPlaylist"
     case sptPartialPlaylists = "sptPartialPlaylists"
     case sptPlaylistSnapshot = "sptPlaylistSnapshot"

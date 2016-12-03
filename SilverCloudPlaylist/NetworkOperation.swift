@@ -35,41 +35,7 @@ class NetworkOperation {
     }
 
 }*/
-/*
-struct SCPPlaylistListService {
-    let userName: String
-    
-    typealias SilverCloudPlaylistsCompletion = ((_ error: Error?, _ scpPlaylistList: SilverCloudPlaylistList?) -> ())
-    
-    func updateSPTPlaylists(withToken token: String!, completion: @escaping SilverCloudPlaylistsCompletion) {
-        print("updating playlists")
-        SPTPlaylistList.playlists(forUser: userName, withAccessToken: token) {
-            (error, playlistsResponse) in
-            print("errorSays: \(error?.localizedDescription)")
-            guard error == nil, let playlistsList = playlistsResponse as? SPTPlaylistList else {
-                print("haveError on SPTPlaylistList.playlists(forUser), error: \(error)")
-                completion(error, nil)
-                return
-            }
-            // handleList
-            print("have playlistsResponse")
-            if  let playlists = playlistsList.items as? [SPTPlaylistSnapshot] {
-                for playlist in playlists  {
-                    print("playlist: \(playlist.name)")
-                    
-                }
-            }
-            do {
-                let scpPlaylistList = try SilverCloudPlaylistList(sptPlaylistList: playlistsList)
-                print("good playlists")
-                completion(nil, scpPlaylistList)
-            } catch (let playlistsError) {
-                print("catching error on playlistsRequest")
-                completion(playlistsError, nil)
-            }
-        }
-    }
-}*/
+
 
 
 class SCPListService: SilverCloudService, SessionHandler {
@@ -98,11 +64,11 @@ class SCPListService: SilverCloudService, SessionHandler {
             if  let playlists = playlistsList.items as? [SPTPlaylistSnapshot] {
                 for playlist in playlists  {
                     print("playlist: \(playlist.name)")
-                    
                 }
             }
-            if let partialPlaylists = try? self.unwrapPlaylistList(sptPlaylistList: playlistsList) {
-            var scplaylistList = [SCPlaylist]()
+            
+            func toSCPList(from partialPlaylists: [SPTPartialPlaylist]) {
+                var scplaylistList = [SCPlaylist]()
                 for partial in partialPlaylists {
                     let trackService = TracksService(tracksUri: partial.uri)
                     //handleTracks(withUri: partial.uri)
@@ -118,13 +84,20 @@ class SCPListService: SilverCloudService, SessionHandler {
                         }
                         scplaylistList.append(scpPlaylist)
                     }
-                    
-                    
                 }
                 completion(nil, SCPList(playlists: scplaylistList))
             }
+
+            do {
+                let partialPlaylists = try self.unwrapPlaylistList(sptPlaylistList: playlistsList)
+                toSCPList(from: partialPlaylists)
+            } catch {
+                completion(error, nil)
+            }
         }
     }
+
+
     
     func unwrapPlaylistList(sptPlaylistList: SPTPlaylistList?) throws -> [SPTPartialPlaylist]  {
         var sptPartialPlaylists: [SPTPartialPlaylist] = []
@@ -136,7 +109,7 @@ class SCPListService: SilverCloudService, SessionHandler {
             //if user hasn't created any playlists there is still a SPTPlaylistList Object with 0 iitems == nil
             //could have feature to invite them to create a playlist
             print("user has 0 playlists")
-            throw PlaylistError.missing(ErrorIdentifier.items.rawValue)
+            throw PlaylistError.missing(ErrorIdentifier.sptPlaylistListItems.rawValue)
         }
         print("printing playlistList: \(playlistList)")
         
@@ -149,31 +122,6 @@ class SCPListService: SilverCloudService, SessionHandler {
         }
         return sptPartialPlaylists
     }
-    
-    //typealias TracksCompletion = ((_ error: Error?, _ scpPlaylistList: [SPTTrack]?) -> ())
-    
-    /*
-    func handleTracks(withUri uri: URL, completion: TracksCompletion ) {
-        var tracks: [SPTPartialTrack] = []
-        handleToken() {
-            (error, token) in
-            guard let accessToken = token else  {
-                print ("badToken error: \(error)")
-                return
-            }
-            
-            SPTPlaylistSnapshot.playlist(withURI: uri, accessToken: accessToken) {
-                (error, playlistSnapshot) in
-                if let playlistSnapshot = playlistSnapshot as? SPTPlaylistSnapshot, let items = playlistSnapshot.firstTrackPage.items {
-                    for item in items {
-                        if let track = item as? SPTPartialTrack {
-                            tracks.append(track)
-                        }
-                    }
-                }
-            }
-        }
-    }*/
     
 }
 
@@ -188,7 +136,7 @@ class TracksService: SilverCloudService, SessionHandler {
     typealias TracksCompletion = ((_ error: Error?, _ scpPlaylistList: [SPTPartialTrack]?) -> ())
     func handleTracks(withUri uri: URL, completion: @escaping TracksCompletion ) {
         var tracks: [SPTPartialTrack] = []
-        handleToken() {
+        handleSession() {
             (error, token) in
             guard let accessToken = token else  {
                 print ("badToken error: \(error)")

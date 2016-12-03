@@ -16,7 +16,7 @@ protocol SessionHandler:  AuthDelegate {
 extension SessionHandler {
     
     typealias TokenCompletion = ((_ error: Error?, _ token: String?) -> ())
-    func handleToken(completion: @escaping TokenCompletion) {
+    func handleSession(completion: @escaping TokenCompletion) {
         guard let scpSession = spotifySession else {
             return
         }
