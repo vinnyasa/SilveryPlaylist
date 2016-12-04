@@ -20,6 +20,8 @@
 		2740EA001DF26DC5003F9461 /* NewPlaylistTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2740E9FE1DF26DC5003F9461 /* NewPlaylistTableViewController.swift */; };
 		2740EA021DF38751003F9461 /* SCPList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2740EA011DF38751003F9461 /* SCPList.swift */; };
 		2740EA031DF38751003F9461 /* SCPList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2740EA011DF38751003F9461 /* SCPList.swift */; };
+		2740EA081DF3CC55003F9461 /* NewPlaylist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2740EA071DF3CC55003F9461 /* NewPlaylist.swift */; };
+		2740EA091DF3CC55003F9461 /* NewPlaylist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2740EA071DF3CC55003F9461 /* NewPlaylist.swift */; };
 		2755B12C1DEB925C00CB486E /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2755B12B1DEB925C00CB486E /* LoginViewController.swift */; };
 		2755B12D1DEB925C00CB486E /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2755B12B1DEB925C00CB486E /* LoginViewController.swift */; };
 		2755B12F1DEBACDF00CB486E /* SpotifyAuthentication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2755B12E1DEBACDF00CB486E /* SpotifyAuthentication.framework */; };
@@ -70,6 +72,7 @@
 		2740E9F81DF22863003F9461 /* SCPlaylist.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SCPlaylist.swift; sourceTree = "<group>"; };
 		2740E9FE1DF26DC5003F9461 /* NewPlaylistTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewPlaylistTableViewController.swift; sourceTree = "<group>"; };
 		2740EA011DF38751003F9461 /* SCPList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SCPList.swift; sourceTree = "<group>"; };
+		2740EA071DF3CC55003F9461 /* NewPlaylist.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewPlaylist.swift; sourceTree = "<group>"; };
 		2755B1241DEB82D000CB486E /* SilverCloudPlaylist-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SilverCloudPlaylist-Bridging-Header.h"; sourceTree = "<group>"; };
 		2755B12B1DEB925C00CB486E /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		2755B12E1DEBACDF00CB486E /* SpotifyAuthentication.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SpotifyAuthentication.framework; sourceTree = "<group>"; };
@@ -218,6 +221,7 @@
 				27D43D5A1DE8FEF50034DA05 /* CoverArt.swift */,
 				2740E9EA1DEFDD97003F9461 /* Album.swift */,
 				2740EA011DF38751003F9461 /* SCPList.swift */,
+				2740EA071DF3CC55003F9461 /* NewPlaylist.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -378,6 +382,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2740E9EB1DEFDD97003F9461 /* Album.swift in Sources */,
+				2740EA081DF3CC55003F9461 /* NewPlaylist.swift in Sources */,
 				27D43D2A1DE8FB980034DA05 /* AppDelegate.swift in Sources */,
 				27D3053E1DEF31A700930744 /* AuthDelegate.swift in Sources */,
 				2740E9FF1DF26DC5003F9461 /* NewPlaylistTableViewController.swift in Sources */,
@@ -401,6 +406,7 @@
 			files = (
 				2755B12D1DEB925C00CB486E /* LoginViewController.swift in Sources */,
 				2740E9F61DF1DA71003F9461 /* SessionHandler.swift in Sources */,
+				2740EA091DF3CC55003F9461 /* NewPlaylist.swift in Sources */,
 				2740E9F01DF10DF9003F9461 /* SCPListTableViewCell.swift in Sources */,
 				27D3053F1DEF31A700930744 /* AuthDelegate.swift in Sources */,
 				2740EA031DF38751003F9461 /* SCPList.swift in Sources */,

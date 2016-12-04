@@ -24,9 +24,7 @@ struct SCPlaylist {
     var smallImage: UIImage?
     
     //change to init with SPTPlaylistSnapshot
-    
     init?(sptPlaylistSnapshot: SPTPlaylistSnapshot) {
-        
         //guard escentials
         guard  let _ = sptPlaylistSnapshot.uri else {
             return nil
@@ -49,8 +47,34 @@ struct SCPlaylist {
         if let smallImage = sptPlaylistSnapshot.smallestImage {
             self.smallImage = smallImage.toImage
         } else { smallImage = nil }
+    }
+    
+    init? (sptPlaylistSnapshot: SPTPlaylistSnapshot, tracks: [SPTTrack]) {
+        //guard escentials
+        guard  let _ = sptPlaylistSnapshot.uri else {
+            return nil
+        }
+        
+        /*
+         guard  let name = sptPlaylistSnapshot.name, let uri = sptPlaylistSnapshot.uri, let id = sptPlaylistSnapshot.snapshotId else {
+         return nil
+         }
+         self.name = name
+         self.uri = uri
+         self.id = id
+         */
+        self.snapshot = sptPlaylistSnapshot
+        //tracks
         
         
+        if let largeImage = sptPlaylistSnapshot.largestImage  {
+            self.largeImage = largeImage.toImage
+        } else { largeImage = nil }
+        
+        if let smallImage = sptPlaylistSnapshot.smallestImage {
+            self.smallImage = smallImage.toImage
+        } else { smallImage = nil }
+
     }
 
 }
@@ -75,4 +99,6 @@ enum ErrorIdentifier: String {
     case sptPartialPlaylists = "sptPartialPlaylists"
     case sptPlaylistSnapshot = "sptPlaylistSnapshot"
     case sptPlaylistArraySnapshot = "sptPlaylistArraySnapshot"
+    case newPlaylistSnapshot = "newPlaylistSnapshot"
+    case newPlaylistSnapshotWithTracks = "withNewPlaylistSnapshotWithTracks"
 }

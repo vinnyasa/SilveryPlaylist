@@ -159,21 +159,29 @@ class PlaylistService: SilverCloudService, SessionHandler {
                             completion(error, nil)
                             return
                         }
-                        // tracks added succesfully, create SCPLaylist and pass to controller
-                        guard let scpPlaylist = SCPlaylist(sptPlaylistSnapshot: sptPlaylistSnapshot) else {
-                            completion(PlaylistServiceError.unableToCreateSCPlaylist, nil)
-                            return
+                        // tracks added succesfully, create SCPLaylist & tracks to different init or get newSnapshot and then create SCPLaylist to pass to controller
+                        SPTPlaylistSnapshot.playlist(withURI: sptPlaylistSnapshot.uri, accessToken: token) {
+                            (error, playlistWithTracks) in
+                            guard let sptPlaylistWithTracks = playlistWithTracks as? SPTPlaylistSnapshot, let scpPlaylistWithTracks = SCPlaylist(sptPlaylistSnapshot: sptPlaylistWithTracks) else {
+                                completion(PlaylistServiceError.unableToCreateSCPlaylist(ErrorIdentifier.newPlaylistSnapshotWithTracks.rawValue), nil)
+                                return
+                            }
+                            completion(nil, scpPlaylistWithTracks)
                         }
-                        completion(nil, scpPlaylist)
                     }
                 }
                 //createNewPlaylist, then add tracks then create an SCPPlaylist and add to array. regardless if tracks are added, return that SCPlaylist
+                guard let scpPlaylist = SCPlaylist(sptPlaylistSnapshot: sptPlaylistSnapshot) else {
+                    completion(PlaylistServiceError.unableToCreateSCPlaylist(ErrorIdentifier.newPlaylistSnapshot.rawValue), nil)
+                    return
+                }
+                completion(nil, scpPlaylist)
             }
         }
     }
     
     enum PlaylistServiceError: Error {
-        case unableToCreateSCPlaylist
+        case unableToCreateSCPlaylist(String)
     
     }
     
