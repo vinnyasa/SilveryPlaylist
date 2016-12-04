@@ -14,10 +14,12 @@
 		2740E9F31DF1104E003F9461 /* SCPListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2740E9F11DF1104E003F9461 /* SCPListTableViewController.swift */; };
 		2740E9F51DF1DA71003F9461 /* SessionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2740E9F41DF1DA71003F9461 /* SessionHandler.swift */; };
 		2740E9F61DF1DA71003F9461 /* SessionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2740E9F41DF1DA71003F9461 /* SessionHandler.swift */; };
-		2740E9F91DF22863003F9461 /* SCPPlaylist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2740E9F81DF22863003F9461 /* SCPPlaylist.swift */; };
-		2740E9FA1DF22863003F9461 /* SCPPlaylist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2740E9F81DF22863003F9461 /* SCPPlaylist.swift */; };
-		2740E9FC1DF22960003F9461 /* SCPList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2740E9FB1DF22960003F9461 /* SCPList.swift */; };
-		2740E9FD1DF22960003F9461 /* SCPList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2740E9FB1DF22960003F9461 /* SCPList.swift */; };
+		2740E9F91DF22863003F9461 /* SCPlaylist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2740E9F81DF22863003F9461 /* SCPlaylist.swift */; };
+		2740E9FA1DF22863003F9461 /* SCPlaylist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2740E9F81DF22863003F9461 /* SCPlaylist.swift */; };
+		2740E9FF1DF26DC5003F9461 /* NewPlaylistTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2740E9FE1DF26DC5003F9461 /* NewPlaylistTableViewController.swift */; };
+		2740EA001DF26DC5003F9461 /* NewPlaylistTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2740E9FE1DF26DC5003F9461 /* NewPlaylistTableViewController.swift */; };
+		2740EA021DF38751003F9461 /* SCPList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2740EA011DF38751003F9461 /* SCPList.swift */; };
+		2740EA031DF38751003F9461 /* SCPList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2740EA011DF38751003F9461 /* SCPList.swift */; };
 		2755B12C1DEB925C00CB486E /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2755B12B1DEB925C00CB486E /* LoginViewController.swift */; };
 		2755B12D1DEB925C00CB486E /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2755B12B1DEB925C00CB486E /* LoginViewController.swift */; };
 		2755B12F1DEBACDF00CB486E /* SpotifyAuthentication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2755B12E1DEBACDF00CB486E /* SpotifyAuthentication.framework */; };
@@ -65,8 +67,9 @@
 		2740E9EE1DF10DF9003F9461 /* SCPListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SCPListTableViewCell.swift; sourceTree = "<group>"; };
 		2740E9F11DF1104E003F9461 /* SCPListTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SCPListTableViewController.swift; sourceTree = "<group>"; };
 		2740E9F41DF1DA71003F9461 /* SessionHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionHandler.swift; sourceTree = "<group>"; };
-		2740E9F81DF22863003F9461 /* SCPPlaylist.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SCPPlaylist.swift; sourceTree = "<group>"; };
-		2740E9FB1DF22960003F9461 /* SCPList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SCPList.swift; sourceTree = "<group>"; };
+		2740E9F81DF22863003F9461 /* SCPlaylist.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SCPlaylist.swift; sourceTree = "<group>"; };
+		2740E9FE1DF26DC5003F9461 /* NewPlaylistTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewPlaylistTableViewController.swift; sourceTree = "<group>"; };
+		2740EA011DF38751003F9461 /* SCPList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SCPList.swift; sourceTree = "<group>"; };
 		2755B1241DEB82D000CB486E /* SilverCloudPlaylist-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SilverCloudPlaylist-Bridging-Header.h"; sourceTree = "<group>"; };
 		2755B12B1DEB925C00CB486E /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		2755B12E1DEBACDF00CB486E /* SpotifyAuthentication.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SpotifyAuthentication.framework; sourceTree = "<group>"; };
@@ -140,6 +143,7 @@
 				2755B12B1DEB925C00CB486E /* LoginViewController.swift */,
 				2740E9EE1DF10DF9003F9461 /* SCPListTableViewCell.swift */,
 				2740E9F11DF1104E003F9461 /* SCPListTableViewController.swift */,
+				2740E9FE1DF26DC5003F9461 /* NewPlaylistTableViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -210,10 +214,10 @@
 				2740E9F71DF1E428003F9461 /* Auth */,
 				27E2FC631DECAA8800E3251A /* SCPNetworkOperation */,
 				27D43D581DE8FE890034DA05 /* Track.swift */,
-				2740E9F81DF22863003F9461 /* SCPPlaylist.swift */,
+				2740E9F81DF22863003F9461 /* SCPlaylist.swift */,
 				27D43D5A1DE8FEF50034DA05 /* CoverArt.swift */,
 				2740E9EA1DEFDD97003F9461 /* Album.swift */,
-				2740E9FB1DF22960003F9461 /* SCPList.swift */,
+				2740EA011DF38751003F9461 /* SCPList.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -376,17 +380,18 @@
 				2740E9EB1DEFDD97003F9461 /* Album.swift in Sources */,
 				27D43D2A1DE8FB980034DA05 /* AppDelegate.swift in Sources */,
 				27D3053E1DEF31A700930744 /* AuthDelegate.swift in Sources */,
-				2740E9FC1DF22960003F9461 /* SCPList.swift in Sources */,
+				2740E9FF1DF26DC5003F9461 /* NewPlaylistTableViewController.swift in Sources */,
 				27D43D591DE8FE890034DA05 /* Track.swift in Sources */,
 				2740E9EF1DF10DF9003F9461 /* SCPListTableViewCell.swift in Sources */,
 				2755B12C1DEB925C00CB486E /* LoginViewController.swift in Sources */,
 				27D43D5B1DE8FEF50034DA05 /* CoverArt.swift in Sources */,
 				2740E9F21DF1104E003F9461 /* SCPListTableViewController.swift in Sources */,
+				2740EA021DF38751003F9461 /* SCPList.swift in Sources */,
 				2740E9F51DF1DA71003F9461 /* SessionHandler.swift in Sources */,
 				27D305441DEF413A00930744 /* SCPUser.swift in Sources */,
 				27E2FC651DECAB9500E3251A /* SilverCloudAuth.swift in Sources */,
 				27D305471DEF52D200930744 /* NetworkOperation.swift in Sources */,
-				2740E9F91DF22863003F9461 /* SCPPlaylist.swift in Sources */,
+				2740E9F91DF22863003F9461 /* SCPlaylist.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -398,13 +403,14 @@
 				2740E9F61DF1DA71003F9461 /* SessionHandler.swift in Sources */,
 				2740E9F01DF10DF9003F9461 /* SCPListTableViewCell.swift in Sources */,
 				27D3053F1DEF31A700930744 /* AuthDelegate.swift in Sources */,
-				2740E9FA1DF22863003F9461 /* SCPPlaylist.swift in Sources */,
+				2740EA031DF38751003F9461 /* SCPList.swift in Sources */,
+				2740E9FA1DF22863003F9461 /* SCPlaylist.swift in Sources */,
 				2740E9F31DF1104E003F9461 /* SCPListTableViewController.swift in Sources */,
 				27D43D3F1DE8FB9A0034DA05 /* SilverCloudPlaylistTests.swift in Sources */,
 				27D305481DEF52D200930744 /* NetworkOperation.swift in Sources */,
 				27E2FC661DECAB9500E3251A /* SilverCloudAuth.swift in Sources */,
 				27D305451DEF413A00930744 /* SCPUser.swift in Sources */,
-				2740E9FD1DF22960003F9461 /* SCPList.swift in Sources */,
+				2740EA001DF26DC5003F9461 /* NewPlaylistTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

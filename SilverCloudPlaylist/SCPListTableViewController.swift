@@ -11,10 +11,9 @@ import UIKit
 class SCPListTableViewController: UITableViewController, SessionHandler {
 
     var playlists = [SCPlaylist]()
-    
-    
     var auth: SPTAuth = SPTAuth.defaultInstance()
     var silverCloudAuth = SilverCloudAuth()
+    var isInitial = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,7 +24,10 @@ class SCPListTableViewController: UITableViewController, SessionHandler {
     
     override func viewDidAppear(_ animated: Bool) {
         print("callingViewDidAppear")
-        sessionUpdate()
+        if isInitial {
+            sessionUpdate()
+            isInitial = false
+        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -84,7 +86,7 @@ class SCPListTableViewController: UITableViewController, SessionHandler {
 
     func updatePlaylists(withtoken token: String) {
         
-        if let sptUser = spotifyUserName {
+        if let sptUser = spotifySession?.accessToken {
             print("have user in UD: \(sptUser), getting playlists")
             let service = SCPListService(username: sptUser)
             service.updateSCPList(withToken: token) {
@@ -143,7 +145,7 @@ class SCPListTableViewController: UITableViewController, SessionHandler {
         let cell = tableView.dequeueReusableCell(withIdentifier: "SilverCloudCell", for: indexPath) as! SCPListTableViewCell
         
         for playlist in playlists {
-            if let name = playlist.name, let image = playlist.images[1] {
+            if let name = playlist.snapshot?.name, let image = playlist.smallImage {
                 cell.scpNameLabel?.text = name
                 cell.scpImageView?.image = image
             }
@@ -192,6 +194,18 @@ class SCPListTableViewController: UITableViewController, SessionHandler {
          if let _ = loginVC?.hasSession {
          
          }*/
+    }
+    
+    @IBAction func savePlaylist(_ segue:UIStoryboardSegue) {
+        
+        /*
+         let newPlaylistVC = segue.source as? LoginViewController
+         if let _ = newPlaylistVC?.playlist {
+         
+         }*/
+        //createNewPlaylist, then add tracks then create an SCPPlaylist and add to array. regardless if tracks are added
+        
+        
     }
     
     // MARK: - Navigation

@@ -21,10 +21,7 @@ struct SCPUser {
     }
 }
 
-enum UserDefaultsKey: String {
-    case user = "UserKey"
-    case spotifySession = "SpotifySession"
-}
+
 //GET "https://api.spotify.com/v1/users/wizzler/playlists" -H "Accept: application/json"
 
 //GET "https://api.spotify.com/v1/me" -H "Authorization: Bearer {your access token}"

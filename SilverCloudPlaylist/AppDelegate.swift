@@ -32,47 +32,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 print("error in callBack: \(error)")
                 return
             }
-            /* save session, I am pretty sure sdk is doing this
-            let userDefaults = UserDefaults.standard
-            let sessionData = NSKeyedArchiver.archivedData(withRootObject: sptSession)
-            userDefaults.set(sessionData, forKey: Session.userDefaultsKey.rawValue)
-            //userDefaults.set(true, forKey: Session.hasSession.rawValue)
-            userDefaults.synchronize()*/
+            self.sessionToUD(session: sptSession)
             
             let loginCallback = NSNotification.Name(rawValue: NotificationIdentifier.loginCallback.rawValue)
             NotificationCenter.default.post(name: loginCallback, object: nil)
-            self.handleSCPUser(session: sptSession)
         })
         return true
     }
     
-    func handleSCPUser(session: SPTSession) {
-        print("getting user")
-        SPTUser.requestCurrentUser(withAccessToken: session.accessToken) {
-            (error, userResponse) in
-            //userObjectDictionary
-            guard error == nil else {
-                print("didn't get user")
-                //FIXME: handle error
-                return
-            }
-            if let user = userResponse as? SPTUser {
-                //self.id = user.canonicalUserName
-                print("haveUserFromRequest")
-                self.userToUserDefaults(user: user)
-            }
-        }
+    func sessionToUD(session: SPTSession) {
+        let userDefaults = UserDefaults.standard
+        let sessionData = NSKeyedArchiver.archivedData(withRootObject: session)
+        userDefaults.set(sessionData, forKey: UserDefaultsKey.spotifySession.rawValue)
+        userDefaults.synchronize()
+
     }
     
-    func userToUserDefaults(user: SPTUser) {
-        //demo only
-        print("userToUD")
-        let userString = user.canonicalUserName
-        let userDefaults = UserDefaults.standard
-        userDefaults.set(userString, forKey: UserDefaultsKey.user.rawValue)
-        userDefaults.synchronize()
-        print("ud syncronized")
-    }
+
 
 
     func applicationWillResignActive(_ application: UIApplication) {

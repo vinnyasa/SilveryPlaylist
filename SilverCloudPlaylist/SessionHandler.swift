@@ -56,6 +56,10 @@ extension SessionHandler {
     }
 }
 
+enum UserDefaultsKey: String {
+    case user = "UserKey"
+    case spotifySession = "SpotifySession"
+}
 
 enum SessionError: Error {
     case unableToRenewSession

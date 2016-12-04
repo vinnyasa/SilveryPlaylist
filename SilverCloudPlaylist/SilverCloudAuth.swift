@@ -52,6 +52,7 @@ extension UIViewController {
         guard let session = NSKeyedUnarchiver.unarchiveObject(with: data) as? SPTSession else { return nil }
         return session
     }
+    /*
     var spotifyUserName: String? {
         guard let userName = UserDefaults.standard.string(forKey: UserDefaultsKey.user.rawValue) else {
             print("no unarchivedUserName")
@@ -59,7 +60,5 @@ extension UIViewController {
         }
         print("unarchivedUserName")
         return userName
-    }
-    
-    
+    }*/
 }
