@@ -31,6 +31,7 @@ extension SessionHandler {
                 }
                 //sdk should be saving session to defaults, test this behavior
                 //renewed session is not being saved to NSUserDefaults by sdk, why??
+                print("session has canonical as: \(renewedSession.canonicalUsername)")
                 self.sessionToUserDefaults(session: renewedSession)
                 completion(nil, token)
             }
@@ -39,6 +40,7 @@ extension SessionHandler {
         print("session is valid")
         // have valid session: good to go done with authentication
         //self.handleSCPUser(session: scpSession)
+        print("user from valid session = \(scpSession.canonicalUsername)")
         completion(nil, scpSession.accessToken)
     }
     

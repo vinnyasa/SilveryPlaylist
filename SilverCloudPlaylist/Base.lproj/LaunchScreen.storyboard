@@ -24,11 +24,11 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Silver Cloud Playlist" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mih-S7-t0x">
                                 <rect key="frame" x="109" y="140" width="158" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                <nil key="textColor"/>
+                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="mih-S7-t0x" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="2jL-eC-Xjd"/>
                             <constraint firstItem="mih-S7-t0x" firstAttribute="top" secondItem="Llm-lL-Icb" secondAttribute="bottom" constant="120" id="4po-Uq-CmV"/>

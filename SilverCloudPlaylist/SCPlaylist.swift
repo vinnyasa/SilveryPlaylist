@@ -9,9 +9,7 @@
 import Foundation
 
 struct SCPlaylist {
-    //let name: String?
-    //let uri: URL?
-    //let id: String
+    
     let snapshot: SPTPlaylistSnapshot?
     var tracks: [SPTPartialTrack]? {
         guard let sptTracks = snapshot?.firstTrackPage.items as? [SPTPartialTrack] else {
@@ -19,9 +17,20 @@ struct SCPlaylist {
         }
         return sptTracks
     }
-    //convert to UIImage
     var largeImage: UIImage?
     var smallImage: UIImage?
+    var tracksOnLocal: [SPTPartialTrack]?
+    var name: String? {
+        return snapshot!.name
+    }
+    var uri: URL? {
+        return snapshot!.uri
+    }
+    var id: String? {
+        return snapshot?.snapshotId
+    }
+    
+    
     
     //change to init with SPTPlaylistSnapshot
     init?(sptPlaylistSnapshot: SPTPlaylistSnapshot) {
@@ -29,15 +38,6 @@ struct SCPlaylist {
         guard  let _ = sptPlaylistSnapshot.uri else {
             return nil
         }
-
-        /*
-        guard  let name = sptPlaylistSnapshot.name, let uri = sptPlaylistSnapshot.uri, let id = sptPlaylistSnapshot.snapshotId else {
-            return nil
-        }
-        self.name = name
-        self.uri = uri
-        self.id = id
-        */
         self.snapshot = sptPlaylistSnapshot
         //tracks
         if let largeImage = sptPlaylistSnapshot.largestImage {
@@ -49,32 +49,16 @@ struct SCPlaylist {
         } else { smallImage = nil }
     }
     
-    init? (sptPlaylistSnapshot: SPTPlaylistSnapshot, tracks: [SPTTrack]) {
-        //guard escentials
-        guard  let _ = sptPlaylistSnapshot.uri else {
+    init? (sptPlaylistSnapshot: SPTPlaylistSnapshot, tracks: [SPTPartialTrack]?) {
+        
+        guard let playlist = SCPlaylist(sptPlaylistSnapshot: sptPlaylistSnapshot) else {
             return nil
         }
+        snapshot = playlist.snapshot
+        largeImage = playlist.largeImage
+        smallImage = playlist.smallImage
+        tracksOnLocal = tracks
         
-        /*
-         guard  let name = sptPlaylistSnapshot.name, let uri = sptPlaylistSnapshot.uri, let id = sptPlaylistSnapshot.snapshotId else {
-         return nil
-         }
-         self.name = name
-         self.uri = uri
-         self.id = id
-         */
-        self.snapshot = sptPlaylistSnapshot
-        //tracks
-        
-        
-        if let largeImage = sptPlaylistSnapshot.largestImage  {
-            self.largeImage = largeImage.toImage
-        } else { largeImage = nil }
-        
-        if let smallImage = sptPlaylistSnapshot.smallestImage {
-            self.smallImage = smallImage.toImage
-        } else { smallImage = nil }
-
     }
 
 }
@@ -101,4 +85,6 @@ enum ErrorIdentifier: String {
     case sptPlaylistArraySnapshot = "sptPlaylistArraySnapshot"
     case newPlaylistSnapshot = "newPlaylistSnapshot"
     case newPlaylistSnapshotWithTracks = "withNewPlaylistSnapshotWithTracks"
+    case localPlaylist = "localPlaylist"
+    case json = "jsonDictionary"
 }

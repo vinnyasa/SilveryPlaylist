@@ -13,7 +13,7 @@ struct SCPList {
     
     
     init(sptPlaylistsSnapshot: [SPTPlaylistSnapshot]) throws {
-        guard !sptPlaylistsSnapshot.isEmpty else {
+        if sptPlaylistsSnapshot.isEmpty {
             throw SCPListError.missing(ErrorIdentifier.sptPlaylistArraySnapshot.rawValue)
         }
         for snapshot in sptPlaylistsSnapshot {
@@ -21,6 +21,17 @@ struct SCPList {
                 playlists.append(scpPlaylist)
             }
         }
+    }
+    // init from json
+    init(jsonDictionary: [String: Any]?) throws {
+        /*
+        guard let json = jsonDictionary else {
+            throw SCPListError.missing(ErrorIdentifier.json.rawValue)
+        }
+        
+        if let items = json["items"] as [[String: Any]] {
+            for item in items
+        }*/
     }
 
 

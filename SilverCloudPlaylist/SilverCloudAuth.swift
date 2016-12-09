@@ -44,6 +44,27 @@ enum NotificationIdentifier: String {
     case loginCallback = "loginCallback"
 }
 
+extension AuthDelegate {
+    func setUpAuth() {
+        print("settingAuth")
+        /*
+         SPTAuth.defaultInstance().clientID = silverCloudAuth.clientId
+         SPTAuth.defaultInstance().redirectURL = URL(string: silverCloudAuth.redirectURI)
+         SPTAuth.defaultInstance().requestedScopes = silverCloudAuth.scopes
+         
+         SPTAuth.defaultInstance().tokenSwapURL = URL(string: silverCloudAuth.tokenSwapURL)
+         SPTAuth.defaultInstance().tokenRefreshURL = URL(string: silverCloudAuth.tokenRefreshURL)
+         SPTAuth.defaultInstance().sessionUserDefaultsKey = silverCloudAuth.sessionUserDefaultsKey
+         */
+        //auth = SPTAuth.defaultInstance()
+        auth.clientID = silverCloudAuth.clientId
+        auth.redirectURL = URL(string: silverCloudAuth.redirectURI)
+        auth.requestedScopes = silverCloudAuth.scopes
+        auth.tokenSwapURL = URL(string: silverCloudAuth.tokenSwapURL)
+        auth.tokenRefreshURL = URL(string: silverCloudAuth.tokenRefreshURL)
+        auth.sessionUserDefaultsKey = silverCloudAuth.sessionUserDefaultsKey
+    }
+}
 
 
 extension UIViewController {

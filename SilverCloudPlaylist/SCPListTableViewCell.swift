@@ -16,6 +16,11 @@ class SCPListTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        //scpImageView?.layer.borderWidth = 1
+        scpImageView?.layer.masksToBounds = false
+        //scpImageView?.layer.borderColor = UIColor.blackColor().CGColor
+        scpImageView?.layer.cornerRadius = 16.0
+        scpImageView?.clipsToBounds = true
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
