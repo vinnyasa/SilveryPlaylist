@@ -8,7 +8,7 @@
 
 import Foundation
 import UIKit
-
+/*
 struct CoverArt {
     
     //currently getting 60, 300, 640
@@ -51,4 +51,4 @@ extension String {
         return image
     }
 }
-
+*/

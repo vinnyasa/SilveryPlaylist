@@ -7,11 +7,10 @@
 //
 
 import Foundation
-
+/*
 struct Album {
     
     let name: String?
-    
     //handleImages, need specific
     var images: [CoverArt] = []
     
@@ -27,3 +26,4 @@ struct Album {
         }
     }
 }
+*/

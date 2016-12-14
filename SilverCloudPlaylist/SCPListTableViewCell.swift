@@ -16,17 +16,22 @@ class SCPListTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        //scpImageView?.layer.borderWidth = 1
-        scpImageView?.layer.masksToBounds = false
-        //scpImageView?.layer.borderColor = UIColor.blackColor().CGColor
-        scpImageView?.layer.cornerRadius = 16.0
-        scpImageView?.clipsToBounds = true
+        scpImageView?.rounded()
+        self.indentationWidth = 20.0
+        self.indentationLevel = 0
     }
-
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
     }
+    /*
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        let margin: CGFloat = 20.0
+        let indentPoints = CGFloat(self.indentationLevel) * self.indentationWidth
+        indentConstraint.constant = margin + indentPoints
+    }*/
 
 }

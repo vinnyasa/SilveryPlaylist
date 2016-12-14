@@ -43,7 +43,7 @@ class LoginViewController: UIViewController, AuthDelegate {
         guard let loginUrl = auth.spotifyWebAuthenticationURL() else {
             print("don't have spotifyWebAuthenticationURL() ")
             return
-        }
+        } 
         openSpotifyLogin(url: loginUrl)
     }
     

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2702623C1E00A07F00B90BB1 /* PlaylistTypePopTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2702623B1E00A07F00B90BB1 /* PlaylistTypePopTableViewController.swift */; };
+		2702623D1E00A07F00B90BB1 /* PlaylistTypePopTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2702623B1E00A07F00B90BB1 /* PlaylistTypePopTableViewController.swift */; };
 		2740E9EB1DEFDD97003F9461 /* Album.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2740E9EA1DEFDD97003F9461 /* Album.swift */; };
 		2740E9EF1DF10DF9003F9461 /* SCPListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2740E9EE1DF10DF9003F9461 /* SCPListTableViewCell.swift */; };
 		2740E9F01DF10DF9003F9461 /* SCPListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2740E9EE1DF10DF9003F9461 /* SCPListTableViewCell.swift */; };
@@ -28,8 +30,6 @@
 		2740EA0F1DF488E8003F9461 /* SearchType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2740EA0D1DF488E8003F9461 /* SearchType.swift */; };
 		2740EA121DF48F8E003F9461 /* PlaylistTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2740EA111DF48F8E003F9461 /* PlaylistTableViewController.swift */; };
 		2740EA131DF48F8E003F9461 /* PlaylistTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2740EA111DF48F8E003F9461 /* PlaylistTableViewController.swift */; };
-		2740EA151DF492B4003F9461 /* PlaylistDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2740EA141DF492B3003F9461 /* PlaylistDetailTableViewController.swift */; };
-		2740EA161DF492B4003F9461 /* PlaylistDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2740EA141DF492B3003F9461 /* PlaylistDetailTableViewController.swift */; };
 		2740EA181DF4B281003F9461 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2740EA171DF4B281003F9461 /* SearchViewController.swift */; };
 		2740EA191DF4B281003F9461 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2740EA171DF4B281003F9461 /* SearchViewController.swift */; };
 		2740EA1B1DF4BCD3003F9461 /* controllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2740EA1A1DF4BCD3003F9461 /* controllerExtension.swift */; };
@@ -38,6 +38,8 @@
 		2755B12D1DEB925C00CB486E /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2755B12B1DEB925C00CB486E /* LoginViewController.swift */; };
 		2755B12F1DEBACDF00CB486E /* SpotifyAuthentication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2755B12E1DEBACDF00CB486E /* SpotifyAuthentication.framework */; };
 		2755B1301DEBACDF00CB486E /* SpotifyAuthentication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2755B12E1DEBACDF00CB486E /* SpotifyAuthentication.framework */; };
+		27BE58121DFE39F500667393 /* TrackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27BE58111DFE39F400667393 /* TrackViewController.swift */; };
+		27BE58131DFE39F500667393 /* TrackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27BE58111DFE39F400667393 /* TrackViewController.swift */; };
 		27D3053A1DEEB7D600930744 /* SpotifyMetadata.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27D305391DEEB7D600930744 /* SpotifyMetadata.framework */; };
 		27D3053B1DEEB7D600930744 /* SpotifyMetadata.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27D305391DEEB7D600930744 /* SpotifyMetadata.framework */; };
 		27D3053E1DEF31A700930744 /* AuthDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D3053D1DEF31A700930744 /* AuthDelegate.swift */; };
@@ -81,6 +83,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2702623B1E00A07F00B90BB1 /* PlaylistTypePopTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaylistTypePopTableViewController.swift; sourceTree = "<group>"; };
 		2740E9EA1DEFDD97003F9461 /* Album.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Album.swift; sourceTree = "<group>"; };
 		2740E9EE1DF10DF9003F9461 /* SCPListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SCPListTableViewCell.swift; sourceTree = "<group>"; };
 		2740E9F11DF1104E003F9461 /* SCPListTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SCPListTableViewController.swift; sourceTree = "<group>"; };
@@ -92,12 +95,12 @@
 		2740EA0A1DF4884A003F9461 /* SearchTypePopTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchTypePopTableViewController.swift; sourceTree = "<group>"; };
 		2740EA0D1DF488E8003F9461 /* SearchType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchType.swift; sourceTree = "<group>"; };
 		2740EA111DF48F8E003F9461 /* PlaylistTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaylistTableViewController.swift; sourceTree = "<group>"; };
-		2740EA141DF492B3003F9461 /* PlaylistDetailTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaylistDetailTableViewController.swift; sourceTree = "<group>"; };
 		2740EA171DF4B281003F9461 /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		2740EA1A1DF4BCD3003F9461 /* controllerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = controllerExtension.swift; sourceTree = "<group>"; };
 		2755B1241DEB82D000CB486E /* SilverCloudPlaylist-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SilverCloudPlaylist-Bridging-Header.h"; sourceTree = "<group>"; };
 		2755B12B1DEB925C00CB486E /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		2755B12E1DEBACDF00CB486E /* SpotifyAuthentication.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SpotifyAuthentication.framework; sourceTree = "<group>"; };
+		27BE58111DFE39F400667393 /* TrackViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackViewController.swift; sourceTree = "<group>"; };
 		27D305391DEEB7D600930744 /* SpotifyMetadata.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SpotifyMetadata.framework; sourceTree = "<group>"; };
 		27D3053D1DEF31A700930744 /* AuthDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthDelegate.swift; sourceTree = "<group>"; };
 		27D305431DEF413A00930744 /* SCPUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SCPUser.swift; sourceTree = "<group>"; };
@@ -183,11 +186,12 @@
 				2755B12B1DEB925C00CB486E /* LoginViewController.swift */,
 				2740E9EE1DF10DF9003F9461 /* SCPListTableViewCell.swift */,
 				2740E9F11DF1104E003F9461 /* SCPListTableViewController.swift */,
+				2702623B1E00A07F00B90BB1 /* PlaylistTypePopTableViewController.swift */,
 				2740E9FE1DF26DC5003F9461 /* NewPlaylistTableViewController.swift */,
-				2740EA0A1DF4884A003F9461 /* SearchTypePopTableViewController.swift */,
 				2740EA111DF48F8E003F9461 /* PlaylistTableViewController.swift */,
-				2740EA141DF492B3003F9461 /* PlaylistDetailTableViewController.swift */,
+				27BE58111DFE39F400667393 /* TrackViewController.swift */,
 				2740EA171DF4B281003F9461 /* SearchViewController.swift */,
+				2740EA0A1DF4884A003F9461 /* SearchTypePopTableViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -433,14 +437,15 @@
 				27D43D591DE8FE890034DA05 /* Track.swift in Sources */,
 				2740E9EF1DF10DF9003F9461 /* SCPListTableViewCell.swift in Sources */,
 				2755B12C1DEB925C00CB486E /* LoginViewController.swift in Sources */,
-				2740EA151DF492B4003F9461 /* PlaylistDetailTableViewController.swift in Sources */,
 				2740EA121DF48F8E003F9461 /* PlaylistTableViewController.swift in Sources */,
 				27F2D1981DF637D300BD6262 /* SCPColor.swift in Sources */,
 				27D43D5B1DE8FEF50034DA05 /* CoverArt.swift in Sources */,
 				2740E9F21DF1104E003F9461 /* SCPListTableViewController.swift in Sources */,
+				27BE58121DFE39F500667393 /* TrackViewController.swift in Sources */,
 				2740EA021DF38751003F9461 /* SCPList.swift in Sources */,
 				2740EA181DF4B281003F9461 /* SearchViewController.swift in Sources */,
 				2740E9F51DF1DA71003F9461 /* SessionHandler.swift in Sources */,
+				2702623C1E00A07F00B90BB1 /* PlaylistTypePopTableViewController.swift in Sources */,
 				27D305441DEF413A00930744 /* SCPUser.swift in Sources */,
 				27E2FC651DECAB9500E3251A /* SilverCloudAuth.swift in Sources */,
 				27D305471DEF52D200930744 /* NetworkOperation.swift in Sources */,
@@ -465,10 +470,11 @@
 				2740EA0C1DF4884B003F9461 /* SearchTypePopTableViewController.swift in Sources */,
 				2740E9F31DF1104E003F9461 /* SCPListTableViewController.swift in Sources */,
 				27D43D3F1DE8FB9A0034DA05 /* SilverCloudPlaylistTests.swift in Sources */,
-				2740EA161DF492B4003F9461 /* PlaylistDetailTableViewController.swift in Sources */,
 				2740EA191DF4B281003F9461 /* SearchViewController.swift in Sources */,
 				27D305481DEF52D200930744 /* NetworkOperation.swift in Sources */,
+				2702623D1E00A07F00B90BB1 /* PlaylistTypePopTableViewController.swift in Sources */,
 				27E2FC661DECAB9500E3251A /* SilverCloudAuth.swift in Sources */,
+				27BE58131DFE39F500667393 /* TrackViewController.swift in Sources */,
 				27D305451DEF413A00930744 /* SCPUser.swift in Sources */,
 				2740EA001DF26DC5003F9461 /* NewPlaylistTableViewController.swift in Sources */,
 				2740EA131DF48F8E003F9461 /* PlaylistTableViewController.swift in Sources */,

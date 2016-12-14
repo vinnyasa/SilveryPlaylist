@@ -16,17 +16,19 @@ class SearchViewController: UIViewController, UIPopoverPresentationControllerDel
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
     
+    @IBOutlet weak var navigationView: UIView!
     //var tableView: UITableView?
     let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.gray)
     var searchResult: SearchResult?
     var tracksToAdd: [SPTPartialTrack] = []
     
-    var searchType: SPTSearchQueryType?
+    var searchType: SPTSearchQueryType = .queryTypeTrack
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupDelegates()
         setupSearchBar()
+        navigationView.addBottomBorder()
     }
 
     override func didReceiveMemoryWarning() {
@@ -48,7 +50,7 @@ class SearchViewController: UIViewController, UIPopoverPresentationControllerDel
         activityIndicator.frame = searchBar.bounds
         activityIndicator.startAnimating()
         if let searchTerm = searchBar.text{
-            searchSpotify(with: searchTerm)
+            searchSpotify(with: searchTerm, queryType: searchType)
         }
         searchBar.text = nil
         view.endEditing(true)
@@ -171,7 +173,7 @@ class SearchViewController: UIViewController, UIPopoverPresentationControllerDel
             searchTypeLabel.isHidden = false
             introLabel.text = "great now search for \(searchType)"
          }
-        print("search type return: \(searchType?.toString ?? "no return")")
+        print("search type return: \(searchType.toString ?? "no return")")
         //show search bar
         searchBar.isHidden = false
         tableView?.isHidden = false
@@ -179,12 +181,11 @@ class SearchViewController: UIViewController, UIPopoverPresentationControllerDel
     
     // MARK: - Search 
     
-    func searchSpotify(with query: String) {
+    func searchSpotify(with query: String, queryType: SPTSearchQueryType) {
         let searchService = SearchService()
-        if let queryType = searchType {
-            searchService.searchSpotify(with: query, searchType: queryType) {
-                (error, searchResults) in
-                DispatchQueue.main.async {
+        searchService.searchSpotify(with: query, searchType: queryType) {
+            (error, searchResults) in
+            DispatchQueue.main.async {
                 guard error == nil, let searchResult = searchResults else {
                     print("invalidSearch, error: \(error)")
                     // handle error
@@ -194,9 +195,9 @@ class SearchViewController: UIViewController, UIPopoverPresentationControllerDel
                 self.activityIndicator.stopAnimating()
                 self.tableView.reloadData()
                 
-                }
             }
         }
+
     }
     
     // MARK: - Navigation
@@ -215,6 +216,9 @@ class SearchViewController: UIViewController, UIPopoverPresentationControllerDel
         
         case .showSearchMenuPop:
             if let searchTypeVC =  segue.destination as? SearchTypePopTableViewController, let frame = searchMenuButton?.frame {
+                searchTypeVC.popoverPresentationController?.delegate = self
+                configurePopOverController(popVC: searchTypeVC, cgSize: CGSize(width: 108, height: 132), sourceRect: frame, sourceView: view, barButtonItem: nil, backgroundColor: .white)
+                /*
                 searchTypeVC.modalPresentationStyle = UIModalPresentationStyle.popover
                 searchTypeVC.popoverPresentationController?.delegate = self
                 searchTypeVC.popoverPresentationController?.sourceView = view
@@ -222,6 +226,7 @@ class SearchViewController: UIViewController, UIPopoverPresentationControllerDel
                 searchTypeVC.preferredContentSize = CGSize(width: 108, height: 132)
                 searchTypeVC.popoverPresentationController?.permittedArrowDirections = UIPopoverArrowDirection.any
                 searchTypeVC.popoverPresentationController?.backgroundColor = .white
+                */
             }
         default:
             break
@@ -230,21 +235,20 @@ class SearchViewController: UIViewController, UIPopoverPresentationControllerDel
     
     
     // Mark: - UIPopoverPresentationControllerDelegate
+    /*
     func prepareForPopoverPresentation(_ popoverPresentationController: UIPopoverPresentationController) {
         popoverPresentationController.permittedArrowDirections = UIPopoverArrowDirection.any
     }
     
     func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
         return UIModalPresentationStyle.none
-    }
+    }*/
     
     enum SegueIdentifier: String {
         case showSearchMenuPop = "showSearchMenuPop"
         case addTracks = "addTracks"
     }
     
-    override var prefersStatusBarHidden: Bool {
-        return true
-    }
+    
     
 }

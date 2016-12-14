@@ -1,21 +1,26 @@
 //
-//  SearchTypePopTableViewController.swift
+//  PlaylistTypePopTableViewController.swift
 //  SilverCloudPlaylist
 //
-//  Created by Ayah Effi-yah on 12/4/16.
+//  Created by Ayah Effi-yah on 12/13/16.
 //  Copyright © 2016 TrhUArrayLUV. All rights reserved.
 //
 
 import UIKit
 
-class SearchTypePopTableViewController: UITableViewController, SegueHandler {
+class PlaylistTypePopTableViewController: UITableViewController {
     
-    let searchTypes: [SPTSearchQueryType] = [.queryTypeAlbum, .queryTypeTrack, .queryTypePlaylist]
-    var searchType: SPTSearchQueryType?
-    
+    let playlistStatus: [Status] = [.publicPl, .privatePl]
+    var status: Status?
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        //tableView.register(UITableViewCell, forCellReuseIdentifier: "SearchTypeCell")
+
+        // Uncomment the following line to preserve selection between presentations
+        // self.clearsSelectionOnViewWillAppear = false
+
+        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
+        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
 
     override func didReceiveMemoryWarning() {
@@ -40,31 +45,31 @@ class SearchTypePopTableViewController: UITableViewController, SegueHandler {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        searchType = searchTypes[(indexPath as NSIndexPath).row]
-        print(searchType?.toString ?? "no search type")
+        status = playlistStatus[(indexPath as NSIndexPath).row]
+        print(status?.rawValue ?? "no search type")
         performSegue(withIdentifier: SegueIdentifier.searchTypeSelected.rawValue, sender: nil)
         //self.dismiss(animated: true, completion: nil)
     }
-
+    
     // MARK: - Table view data source
-
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 1
     }
-
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return searchTypes.count
+        return playlistStatus.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "searchTypeCell", for: indexPath)
-
+        
         // Configure the cell...
-        let searchType = searchTypes[(indexPath as NSIndexPath).row]
-        cell.textLabel?.text = searchType.toString
-
+        let playlistType = playlistStatus[(indexPath as NSIndexPath).row]
+        cell.textLabel?.text = playlistType.rawValue
+        
         return cell
     }
     

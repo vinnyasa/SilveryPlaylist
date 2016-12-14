@@ -27,7 +27,13 @@ struct SCPlaylist {
         return snapshot!.uri
     }
     var id: String? {
-        return snapshot?.snapshotId
+        guard let uri = snapshot?.uri else {
+            return nil
+        }
+        let separatedUri = String(describing: uri).characters.split { $0 == ":" }
+        let uriArray = separatedUri.map(String.init)
+        print("check it out playlist \(uriArray.last)")
+        return uriArray.last
     }
     
     
@@ -61,6 +67,20 @@ struct SCPlaylist {
         
     }
 
+}
+
+enum Status: String {
+    case publicPl = "public"
+    case privatePl = "private"
+    
+    var toBool: Bool {
+        switch self {
+        case .privatePl:
+            return false
+        case .publicPl:
+            return true
+        }
+    }
 }
 
 extension SPTImage {

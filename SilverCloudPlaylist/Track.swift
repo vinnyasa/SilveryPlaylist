@@ -11,24 +11,35 @@ import Foundation
 struct Track {
 
     let name: String
-    let id: String
-    //let artist: String
-    //var coverArt = CoverArt?()
-    let album: Album?
-    var coverArt: [CoverArt]? {
-        return album?.images
-    }
-    //maybe just bring in one?
-    var image: UIImage? {
-        return album?.images.first?.image
-    }
+    let album: String?
+    var artist: String?
+    var smallImage: UIImage?
+    var largeImage: UIImage?
     
-    init?(trackDictionary: [String: Any]) {
-        guard let track = trackDictionary["track"] as? [String: Any], let name = track["name"] as? String, let id = track["id"] as? String, let album = track["album"] as? [String: Any]  else {
+    init?(track: SPTPartialTrack) {
+        
+        guard let name = track.name else {
             return nil
         }
         self.name = name
-        self.id = id
-        self.album = Album(albumDictionary: album)
+        print("getting album name:")
+        if let album = track.album, let albumName = track.album?.name {
+            self.album = albumName
+            print(albumName)
+            print("getting images:")
+            if let smallImage = album.smallestCover, let largeImage = album.largestCover {
+                print("there should be images")
+                self.smallImage = smallImage.toImage
+                self.largeImage = largeImage.toImage
+            }
+        } else { album = nil }
+        
+        if let artists = track.artists as? [SPTPartialArtist] {
+            if !artists.isEmpty {
+                self.artist = artists.first?.name
+            }
+        } else { artist = nil }
+        
+        
     }
 }

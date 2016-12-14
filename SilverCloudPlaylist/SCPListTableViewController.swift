@@ -8,14 +8,14 @@
 
 import UIKit
 
-class SCPListTableViewController: UITableViewController, SessionHandler {
+class SCPListTableViewController: UITableViewController, SessionHandler, SegueHandler {
 
     var playlists = [SCPlaylist]()
     var auth: SPTAuth = SPTAuth.defaultInstance()
     var silverCloudAuth = SilverCloudAuth()
     var isInitial = true
     var playlistsToDelete = [SCPlaylist]()
-    @IBOutlet weak var playlistImageView: UIImageView!
+    let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,12 +52,19 @@ class SCPListTableViewController: UITableViewController, SessionHandler {
         }
     }
     
-    func testOwner(token: String) {
-        SPTUser.requestCurrentUser(withAccessToken: token) {
-        (error, user) in
-            if let user = user as? SPTUser, let display = user.displayName, let canonical = user.canonicalUserName {
-                print("user displayName is: \(display)")
-                print("user displayName is: \(canonical)")
+    func handleUpdateError(error: Error?) {
+        print("scpServiceHandler has error: \(error)")
+        guard  let playlistError = error as? SCPListServiceError else {
+            print ("error in request, error: \(error)")
+            self.unableToUpdatePlaylists()
+            return
+        }
+        switch playlistError {
+        case .missing(let identifier):
+            print("scpServiceHandler has error at: \(identifier)")
+            //could have if identifier == "items", invite them to create playlist feature
+            if identifier == ErrorIdentifier.sptPlaylistListItems.rawValue {
+                self.playlistCreateInvite()
             }
         }
     }
@@ -69,41 +76,65 @@ class SCPListTableViewController: UITableViewController, SessionHandler {
             // let's try this
             service.updateSCPList(withToken: token) {
                 (error, scpPlaylists) in
-                guard let playlists = scpPlaylists else {
-                    //handle errors
-                    print("scpServiceHandler has error: \(error)")
-                    guard  let playlistError = error as? SCPListServiceError else {
-                        print ("error in request, error: \(error)")
+                //enter main thread
+                DispatchQueue.main.async {
+                    print("in main delivering update")
+                    self.activityIndicator.stopAnimating()
+                    guard let playlists = scpPlaylists else {
+                        self.handleUpdateError(error: error)
+                        /*//handle errors
+                        print("scpServiceHandler has error: \(error)")
+                        
+                        guard  let playlistError = error as? SCPListServiceError else {
+                            print ("error in request, error: \(error)")
+                            self.unableToUpdatePlaylists()
+                            return
+                        }
+                        switch playlistError {
+                        case .missing(let identifier):
+                            print("scpServiceHandler has error at: \(identifier)")
+                            //could have if identifier == "items", invite them to create playlist feature
+                            if identifier == ErrorIdentifier.sptPlaylistListItems.rawValue {
+                                self.playlistCreateInvite()
+                            }
+                        }*/
                         return
                     }
-                    switch playlistError {
-                    case .missing(let identifier):
-                        print("scpServiceHandler has error at: \(identifier)")
-                        //could have if identifier == "items", invite them to create playlist feature
-                        if identifier == ErrorIdentifier.sptPlaylistListItems.rawValue {
-                            self.playlistCreateInvite()
-                        }
-                    }
-                    return
+                    
+                    self.playlists = playlists
+                    print(playlists)
+                    self.tableView.reloadData()
+                    
                 }
-                //should put an activity indicator
-                print("in main thread")
-                self.playlists = playlists
-                self.tableView.reloadData()
             }
         }
+    }
+    
+    func unableToUpdatePlaylists() {
+        // right know just presenting this alert for general error, but should be taylored to different error scenarios
+        let alertView = UIAlertController(title: "Network Error", message: "Unable to update playlist", preferredStyle: .alert)
+        let ok = UIAlertAction(title: "ok", style: .cancel, handler: nil)
+        alertView.addAction(ok)
+        self.present(alertView, animated: true, completion: nil)
     }
     
     func playlistCreateInvite() {
         // a tour or something to teach them how to add playlists
         print("inviting user to create playlists")
+        let alertView = UIAlertController(title: "No Playlists Detected", message: "It appears you haven't created any playlists yet, would you like to create one today, just use the '+' button", preferredStyle: .alert)
+        let ok = UIAlertAction(title: "ok", style: .cancel, handler: nil)
+        alertView.addAction(ok)
+        self.present(alertView, animated: true, completion: nil)
     }
     
     // MARK: - configure view
     func configureTable() {
         tableView.rowHeight = 77
-        self.title = Title.playlist.rawValue
-        self.navigationItem.leftBarButtonItem = self.editButtonItem
+        title = Title.playlist.rawValue
+        navigationItem.leftBarButtonItem = self.editButtonItem
+        activityIndicator.center = CGPoint(x: view.center.x, y: view.center.y - 60.0)
+        //activityIndicator.startAnimating()
+        view.addSubview(activityIndicator)
     }
     
     // MARK: - Table view data source
@@ -125,20 +156,11 @@ class SCPListTableViewController: UITableViewController, SessionHandler {
         if let name = playlist.name, let image = playlist.smallImage {
             cell.scpNameLabel?.text = name
             cell.scpImageView?.image = image
+            
         }
-        if let scpImageView = cell.scpImageView  {
-            //configureImageView(scpImageView, radius: 15.0)
-            scpImageView.rounded()
-        }
+        
         return cell
     }
-    
-     // Override to support conditional editing of the table view.
-     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-     // Return false if you do not want the specified item to be editable.
-        return true
-     }
-    
     
     // Override to support editing the table view.
      override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
@@ -146,63 +168,50 @@ class SCPListTableViewController: UITableViewController, SessionHandler {
             // Delete the row from the data source
             let playlist = playlists.remove(at: indexPath.row)
             playlistsToDelete.append(playlist)
-            // delete from spotify. They don't have endpoint for deleting a playlist in the Web API; the notion of deleting a playlist is not relevant within the Spotify’s playlist system. Even if you are the playlist’s owner and you choose to manually remove it from your own list of playlists, you are simply unfollowing it. So that would be the way to handle it.
+            // delete from spotify, the notion of deleting a playlist is not relevant within the Spotify’s playlist system. Even if you are the playlist’s owner and you choose to manually remove it from your own list of playlists, you are simply unfollowing it. 
             if let username = spotifySession?.canonicalUsername, let playlistId = playlist.id {
                 let playlistService = PlaylistService()
+                print("playliist id: \(playlistId)")
                 playlistService.unfollowPlaylist(username: username , playlist: playlistId) {
                     (error, success) in
                     guard success else {
                         //FIXME: unable to unfollow, maybe trigger some alert ?
+                        print("you have just deleted this playlist: \(success)")
                         return
                     }
                 }
             }
-            
-            
             //delete playlist from dataBase
             tableView.deleteRows(at: [indexPath], with: .fade)
         }
     }
     
-    /*
-     // Override to support rearranging the table view.
-     override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-     
-     }
-     */
     
-    /*
-     // Override to support conditional rearranging of the table view.
-     override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-     // Return false if you do not want the item to be re-orderable.
-     return true
-     }
-     */
     @IBAction func loginSuccessFul(_ segue:UIStoryboardSegue) {
-        //hasSession = true
-        /*
-         let loginVC = segue.source as? LoginViewController
-         if let _ = loginVC?.hasSession {
-         
-         }*/
     }
     
     @IBAction func savePlaylist(_ segue:UIStoryboardSegue) {
          let newPlaylistVC = segue.source as? NewPlaylistTableViewController
-        //activityIndicator.isAnimating = true
-         if let name = newPlaylistVC?.name, let tracks = newPlaylistVC?.tracks {
+        activityIndicator.startAnimating()
+        print("saving new playlist")
+         if let name = newPlaylistVC?.name?.capitalized, let tracks = newPlaylistVC?.tracks, let publicFlag = newPlaylistVC?.playlistStatus?.toBool {
             //createNewPlaylist, then add tracks then create an SCPPlaylist and add to array. regardless if tracks are added
             handleSession() {
                 (error, token) in
                 if let accessToken = token {
-                    PlaylistService().handleCreateNewPlaylist(withName: name, accessToken: accessToken, tracks: tracks) {
+                    print("requesting save")
+                    PlaylistService().handleCreateNewPlaylist(withName: name, accessToken: accessToken, tracks: tracks, publicFlag: publicFlag) {
                         (error, scpPlaylist) in
+                        //enter main thread
+                        DispatchQueue.main.async {
+                        self.activityIndicator.stopAnimating()
                         guard error == nil, let playlist = scpPlaylist else {
                             return
                         }
-                        //activityIndicator.isAnimating = false
+                        print("adding playlist: ")
                         self.playlists.append(playlist)
                         self.tableView.reloadData()
+                        }
                     }
                 }
             }
@@ -212,15 +221,30 @@ class SCPListTableViewController: UITableViewController, SessionHandler {
     
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-        // pass title for detailViewController as Playlist
+        guard let identifier = segue.identifier, let _ = SegueIdentifier(rawValue: identifier) else {
+            fatalError("segue identifier not found in \(self)")
+        }
+        switch segueIdentifierForSegue(segue) {
+        case .showPlaylist:
+            if let indexPath = tableView.indexPathForSelectedRow, let playlistVC =  segue.destination as? PlaylistTableViewController {
+                let playlist = playlists[indexPath.row]
+                playlistVC.playlist = playlist
+                playlistVC.title = Title.playlist.rawValue
+            }
+        case .showNewPlaylist:
+            (segue.destination as? NewPlaylistTableViewController)?.title = Title.newPlaylist.rawValue
+            (segue.destination as? NewPlaylistTableViewController)?.viewMode = NewPlaylistTableViewController.ViewMode.newPlaylist
+            
+        default:
+            break
+        }
     }
     
     enum SegueIdentifier: String {
         case showLogin = "showLogin"
+        case showPlaylist = "showPlaylist"
+        case showNewPlaylist = "showNewPlaylist"
     }
-    
 }
 
 

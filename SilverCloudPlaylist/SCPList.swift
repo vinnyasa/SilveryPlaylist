@@ -7,7 +7,7 @@
 //
 
 import Foundation
-
+/*
 struct SCPList {
     var playlists = [SCPlaylist]()
     
@@ -39,3 +39,4 @@ struct SCPList {
 enum SCPListError: Error {
     case missing(String)
 }
+*/
