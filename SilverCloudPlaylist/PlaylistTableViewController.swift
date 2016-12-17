@@ -17,6 +17,9 @@ class PlaylistTableViewController: UITableViewController, SegueHandler, SessionH
     @IBOutlet weak var statusLabel: UILabel?
     var auth: SPTAuth = SPTAuth.defaultInstance()
     var silverCloudAuth = SilverCloudAuth()
+    //var changesForLocal: [PlaylistEdit] = []
+    //var editedPlaylist: SCPlaylist?
+    var delegate: PlaylistDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,13 +40,27 @@ class PlaylistTableViewController: UITableViewController, SegueHandler, SessionH
     }
     
     func loadPlaylist() {
-        if let playlist = playlist, let name = playlist.name, let image = playlist.smallImage, let isPublic = playlist.snapshot?.isPublic  {
+        if let name = playlist?.name {
             nameLabel?.text = name
+        }
+        if let isPublic = playlist?.isPublic {
+            statusLabel?.text = isPublic ? Share.publicMode.rawValue : Share.privateMode.rawValue
+            print("status label should have: \(isPublic ? Share.publicMode.rawValue : Share.privateMode.rawValue)")
+        }
+        /*
+        if let image = playlist?.smallImage  {
             playlistImageView.image = image
-            statusLabel?.text = isPublic ? Status.publicPl.rawValue : Status.privatePl.rawValue
-            if let tracks = playlist.tracks  {
-                self.tracks.append(contentsOf: tracks)
-            }
+        }*/
+        let image = playlist?.smallImage ?? UIImage(assetIdentifier: .music)
+        /*
+        if let image = image {
+            playlistImageView.image = image
+        }*/
+        playlistImageView.image = image
+
+        
+        if let tracks = playlist?.tracks  {
+            self.tracks.append(contentsOf: tracks)
         }
     }
     
@@ -74,10 +91,10 @@ class PlaylistTableViewController: UITableViewController, SegueHandler, SessionH
         if indexPath.row == 0 {
             cell.addTopBorder(view: self.view)
         }
-        
         return cell
     }
     
+    /*
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         // Return false if you do not want the specified item to be editable.
@@ -90,7 +107,7 @@ class PlaylistTableViewController: UITableViewController, SegueHandler, SessionH
             // Delete the row from the data source
             tableView.deleteRows(at: [indexPath], with: .fade)
         }
-    }
+    }*/
     
     //MARK: Error Handling Alerts
     func unableToSaveChanges() {
@@ -112,9 +129,10 @@ class PlaylistTableViewController: UITableViewController, SegueHandler, SessionH
         }
         print("loading tracks")
         self.tracks = tracks
+        playlist?.tracks = tracks
         tableView.reloadData()
     }
-    
+    /*
     func changeName(snapshot: SPTPlaylistSnapshot, name: String, accessToken: String){
         snapshot.changePlaylistDetails(["name": "\(name)"], withAccessToken: accessToken) {
             (error) in
@@ -126,10 +144,50 @@ class PlaylistTableViewController: UITableViewController, SegueHandler, SessionH
             }
             self.nameLabel?.text = name
         }
+    }*/
+    
+    func changedetails(snapshot: SPTPlaylistSnapshot, details: [AnyHashable: Any], accessToken: String) {
+        snapshot.changePlaylistDetails(details, withAccessToken: accessToken) {
+            (error) in
+            DispatchQueue.main.async {
+                guard error == nil else {
+                    self.unableToSaveChanges()
+                    return
+                }
+                if let name = details["name"] as? String {
+                    self.nameLabel?.text = name
+                    self.playlist?.name = self.nameLabel?.text
+                }
+                if let isPublic = details["isPublic"] as? Bool {
+                    print("returned from changing isPublic")
+                    self.statusLabel?.text = self.shareMode(isPublic: isPublic)
+                    self.playlist?.isPublic = isPublic
+                }
+                
+            }
+            
+        }
     }
+    /*
+    func createEditedPlaylist(changes: [PlaylistEdit]) {
+        print("creating local playlist")
+        for change in changes {
+            switch change {
+            case .name:
+                playlist?.name = nameLabel?.text
+            case .tracks:
+                playlist?.tracks = tracks
+            case .isPublic:
+                if let shareLevel = statusLabel?.text, let share = Share(rawValue:shareLevel) {
+                    print("playlistIsPublicWillBeSet to \(share == .publicMode)")
+                    playlist?.isPublic = (share == .publicMode)
+                }
+            }
+        }
+    }*/
     
     @IBAction func saveChanges(_ segue:UIStoryboardSegue) {
-        if let editPlaylistVC = segue.source as? NewPlaylistTableViewController, let name = editPlaylistVC.name, let playlistName = playlist?.name, let snapshot = playlist?.snapshot {
+        if let editPlaylistVC = segue.source as? NewPlaylistTableViewController, let name = editPlaylistVC.name, let playlistName = playlist?.name, let snapshot = playlist?.snapshot, let editedIsPublic = editPlaylistVC.isPublic, let isPublic = playlist?.isPublic {
             
             handleSession() {
                 (error, token) in
@@ -139,18 +197,38 @@ class PlaylistTableViewController: UITableViewController, SegueHandler, SessionH
                     return
                 }
                 print("processing request after token")
+                var details: [AnyHashable: Any] = [:]
                 if name != playlistName {
                     //push change to spotify
                     print("have different name")
-                    self.changeName(snapshot: snapshot, name: name, accessToken: accessToken)
+                    //self.changeName(snapshot: snapshot, name: name, accessToken: accessToken)
+                    details["name"] = name
+                    //self.changesForLocal.append(.name)
                 }
-                snapshot.replaceTracks(inPlaylist: editPlaylistVC.tracks, withAccessToken: accessToken) {
-                    (error) in
-                    DispatchQueue.main.async {
-                        self.handleTracks(tracks: editPlaylistVC.tracks, error: error)
+                if editedIsPublic != isPublic {
+                    print("edited is public: \(editedIsPublic)")
+                    //self.statusLabel?.text = self.shareMode(isPublic: editedIsPublic)
+                    details["isPublic"] = editedIsPublic
+                    //self.changesForLocal.append(.isPublic)
+                }
+                if !details.isEmpty {
+                    self.changedetails(snapshot: snapshot, details: details, accessToken: accessToken)
+                }
+                print("checking editOperation")
+                if editPlaylistVC.tracksEditOperation != nil {
+                    snapshot.replaceTracks(inPlaylist: editPlaylistVC.tracks, withAccessToken: accessToken) {
+                        (error) in
+                        DispatchQueue.main.async {
+                            self.handleTracks(tracks: editPlaylistVC.tracks, error: error)
+                        }
                     }
+                    //self.changesForLocal.append(.tracks)
                 }
-
+                
+                /*
+                if !self.changesForLocal.isEmpty {
+                   self.createEditedPlaylist(changes: self.changesForLocal)
+                }*/
                 /*
                 print("tracksEditOperation is: \(editPlaylistVC.tracksEditOperation)")
                 if let editOperation = editPlaylistVC.tracksEditOperation {
@@ -196,6 +274,14 @@ class PlaylistTableViewController: UITableViewController, SegueHandler, SessionH
         //maybe show an alert saying, changes will disply once Spotify accepts them in a few moments or changes may take a few moments, waiting for Spotify's confirmation.
         
     }
+    override func willMove(toParentViewController parent: UIViewController?) {
+        super.willMove(toParentViewController: parent)
+        if parent == nil, let editedPlaylist = playlist {
+            print("This VC is 'will' be popped. i.e. the back button was pressed.")
+            delegate?.addEditedPlaylist(playlist: editedPlaylist)
+        }
+    }
+    
     
     // MARK: - Navigation
 
@@ -215,6 +301,8 @@ class PlaylistTableViewController: UITableViewController, SegueHandler, SessionH
                 editPlaylistVC.name = name
                 editPlaylistVC.playlistNameTextField?.text = name
                 editPlaylistVC.tracks = tracks
+                editPlaylistVC.isPublic = playlist?.isPublic ?? true
+                
                 
             }
         case .showTrack:
@@ -226,7 +314,9 @@ class PlaylistTableViewController: UITableViewController, SegueHandler, SessionH
                 }
                 trackVC.track = track
                 trackVC.popoverPresentationController?.delegate = self
-                let y = self.view.frame.height/2 - 77.0
+                //let y = self.view.frame.height/2 - 77.0
+                let popHeight:CGFloat = 144.0
+                let y = self.view.frame.height - popHeight
                 let rect = CGRect(x: 0, y: y, width: 1.0, height: 1.0)
                 let cgSize = CGSize(width: self.view.frame.width, height: 144.0)
                 configurePopOverController(popVC: trackVC, cgSize: cgSize, sourceRect: rect, sourceView: view, barButtonItem: nil, backgroundColor: nil)
@@ -280,7 +370,12 @@ class PlaylistTableViewController: UITableViewController, SegueHandler, SessionH
             break
         }
     }
-*/
+*/  /*
+    enum PlaylistEdit {
+        case name
+        case tracks
+        case isPublic
+    }*/
     
 }
 

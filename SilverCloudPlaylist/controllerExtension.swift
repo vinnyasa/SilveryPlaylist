@@ -34,6 +34,7 @@ extension SegueHandler where Self: UIViewController, SegueIdentifier.RawValue ==
 
 enum AssetIdentifier: String {
     case menu = "menu"
+    case music = "music"
 }
 
 protocol SegueHandler {
@@ -54,6 +55,9 @@ extension UIViewController {
     
     func configureImageView(_ imageView: UIImageView, radius: CGFloat) {
         imageView.layer.cornerRadius = radius
+    }
+    func shareMode(isPublic: Bool) -> String {
+        return isPublic ? "public" : "private"
     }
 }
 
@@ -143,4 +147,10 @@ extension UIImageView {
     }
 }
 
+
+//MARK: 
+
+protocol PlaylistDelegate {
+    func addEditedPlaylist(playlist: SCPlaylist)
+}
 

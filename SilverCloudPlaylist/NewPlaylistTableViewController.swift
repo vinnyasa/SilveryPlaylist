@@ -20,7 +20,8 @@ class NewPlaylistTableViewController: UITableViewController, UITextFieldDelegate
     @IBOutlet weak var playlistTypeLabel: UILabel!
     var name: String?
     var tracks: [SPTPartialTrack] = []
-    var playlistStatus: Status?
+    var isPublic: Bool?
+    //var share: Share?
     var viewMode: ViewMode?
     
     //ToProcessOnExistingPlaylist
@@ -41,13 +42,12 @@ class NewPlaylistTableViewController: UITableViewController, UITextFieldDelegate
     func configureView() {
         addMusicButton?.titleLabel?.textAlignment = .left
         playlistNameTextField?.delegate = self
-        //setupBorder(forView: navigationView)
         navigationView?.addBottomBorder()
         setupDoneButtons()
         setupTextField()
         tableView.isEditing = true
     }
-    
+    /*
     func setupBorder(forView view: UIView?) {
         let border = CALayer()
         let borderWidth = CGFloat(1.0)
@@ -60,7 +60,7 @@ class NewPlaylistTableViewController: UITableViewController, UITextFieldDelegate
             view?.layer.addSublayer(border)
             view?.layer.masksToBounds = true
         }
-    }
+    }*/
     
     // MARK: - Text field
     
@@ -73,31 +73,23 @@ class NewPlaylistTableViewController: UITableViewController, UITextFieldDelegate
     func textFieldDidEndEditing(_ textField: UITextField) {
         print("textFieldDidEndEditing called")
         if let textCount = textField.text?.characters.count, textCount > 1, let name = playlistNameTextField?.text {
+            print("have name for new pl: \(name)")
             self.name = name.capitalized
             buttonsEnabled(allow: true)
         } else if let textCount = textField.text?.characters.count, textCount <= 1 {
             buttonsEnabled(allow: false)
             print("sorry you need a longer name")
+            //show alert
         }
     }
 
     
-    /*
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         playlistNameTextField?.resignFirstResponder()
-        //could add a minimum of characters for name? does Spotify have minimum
-        guard let name = playlistNameTextField?.text, name.characters.count > 1 else {
-            return false
-        }
-        print("enabling save button, \(saveButton?.isEnabled)")
-        buttonsEnabled(allow: true)
-        //saveButton?.isEnabled = true
-        print("enabling save button, \(saveButton?.isEnabled)")
-        self.name = name.capitalized
-        
         return true
     }
-    
+    /*
     func textFieldDidBeginEditing(_ textField: UITextField) {
         if let textCount = textField.text?.characters.count, textCount > 1, let name = playlistNameTextField?.text {
             self.name = name
@@ -127,12 +119,14 @@ class NewPlaylistTableViewController: UITableViewController, UITextFieldDelegate
     }
     
     func setupTextField() {
-        guard let viewMode = viewMode, let name = name else { // unableTosetUp
+        guard let viewMode = viewMode, let name = name, let isPublic = isPublic else{ // unableTosetUp
             return
         }
         switch viewMode {
         case .editPlaylist:
             playlistNameTextField?.text = name
+            playlistTypeLabel?.text = shareMode(isPublic: isPublic)
+            playlistTypeLabel.isHidden = false
         default:
             break
         }
@@ -149,12 +143,6 @@ class NewPlaylistTableViewController: UITableViewController, UITextFieldDelegate
         case .newPlaylist:
             saveButton?.isEnabled = allow
         }
-    }
-    
-    func donePressed() {
-        //push changes to spotify and pressent updated on playlistController
-        
-    
     }
     
     func handleChanges(editOperation: EditOperation) {
@@ -213,14 +201,12 @@ class NewPlaylistTableViewController: UITableViewController, UITextFieldDelegate
             tracks.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
             handleChanges(editOperation: .remove)
-            print("tracks after deleting some tracks: \(tracks)")
         }
     }
      // Override to support rearranging the table view.
      override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
         let trackToMove = tracks.remove(at: fromIndexPath.row)
         tracks.insert(trackToMove, at: to.row)
-        print("tracks after moving: \(tracks)")
         handleChanges(editOperation: .replace)
      }
    
@@ -236,26 +222,26 @@ class NewPlaylistTableViewController: UITableViewController, UITextFieldDelegate
     
 
     // MARK: - Navigation
-    @IBAction func privacyLevelSelected(_ segue:UIStoryboardSegue) {
+    @IBAction func playlistStatusSelected(_ segue:UIStoryboardSegue) {
+        print("unwind segue method being called")
         let playlistPopVC = segue.source as? PlaylistTypePopTableViewController
-        if let status = playlistPopVC?.status {
-            playlistStatus = status
-            playlistTypeLabel.text = status.rawValue
+        /*if let share = playlistPopVC?.share {
+            print("share in unwind is: \(share)")
+            self.share = share
+            playlistTypeLabel.text = share.rawValue
+            playlistTypeLabel.isHidden = false
+        }*/
+        if let isPublic = playlistPopVC?.isPublic {
+            print("share in unwind is: \(isPublic)")
+            self.isPublic = isPublic
+            //let shareMode = isPublic ? "public" : "private"
+            playlistTypeLabel.text = shareMode(isPublic: isPublic)
             playlistTypeLabel.isHidden = false
         }
     }
     
-    
     @IBAction func cancelButtonPressed(_ sender: UIButton) {
         self.dismiss(animated: true, completion: nil)
-    }
-    
-    enum SegueIdentifier: String {
-        case saveChangesToPlaylist = "saveChangesToPlaylist"
-        case saveNewPlaylist = "saveNewPlaylist"
-        case showSearchView = "showSearchView"
-        case showPlaylistTypePop = "showPlaylistTypePop"
-        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -264,11 +250,11 @@ class NewPlaylistTableViewController: UITableViewController, UITextFieldDelegate
         }
         switch segueIdentifierForSegue(segue) {
         case .showPlaylistTypePop:
-            if let searchTypeVC =  segue.destination as? SearchTypePopTableViewController, let frame = privacyMenuButton?.frame {
-                searchTypeVC.popoverPresentationController?.delegate = self
-                configurePopOverController(popVC: searchTypeVC, cgSize: CGSize(width: 108, height: 132), sourceRect: frame, sourceView: view, barButtonItem: nil, backgroundColor: .white)
+            if let playlistTypeVC =  segue.destination as? PlaylistTypePopTableViewController, let frame = privacyMenuButton?.frame {
+                print("presenting pop")
+                playlistTypeVC.popoverPresentationController?.delegate = self
+                configurePopOverController(popVC: playlistTypeVC, cgSize: CGSize(width: 108, height: 88), sourceRect: frame, sourceView: view, barButtonItem: nil, backgroundColor: .white)
             }
-            print("presenting pop")
         case .saveNewPlaylist:
             print("name before exit: \(name)")
         default:
@@ -285,6 +271,12 @@ class NewPlaylistTableViewController: UITableViewController, UITextFieldDelegate
     override var prefersStatusBarHidden: Bool {
         return true
     }*/
+    enum SegueIdentifier: String {
+        case saveChangesToPlaylist = "saveChangesToPlaylist"
+        case saveNewPlaylist = "saveNewPlaylist"
+        case showSearchView = "showSearchView"
+        case showPlaylistTypePop = "showPlaylistTypePop"
+    }
     
     enum ViewMode {
         case editPlaylist

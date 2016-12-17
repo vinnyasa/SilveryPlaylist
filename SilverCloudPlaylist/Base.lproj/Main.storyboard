@@ -164,7 +164,7 @@
                                     </constraints>
                                 </imageView>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="status" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vhh-WS-vaU">
-                                    <rect key="frame" x="32" y="61" width="210" height="21.5"/>
+                                    <rect key="frame" x="34" y="61" width="208" height="21.5"/>
                                     <fontDescription key="fontDescription" name="BradleyHandITCTT-Bold" family="Bradley Hand" pointSize="17"/>
                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                     <nil key="highlightedColor"/>
@@ -176,14 +176,14 @@
                                 <constraint firstItem="Mmb-6D-976" firstAttribute="leading" secondItem="oYd-xJ-H5A" secondAttribute="leading" constant="32" id="8c7-ZS-muy"/>
                                 <constraint firstAttribute="trailing" secondItem="qiG-p8-xs6" secondAttribute="trailing" constant="48" id="N6h-bY-x6j"/>
                                 <constraint firstItem="qiG-p8-xs6" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Mmb-6D-976" secondAttribute="trailing" constant="8" id="YCN-d1-O4w"/>
-                                <constraint firstItem="vhh-WS-vaU" firstAttribute="leading" secondItem="Mmb-6D-976" secondAttribute="leading" id="bMJ-wj-PCT"/>
+                                <constraint firstItem="vhh-WS-vaU" firstAttribute="leading" secondItem="Mmb-6D-976" secondAttribute="leading" constant="2" id="bMJ-wj-PCT"/>
                                 <constraint firstItem="qiG-p8-xs6" firstAttribute="leading" secondItem="vhh-WS-vaU" secondAttribute="trailing" constant="8" id="brR-5C-jTX"/>
                                 <constraint firstItem="vhh-WS-vaU" firstAttribute="top" secondItem="Mmb-6D-976" secondAttribute="bottom" constant="8" id="sv3-Kb-hbr"/>
                                 <constraint firstItem="Mmb-6D-976" firstAttribute="top" secondItem="oYd-xJ-H5A" secondAttribute="top" constant="24" id="ul7-Yd-HX2"/>
                             </constraints>
                         </view>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="playlistCell" textLabel="zf0-Cy-vzu" detailTextLabel="rc1-e3-Fm3" style="IBUITableViewCellStyleSubtitle" id="l9I-Ex-c5w">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="playlistCell" focusStyle="custom" textLabel="zf0-Cy-vzu" detailTextLabel="rc1-e3-Fm3" style="IBUITableViewCellStyleSubtitle" id="l9I-Ex-c5w">
                                 <rect key="frame" x="0.0" y="131" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="l9I-Ex-c5w" id="EVi-q8-WSc">
@@ -322,7 +322,7 @@
                                     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                    <textInputTraits key="textInputTraits" enablesReturnKeyAutomatically="YES"/>
+                                    <textInputTraits key="textInputTraits" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
                                 </textField>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Brw-8G-DXf">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
@@ -385,7 +385,7 @@
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ryh-ET-pX3">
-                                    <rect key="frame" x="28" y="131.5" width="32" height="32"/>
+                                    <rect key="frame" x="30" y="132.5" width="32" height="32"/>
                                     <state key="normal" image="menu"/>
                                     <connections>
                                         <segue destination="cZw-PF-4AS" kind="popoverPresentation" identifier="showPlaylistTypePop" popoverAnchorView="ryh-ET-pX3" id="LpJ-Qy-s0C">
@@ -394,7 +394,7 @@
                                     </connections>
                                 </button>
                                 <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="playlistType" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JIp-bN-5Zs">
-                                    <rect key="frame" x="68" y="137" width="94.5" height="21.5"/>
+                                    <rect key="frame" x="68" y="137" width="95" height="22"/>
                                     <fontDescription key="fontDescription" name="BradleyHandITCTT-Bold" family="Bradley Hand" pointSize="17"/>
                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                     <nil key="highlightedColor"/>
@@ -404,14 +404,14 @@
                             <gestureRecognizers/>
                             <constraints>
                                 <constraint firstItem="ryh-ET-pX3" firstAttribute="centerY" secondItem="3BS-uk-1zB" secondAttribute="centerY" id="2nY-Yd-3PE"/>
-                                <constraint firstItem="JIp-bN-5Zs" firstAttribute="leading" secondItem="ryh-ET-pX3" secondAttribute="trailing" constant="8" id="53x-91-aQt"/>
+                                <constraint firstItem="JIp-bN-5Zs" firstAttribute="leading" secondItem="ryh-ET-pX3" secondAttribute="trailing" constant="6" id="53x-91-aQt"/>
                                 <constraint firstItem="ZEl-ta-zI4" firstAttribute="centerX" secondItem="yyJ-db-7m6" secondAttribute="centerX" constant="5.5" id="59l-IX-Ejd"/>
                                 <constraint firstItem="ZEl-ta-zI4" firstAttribute="top" secondItem="Brw-8G-DXf" secondAttribute="bottom" constant="20" id="6km-86-W3g"/>
                                 <constraint firstAttribute="trailing" secondItem="ZEl-ta-zI4" secondAttribute="trailing" constant="19" id="8i9-LL-tTX"/>
                                 <constraint firstAttribute="trailing" secondItem="3BS-uk-1zB" secondAttribute="trailing" constant="16" id="H5n-Vu-nZx"/>
                                 <constraint firstItem="Brw-8G-DXf" firstAttribute="width" secondItem="yyJ-db-7m6" secondAttribute="width" id="YkJ-lr-byQ"/>
                                 <constraint firstItem="Brw-8G-DXf" firstAttribute="centerX" secondItem="yyJ-db-7m6" secondAttribute="centerX" id="ZDU-GT-dX0"/>
-                                <constraint firstItem="ryh-ET-pX3" firstAttribute="leading" secondItem="ZEl-ta-zI4" secondAttribute="leading" constant="-2" id="cLD-3K-jfP"/>
+                                <constraint firstItem="ryh-ET-pX3" firstAttribute="leading" secondItem="ZEl-ta-zI4" secondAttribute="leading" id="cLD-3K-jfP"/>
                                 <constraint firstItem="Brw-8G-DXf" firstAttribute="top" secondItem="yyJ-db-7m6" secondAttribute="top" id="iZT-M1-dV5"/>
                                 <constraint firstAttribute="bottom" secondItem="3BS-uk-1zB" secondAttribute="bottom" constant="11" id="kS9-vU-o2z"/>
                                 <constraint firstItem="ZEl-ta-zI4" firstAttribute="leading" secondItem="yyJ-db-7m6" secondAttribute="leading" constant="30" id="q0z-KW-GOL"/>
@@ -526,38 +526,12 @@
                                     <constraint firstItem="KZ1-Jz-cj2" firstAttribute="centerY" secondItem="aTV-ra-ofu" secondAttribute="centerY" id="za1-G1-ayP"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fiC-BA-Acg">
-                                <rect key="frame" x="32" y="106" width="32" height="32"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <color key="tintColor" red="0.2099638731" green="0.72534938979999997" blue="0.73691318459999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <state key="normal" image="menu">
-                                    <color key="titleColor" red="0.21176470588235294" green="0.72549019607843135" blue="0.73725490196078436" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                                <connections>
-                                    <segue destination="cZw-PF-4AS" kind="popoverPresentation" identifier="showSearchMenuPop" popoverAnchorView="fiC-BA-Acg" id="d1J-rU-IUZ">
-                                        <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
-                                    </segue>
-                                </connections>
-                            </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="select music search type" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="39V-sm-ZCj">
-                                <rect key="frame" x="94" y="68" width="187" height="23"/>
-                                <fontDescription key="fontDescription" name="BradleyHandITCTT-Bold" family="Bradley Hand" pointSize="18"/>
-                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="search type" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sxp-8W-Iva">
-                                <rect key="frame" x="94" y="106" width="90" height="32"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="T6y-er-bqr">
-                                <rect key="frame" x="0.0" y="146" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="60" width="375" height="44"/>
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="64" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="DAW-T5-45z">
-                                <rect key="frame" x="0.0" y="190" width="375" height="477"/>
+                                <rect key="frame" x="0.0" y="104" width="375" height="563"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="searchCell" editingAccessoryType="checkmark" focusStyle="custom" id="fSY-x7-DOT">
@@ -577,29 +551,19 @@
                             <constraint firstItem="T6y-er-bqr" firstAttribute="width" secondItem="Mgk-E2-HK6" secondAttribute="width" id="56y-AX-FXP"/>
                             <constraint firstItem="tXG-9d-ZRS" firstAttribute="width" secondItem="Mgk-E2-HK6" secondAttribute="width" id="DfN-UX-X8v"/>
                             <constraint firstItem="tXG-9d-ZRS" firstAttribute="top" secondItem="Mgk-E2-HK6" secondAttribute="top" id="E7v-5N-ubK"/>
-                            <constraint firstItem="Sxp-8W-Iva" firstAttribute="top" secondItem="fiC-BA-Acg" secondAttribute="top" id="J1l-8v-WYq"/>
+                            <constraint firstItem="T6y-er-bqr" firstAttribute="top" secondItem="tXG-9d-ZRS" secondAttribute="bottom" id="I2B-oA-G9u"/>
                             <constraint firstItem="DAW-T5-45z" firstAttribute="centerX" secondItem="Mgk-E2-HK6" secondAttribute="centerX" id="KRj-zP-cWv"/>
-                            <constraint firstItem="fiC-BA-Acg" firstAttribute="top" secondItem="39V-sm-ZCj" secondAttribute="bottom" constant="15" id="MGi-cw-mIV"/>
-                            <constraint firstItem="39V-sm-ZCj" firstAttribute="centerX" secondItem="Mgk-E2-HK6" secondAttribute="centerX" id="N3s-ho-mRg"/>
                             <constraint firstItem="DAW-T5-45z" firstAttribute="top" secondItem="T6y-er-bqr" secondAttribute="bottom" id="Odg-1d-tpO"/>
-                            <constraint firstItem="Sxp-8W-Iva" firstAttribute="bottom" secondItem="fiC-BA-Acg" secondAttribute="bottom" id="U0F-M4-HW4"/>
-                            <constraint firstItem="39V-sm-ZCj" firstAttribute="top" secondItem="tXG-9d-ZRS" secondAttribute="bottom" constant="8" id="gA6-UF-P0S"/>
-                            <constraint firstItem="Sxp-8W-Iva" firstAttribute="leading" secondItem="fiC-BA-Acg" secondAttribute="trailing" constant="30" id="gSS-Pu-30D"/>
                             <constraint firstItem="tXG-9d-ZRS" firstAttribute="centerX" secondItem="Mgk-E2-HK6" secondAttribute="centerX" id="gXw-Kk-VAz"/>
                             <constraint firstItem="ccS-qq-eqf" firstAttribute="top" secondItem="DAW-T5-45z" secondAttribute="bottom" id="gzx-tH-g9j"/>
-                            <constraint firstItem="T6y-er-bqr" firstAttribute="top" secondItem="fiC-BA-Acg" secondAttribute="bottom" constant="8" id="jjo-k8-5be"/>
                             <constraint firstItem="T6y-er-bqr" firstAttribute="centerX" secondItem="Mgk-E2-HK6" secondAttribute="centerX" id="kJM-Jn-2py"/>
                             <constraint firstItem="DAW-T5-45z" firstAttribute="width" secondItem="Mgk-E2-HK6" secondAttribute="width" id="lCp-A1-Eq7"/>
-                            <constraint firstItem="fiC-BA-Acg" firstAttribute="leading" secondItem="Mgk-E2-HK6" secondAttribute="leading" constant="32" id="qF1-KJ-mVe"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="introLabel" destination="39V-sm-ZCj" id="aXd-jA-vfF"/>
                         <outlet property="navigationView" destination="tXG-9d-ZRS" id="PFg-fn-1fe"/>
                         <outlet property="searchBar" destination="T6y-er-bqr" id="keO-zQ-Mwl"/>
                         <outlet property="searchDisplayController" destination="v6a-2b-vtI" id="LCU-eA-Jmk"/>
-                        <outlet property="searchMenuButton" destination="fiC-BA-Acg" id="cK6-Kp-oeM"/>
-                        <outlet property="searchTypeLabel" destination="Sxp-8W-Iva" id="JYe-NF-ZqB"/>
                         <outlet property="tableView" destination="DAW-T5-45z" id="brw-Lj-MSc"/>
                     </connections>
                 </viewController>
@@ -614,18 +578,18 @@
                     </connections>
                 </searchDisplayController>
             </objects>
-            <point key="canvasLocation" x="2516" y="556"/>
+            <point key="canvasLocation" x="1857" y="691"/>
         </scene>
-        <!--Search Type Pop Table View Controller-->
+        <!--Playlist Type Pop Table View Controller-->
         <scene sceneID="k7P-Nw-vFh">
             <objects>
-                <tableViewController id="cZw-PF-4AS" customClass="SearchTypePopTableViewController" customModule="SilverCloudPlaylist" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="cZw-PF-4AS" customClass="PlaylistTypePopTableViewController" customModule="SilverCloudPlaylist" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="rI7-Jq-kyf">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="gray" indentationWidth="10" reuseIdentifier="searchTypeCell" editingAccessoryType="checkmark" id="0Go-Y5-WLZ">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="gray" indentationWidth="10" reuseIdentifier="statusCell" editingAccessoryType="checkmark" id="0Go-Y5-WLZ">
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="0Go-Y5-WLZ" id="WIF-sh-ber">
@@ -633,7 +597,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="Zbs-PN-SeS" kind="unwind" identifier="searchTypeSelected" trigger="accessoryAction" unwindAction="searchTypeSelected:" id="YGZ-qG-2Q6"/>
+                                    <segue destination="Zbs-PN-SeS" kind="unwind" identifier="playlistStatusSelected" trigger="accessoryAction" unwindAction="playlistStatusSelected:" id="AeB-Fn-mSs"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -646,7 +610,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="g7G-7x-K6z" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="Zbs-PN-SeS" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1732" y="1084"/>
+            <point key="canvasLocation" x="1902" y="1419"/>
         </scene>
     </scenes>
     <resources>
@@ -654,6 +618,5 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="Qxv-DB-cVl"/>
-        <segue reference="LpJ-Qy-s0C"/>
     </inferredMetricsTieBreakers>
 </document>

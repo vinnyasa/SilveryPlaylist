@@ -5,7 +5,7 @@
 //  Created by Ayah Effi-yah on 12/4/16.
 //  Copyright © 2016 TrhUArrayLUV. All rights reserved.
 //
-
+/*
 import UIKit
 
 class SearchTypePopTableViewController: UITableViewController, SegueHandler {
@@ -60,11 +60,9 @@ class SearchTypePopTableViewController: UITableViewController, SegueHandler {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "searchTypeCell", for: indexPath)
-
         // Configure the cell...
         let searchType = searchTypes[(indexPath as NSIndexPath).row]
         cell.textLabel?.text = searchType.toString
-
         return cell
     }
     
@@ -80,4 +78,4 @@ class SearchTypePopTableViewController: UITableViewController, SegueHandler {
         case searchTypeSelected = "searchTypeSelected"
     }
 
-}
+}*/

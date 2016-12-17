@@ -210,25 +210,27 @@ class PlaylistService: SilverCloudService, SessionHandler {
     }
 
     
-    func handleCreateNewPlaylist(withName name: String, accessToken token: String, tracks: [SPTPartialTrack]?, publicFlag: Bool, completion: @escaping SCPlaylistCompletion) {
+    func handleCreateNewPlaylist(withName name: String, accessToken token: String, tracks: [SPTPartialTrack], publicFlag: Bool, completion: @escaping SCPlaylistCompletion) {
         if let username = self.spotifySession?.canonicalUsername {
-            SPTPlaylistList.createPlaylist(withName: name, forUser: username, publicFlag: true, accessToken: token) {
+            SPTPlaylistList.createPlaylist(withName: name, forUser: username, publicFlag: publicFlag, accessToken: token) {
                 (error, sptPlaylistSnapshot) in
                 guard let playlistSnapshot = sptPlaylistSnapshot else {
                     completion(error, nil)
                     return
                 }
                 //could create local SCPLaylist with tracks to different, to avoid another call, but would not have cover art for tracks
-                guard let playlistTracks = tracks else {
+                guard !tracks.isEmpty else {
+                    print("snapshot of playlistwithout tracks: \(playlistSnapshot)")
                     guard let scpPlaylist = SCPlaylist(sptPlaylistSnapshot: playlistSnapshot) else {
                         completion(PlaylistServiceError.unableToCreateSCPlaylist(ErrorIdentifier.newPlaylistSnapshot.rawValue), nil)
                         return
                     }
+                    print("playlist without tracks: \(scpPlaylist)")
                     completion(nil, scpPlaylist)
                     return
                 }
                 //add tracks to playlist
-                playlistSnapshot.addTracks(toPlaylist: playlistTracks, withAccessToken: token) {
+                playlistSnapshot.addTracks(toPlaylist: tracks, withAccessToken: token) {
                     (error) in
                     guard error == nil else {
                         completion(error, nil)

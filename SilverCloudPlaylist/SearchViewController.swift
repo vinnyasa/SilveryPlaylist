@@ -10,9 +10,6 @@ import UIKit
 
 class SearchViewController: UIViewController, UIPopoverPresentationControllerDelegate, SegueHandler, UISearchBarDelegate, UITableViewDelegate, UITableViewDataSource {
 
-    @IBOutlet weak var introLabel: UILabel!
-    @IBOutlet weak var searchTypeLabel: UILabel!
-    @IBOutlet weak var searchMenuButton: UIButton?
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
     
@@ -49,6 +46,7 @@ class SearchViewController: UIViewController, UIPopoverPresentationControllerDel
         searchBar.addSubview(activityIndicator)
         activityIndicator.frame = searchBar.bounds
         activityIndicator.startAnimating()
+        tableView?.isHidden = false
         if let searchTerm = searchBar.text{
             searchSpotify(with: searchTerm, queryType: searchType)
         }
@@ -75,7 +73,7 @@ class SearchViewController: UIViewController, UIPopoverPresentationControllerDel
         guard searchBar != nil else {
             return
         }
-        searchBar.isHidden = true
+        //searchBar.isHidden = false
         searchBar?.tintColor = SilverCloudColor.aquaGreen.toColor
         searchBar?.placeholder = "search music"
         self.definesPresentationContext = true
@@ -109,7 +107,6 @@ class SearchViewController: UIViewController, UIPopoverPresentationControllerDel
     
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    
         let cell = tableView.dequeueReusableCell(withIdentifier: "searchCell", for: indexPath)
         guard let name = searchResult?.name(atIndex: indexPath.row) else {
             return cell
@@ -121,10 +118,8 @@ class SearchViewController: UIViewController, UIPopoverPresentationControllerDel
      }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
         //change accesoryView
         if let cell  = tableView.cellForRow(at: indexPath) {
-            
             if cell.accessoryType == .none {
                 cell.accessoryView = nil
                 cell.accessoryType = .checkmark
@@ -164,7 +159,7 @@ class SearchViewController: UIViewController, UIPopoverPresentationControllerDel
             tracksToAdd = tracksToAdd.filter() { $0 != track }
         }
     }
-    
+    /*
     @IBAction func searchTypeSelected(_ segue:UIStoryboardSegue) {
         let searchTypeVC = segue.source as? SearchTypePopTableViewController
          if let searchTypeQuery = searchTypeVC?.searchType, let searchType = searchTypeQuery.toString {
@@ -177,7 +172,7 @@ class SearchViewController: UIViewController, UIPopoverPresentationControllerDel
         //show search bar
         searchBar.isHidden = false
         tableView?.isHidden = false
-    }
+    }*/
     
     // MARK: - Search 
     
@@ -194,10 +189,8 @@ class SearchViewController: UIViewController, UIPopoverPresentationControllerDel
                 self.searchResult = searchResult
                 self.activityIndicator.stopAnimating()
                 self.tableView.reloadData()
-                
             }
         }
-
     }
     
     // MARK: - Navigation
@@ -206,6 +199,8 @@ class SearchViewController: UIViewController, UIPopoverPresentationControllerDel
         self.dismiss(animated: true, completion: nil)
 
     }
+    
+    /*
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
@@ -231,7 +226,7 @@ class SearchViewController: UIViewController, UIPopoverPresentationControllerDel
         default:
             break
         }
-    }
+    }*/
     
     
     // Mark: - UIPopoverPresentationControllerDelegate

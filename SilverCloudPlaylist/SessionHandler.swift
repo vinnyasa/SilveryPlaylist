@@ -27,6 +27,7 @@ extension SessionHandler {
                 in
                 guard let renewedSession = session, let token = renewedSession.accessToken else {
                     completion(error, nil)
+                    print("don't have renewed session, here is error: \(error)")
                     return
                 }
                 //sdk should be saving session to defaults, test this behavior

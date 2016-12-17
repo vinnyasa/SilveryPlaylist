@@ -11,18 +11,21 @@ import Foundation
 struct SCPlaylist {
     
     let snapshot: SPTPlaylistSnapshot?
+    var tracks: [SPTPartialTrack]?
+        
+
+    /*
     var tracks: [SPTPartialTrack]? {
         guard let sptTracks = snapshot?.firstTrackPage.items as? [SPTPartialTrack] else {
             return nil
         }
         return sptTracks
-    }
+    }*/
     var largeImage: UIImage?
     var smallImage: UIImage?
     var tracksOnLocal: [SPTPartialTrack]?
-    var name: String? {
-        return snapshot!.name
-    }
+    var name: String?
+    var isPublic: Bool?
     var uri: URL? {
         return snapshot!.uri
     }
@@ -32,20 +35,23 @@ struct SCPlaylist {
         }
         let separatedUri = String(describing: uri).characters.split { $0 == ":" }
         let uriArray = separatedUri.map(String.init)
-        print("check it out playlist \(uriArray.last)")
         return uriArray.last
     }
-    
-    
     
     //change to init with SPTPlaylistSnapshot
     init?(sptPlaylistSnapshot: SPTPlaylistSnapshot) {
         //guard escentials
-        guard  let _ = sptPlaylistSnapshot.uri else {
+        guard  let _ = sptPlaylistSnapshot.uri, let name = sptPlaylistSnapshot.name else {
+            print("playlist failed to init")
             return nil
         }
         self.snapshot = sptPlaylistSnapshot
+        self.name = name
         //tracks
+        
+        if let tracks = snapshot?.firstTrackPage.items as? [SPTPartialTrack] {
+            self.tracks = tracks
+        } else { tracks = nil }
         if let largeImage = sptPlaylistSnapshot.largestImage {
             self.largeImage = largeImage.toImage
         } else { largeImage = nil }
@@ -53,34 +59,42 @@ struct SCPlaylist {
         if let smallImage = sptPlaylistSnapshot.smallestImage {
             self.smallImage = smallImage.toImage
         } else { smallImage = nil }
+        if let isPublic = snapshot?.isPublic {
+            self.isPublic = isPublic 
+        }
+        
     }
     
+    /*
     init? (sptPlaylistSnapshot: SPTPlaylistSnapshot, tracks: [SPTPartialTrack]?) {
         
         guard let playlist = SCPlaylist(sptPlaylistSnapshot: sptPlaylistSnapshot) else {
             return nil
         }
         snapshot = playlist.snapshot
+        name = playlist.name
         largeImage = playlist.largeImage
         smallImage = playlist.smallImage
         tracksOnLocal = tracks
         
-    }
+    }*/
 
 }
 
-enum Status: String {
-    case publicPl = "public"
-    case privatePl = "private"
+enum Share: String {
     
+    case publicMode = "public"
+    case privateMode = "private"
+ 
+    /*
     var toBool: Bool {
         switch self {
-        case .privatePl:
+        case .privateMode:
             return false
-        case .publicPl:
+        case .publicMode:
             return true
         }
-    }
+    }*/
 }
 
 extension SPTImage {

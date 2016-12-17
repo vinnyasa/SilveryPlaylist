@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SCPListTableViewController: UITableViewController, SessionHandler, SegueHandler {
+class SCPListTableViewController: UITableViewController, SessionHandler, SegueHandler, PlaylistDelegate {
 
     var playlists = [SCPlaylist]()
     var auth: SPTAuth = SPTAuth.defaultInstance()
@@ -45,6 +45,8 @@ class SCPListTableViewController: UITableViewController, SessionHandler, SegueHa
         handleSession() {
             (error, accessToken) in
             guard error == nil, let token = accessToken else {
+                print("have error getting a good validSession, error: \(error?.localizedDescription)")
+                self.unableToUpdatePlaylists(description: error?.localizedDescription)
                 return
             }
             print("this is token: \(token), finished there")
@@ -56,7 +58,7 @@ class SCPListTableViewController: UITableViewController, SessionHandler, SegueHa
         print("scpServiceHandler has error: \(error)")
         guard  let playlistError = error as? SCPListServiceError else {
             print ("error in request, error: \(error)")
-            self.unableToUpdatePlaylists()
+            self.unableToUpdatePlaylists(description: nil)
             return
         }
         switch playlistError {
@@ -102,7 +104,6 @@ class SCPListTableViewController: UITableViewController, SessionHandler, SegueHa
                     }
                     
                     self.playlists = playlists
-                    print(playlists)
                     self.tableView.reloadData()
                     
                 }
@@ -110,9 +111,11 @@ class SCPListTableViewController: UITableViewController, SessionHandler, SegueHa
         }
     }
     
-    func unableToUpdatePlaylists() {
-        // right know just presenting this alert for general error, but should be taylored to different error scenarios
-        let alertView = UIAlertController(title: "Network Error", message: "Unable to update playlist", preferredStyle: .alert)
+    func unableToUpdatePlaylists(description: String?) {
+        // right now just presenting this alert for general error, but should be taylored to different error scenarios
+        var message = "Unable to update and process playlists."
+        message += " \((description ?? "please check your connection"))"
+        let alertView = UIAlertController(title: "Network Error", message: message, preferredStyle: .alert)
         let ok = UIAlertAction(title: "ok", style: .cancel, handler: nil)
         alertView.addAction(ok)
         self.present(alertView, animated: true, completion: nil)
@@ -130,7 +133,7 @@ class SCPListTableViewController: UITableViewController, SessionHandler, SegueHa
     // MARK: - configure view
     func configureTable() {
         tableView.rowHeight = 77
-        title = Title.playlist.rawValue
+        title = Title.playlists.rawValue
         navigationItem.leftBarButtonItem = self.editButtonItem
         activityIndicator.center = CGPoint(x: view.center.x, y: view.center.y - 60.0)
         //activityIndicator.startAnimating()
@@ -153,11 +156,14 @@ class SCPListTableViewController: UITableViewController, SessionHandler, SegueHa
         let cell = tableView.dequeueReusableCell(withIdentifier: "silverCloudCell", for: indexPath) as! SCPListTableViewCell
         print("loading cell")
         let playlist = playlists[indexPath.row]
-        if let name = playlist.name, let image = playlist.smallImage {
+        if let name = playlist.name {
             cell.scpNameLabel?.text = name
-            cell.scpImageView?.image = image
-            
         }
+        let image = playlist.smallImage ?? UIImage(assetIdentifier: .music)
+        if let image = image {
+            cell.scpImageView?.image = image
+        }
+        
         
         return cell
     }
@@ -171,7 +177,6 @@ class SCPListTableViewController: UITableViewController, SessionHandler, SegueHa
             // delete from spotify, the notion of deleting a playlist is not relevant within the Spotify’s playlist system. Even if you are the playlist’s owner and you choose to manually remove it from your own list of playlists, you are simply unfollowing it. 
             if let username = spotifySession?.canonicalUsername, let playlistId = playlist.id {
                 let playlistService = PlaylistService()
-                print("playliist id: \(playlistId)")
                 playlistService.unfollowPlaylist(username: username , playlist: playlistId) {
                     (error, success) in
                     guard success else {
@@ -186,21 +191,22 @@ class SCPListTableViewController: UITableViewController, SessionHandler, SegueHa
         }
     }
     
-    
+    /*
     @IBAction func loginSuccessFul(_ segue:UIStoryboardSegue) {
-    }
+    }*/
     
     @IBAction func savePlaylist(_ segue:UIStoryboardSegue) {
          let newPlaylistVC = segue.source as? NewPlaylistTableViewController
         activityIndicator.startAnimating()
         print("saving new playlist")
-         if let name = newPlaylistVC?.name?.capitalized, let tracks = newPlaylistVC?.tracks, let publicFlag = newPlaylistVC?.playlistStatus?.toBool {
+         if let name = newPlaylistVC?.name?.capitalized, let tracks = newPlaylistVC?.tracks {
             //createNewPlaylist, then add tracks then create an SCPPlaylist and add to array. regardless if tracks are added
             handleSession() {
                 (error, token) in
                 if let accessToken = token {
                     print("requesting save")
-                    PlaylistService().handleCreateNewPlaylist(withName: name, accessToken: accessToken, tracks: tracks, publicFlag: publicFlag) {
+                    print("public Flag at newPlaylist request: \(newPlaylistVC?.isPublic ?? true)")
+                    PlaylistService().handleCreateNewPlaylist(withName: name, accessToken: accessToken, tracks: tracks, publicFlag: newPlaylistVC?.isPublic ?? true) {
                         (error, scpPlaylist) in
                         //enter main thread
                         DispatchQueue.main.async {
@@ -209,14 +215,24 @@ class SCPListTableViewController: UITableViewController, SessionHandler, SegueHa
                             return
                         }
                         print("adding playlist: ")
+                        let indexPath = IndexPath(row: self.playlists.count, section: 0)
                         self.playlists.append(playlist)
-                        self.tableView.reloadData()
+                        self.tableView.insertRows(at: [indexPath], with: .automatic)
                         }
                     }
                 }
             }
          }
     }
+    
+    // MARK: - Playlist
+    func addEditedPlaylist(playlist: SCPlaylist) {
+        if let selectedIndexPath = tableView.indexPathForSelectedRow {
+            playlists[selectedIndexPath.row] = playlist
+            tableView.reloadRows(at: [selectedIndexPath], with: .none)
+        }
+    }
+    
     // MARK: - Navigation
     
     // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -229,7 +245,8 @@ class SCPListTableViewController: UITableViewController, SessionHandler, SegueHa
             if let indexPath = tableView.indexPathForSelectedRow, let playlistVC =  segue.destination as? PlaylistTableViewController {
                 let playlist = playlists[indexPath.row]
                 playlistVC.playlist = playlist
-                playlistVC.title = Title.playlist.rawValue
+                //playlistVC.title = Title.playlist.rawValue
+                playlistVC.delegate = self
             }
         case .showNewPlaylist:
             (segue.destination as? NewPlaylistTableViewController)?.title = Title.newPlaylist.rawValue

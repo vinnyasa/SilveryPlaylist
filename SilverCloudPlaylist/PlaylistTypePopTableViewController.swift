@@ -10,8 +10,10 @@ import UIKit
 
 class PlaylistTypePopTableViewController: UITableViewController {
     
-    let playlistStatus: [Status] = [.publicPl, .privatePl]
-    var status: Status?
+    let playlistStatus: [Share] = [.publicMode, .privateMode]
+    //var share: Share?
+    var isPublic: Bool?
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,9 +47,9 @@ class PlaylistTypePopTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        status = playlistStatus[(indexPath as NSIndexPath).row]
-        print(status?.rawValue ?? "no search type")
-        performSegue(withIdentifier: SegueIdentifier.searchTypeSelected.rawValue, sender: nil)
+        let share = playlistStatus[(indexPath as NSIndexPath).row]
+        isPublic = (share == .publicMode)
+        performSegue(withIdentifier: SegueIdentifier.playlistStatusSelected.rawValue, sender: nil)
         //self.dismiss(animated: true, completion: nil)
     }
     
@@ -64,12 +66,10 @@ class PlaylistTypePopTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "searchTypeCell", for: indexPath)
-        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "statusCell", for: indexPath)
         // Configure the cell...
         let playlistType = playlistStatus[(indexPath as NSIndexPath).row]
         cell.textLabel?.text = playlistType.rawValue
-        
         return cell
     }
     
@@ -79,10 +79,11 @@ class PlaylistTypePopTableViewController: UITableViewController {
         guard let identifier = segue.identifier, let _ = SegueIdentifier(rawValue: identifier) else {
             fatalError("segue identifier not found in \(self)")
         }
-        
     }
+    
     enum SegueIdentifier: String {
-        case searchTypeSelected = "searchTypeSelected"
+        case playlistStatusSelected = "playlistStatusSelected"
+        
     }
 
 }
