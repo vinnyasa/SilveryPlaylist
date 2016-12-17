@@ -64,12 +64,6 @@ class NewPlaylistTableViewController: UITableViewController, UITextFieldDelegate
     
     // MARK: - Text field
     
-    /*
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        return true;
-    }*/
-    
     func textFieldDidEndEditing(_ textField: UITextField) {
         print("textFieldDidEndEditing called")
         if let textCount = textField.text?.characters.count, textCount > 1, let name = playlistNameTextField?.text {
@@ -83,21 +77,14 @@ class NewPlaylistTableViewController: UITableViewController, UITextFieldDelegate
         }
     }
 
-    
-    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         playlistNameTextField?.resignFirstResponder()
         return true
     }
-    /*
+    
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        if let textCount = textField.text?.characters.count, textCount > 1, let name = playlistNameTextField?.text {
-            self.name = name
-            buttonsEnabled(allow: true)
-        } else if let textCount = textField.text?.characters.count, textCount <= 1 {
-            buttonsEnabled(allow: false)
-        }
-    }*/
+        buttonsEnabled(allow: false)
+    }
     @IBAction func viewTapped(_ sender: UITapGestureRecognizer) {
         playlistNameTextField?.resignFirstResponder()
     }

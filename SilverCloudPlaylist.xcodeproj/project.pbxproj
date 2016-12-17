@@ -21,8 +21,6 @@
 		2740EA001DF26DC5003F9461 /* NewPlaylistTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2740E9FE1DF26DC5003F9461 /* NewPlaylistTableViewController.swift */; };
 		2740EA021DF38751003F9461 /* SCPList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2740EA011DF38751003F9461 /* SCPList.swift */; };
 		2740EA031DF38751003F9461 /* SCPList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2740EA011DF38751003F9461 /* SCPList.swift */; };
-		2740EA0B1DF4884B003F9461 /* SearchTypePopTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2740EA0A1DF4884A003F9461 /* SearchTypePopTableViewController.swift */; };
-		2740EA0C1DF4884B003F9461 /* SearchTypePopTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2740EA0A1DF4884A003F9461 /* SearchTypePopTableViewController.swift */; };
 		2740EA0E1DF488E8003F9461 /* SearchType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2740EA0D1DF488E8003F9461 /* SearchType.swift */; };
 		2740EA0F1DF488E8003F9461 /* SearchType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2740EA0D1DF488E8003F9461 /* SearchType.swift */; };
 		2740EA121DF48F8E003F9461 /* PlaylistTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2740EA111DF48F8E003F9461 /* PlaylistTableViewController.swift */; };
@@ -86,7 +84,6 @@
 		2740E9F81DF22863003F9461 /* SCPlaylist.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SCPlaylist.swift; sourceTree = "<group>"; };
 		2740E9FE1DF26DC5003F9461 /* NewPlaylistTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewPlaylistTableViewController.swift; sourceTree = "<group>"; };
 		2740EA011DF38751003F9461 /* SCPList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SCPList.swift; sourceTree = "<group>"; };
-		2740EA0A1DF4884A003F9461 /* SearchTypePopTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchTypePopTableViewController.swift; sourceTree = "<group>"; };
 		2740EA0D1DF488E8003F9461 /* SearchType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchType.swift; sourceTree = "<group>"; };
 		2740EA111DF48F8E003F9461 /* PlaylistTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaylistTableViewController.swift; sourceTree = "<group>"; };
 		2740EA171DF4B281003F9461 /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
@@ -181,7 +178,6 @@
 				2702623B1E00A07F00B90BB1 /* PlaylistTypePopTableViewController.swift */,
 				27BE58111DFE39F400667393 /* TrackViewController.swift */,
 				2740EA171DF4B281003F9461 /* SearchViewController.swift */,
-				2740EA0A1DF4884A003F9461 /* SearchTypePopTableViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -416,7 +412,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				27F2D1951DF5F7F000BD6262 /* SearchResult.swift in Sources */,
-				2740EA0B1DF4884B003F9461 /* SearchTypePopTableViewController.swift in Sources */,
 				27D43D2A1DE8FB980034DA05 /* AppDelegate.swift in Sources */,
 				27D3053E1DEF31A700930744 /* AuthDelegate.swift in Sources */,
 				2740EA1B1DF4BCD3003F9461 /* controllerExtension.swift in Sources */,
@@ -453,7 +448,6 @@
 				27D3053F1DEF31A700930744 /* AuthDelegate.swift in Sources */,
 				2740EA031DF38751003F9461 /* SCPList.swift in Sources */,
 				2740E9FA1DF22863003F9461 /* SCPlaylist.swift in Sources */,
-				2740EA0C1DF4884B003F9461 /* SearchTypePopTableViewController.swift in Sources */,
 				2740E9F31DF1104E003F9461 /* SCPListTableViewController.swift in Sources */,
 				27D43D3F1DE8FB9A0034DA05 /* SilverCloudPlaylistTests.swift in Sources */,
 				2740EA191DF4B281003F9461 /* SearchViewController.swift in Sources */,

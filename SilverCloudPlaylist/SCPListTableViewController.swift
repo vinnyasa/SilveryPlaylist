@@ -75,31 +75,14 @@ class SCPListTableViewController: UITableViewController, SessionHandler, SegueHa
     func updatePlaylists(withtoken token: String) {
         if let sptUser = spotifySession?.canonicalUsername {
             let service = SCPListService(username: sptUser)
-            // let's try this
             service.updateSCPList(withToken: token) {
                 (error, scpPlaylists) in
-                //enter main thread
+                
                 DispatchQueue.main.async {
                     print("in main delivering update")
                     self.activityIndicator.stopAnimating()
                     guard let playlists = scpPlaylists else {
                         self.handleUpdateError(error: error)
-                        /*//handle errors
-                        print("scpServiceHandler has error: \(error)")
-                        
-                        guard  let playlistError = error as? SCPListServiceError else {
-                            print ("error in request, error: \(error)")
-                            self.unableToUpdatePlaylists()
-                            return
-                        }
-                        switch playlistError {
-                        case .missing(let identifier):
-                            print("scpServiceHandler has error at: \(identifier)")
-                            //could have if identifier == "items", invite them to create playlist feature
-                            if identifier == ErrorIdentifier.sptPlaylistListItems.rawValue {
-                                self.playlistCreateInvite()
-                            }
-                        }*/
                         return
                     }
                     
@@ -123,7 +106,6 @@ class SCPListTableViewController: UITableViewController, SessionHandler, SegueHa
     
     func playlistCreateInvite() {
         // a tour or something to teach them how to add playlists
-        print("inviting user to create playlists")
         let alertView = UIAlertController(title: "No Playlists Detected", message: "It appears you haven't created any playlists yet, would you like to create one today, just use the '+' button", preferredStyle: .alert)
         let ok = UIAlertAction(title: "ok", style: .cancel, handler: nil)
         alertView.addAction(ok)
@@ -181,7 +163,6 @@ class SCPListTableViewController: UITableViewController, SessionHandler, SegueHa
                     (error, success) in
                     guard success else {
                         //FIXME: unable to unfollow, maybe trigger some alert ?
-                        print("you have just deleted this playlist: \(success)")
                         return
                     }
                 }
@@ -200,7 +181,6 @@ class SCPListTableViewController: UITableViewController, SessionHandler, SegueHa
         activityIndicator.startAnimating()
         print("saving new playlist")
          if let name = newPlaylistVC?.name?.capitalized, let tracks = newPlaylistVC?.tracks {
-            //createNewPlaylist, then add tracks then create an SCPPlaylist and add to array. regardless if tracks are added
             handleSession() {
                 (error, token) in
                 if let accessToken = token {
@@ -245,7 +225,6 @@ class SCPListTableViewController: UITableViewController, SessionHandler, SegueHa
             if let indexPath = tableView.indexPathForSelectedRow, let playlistVC =  segue.destination as? PlaylistTableViewController {
                 let playlist = playlists[indexPath.row]
                 playlistVC.playlist = playlist
-                //playlistVC.title = Title.playlist.rawValue
                 playlistVC.delegate = self
             }
         case .showNewPlaylist:
