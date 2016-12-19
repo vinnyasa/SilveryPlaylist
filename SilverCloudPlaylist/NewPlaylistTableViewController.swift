@@ -21,7 +21,6 @@ class NewPlaylistTableViewController: UITableViewController, UITextFieldDelegate
     var name: String?
     var tracks: [SPTPartialTrack] = []
     var isPublic: Bool?
-    //var share: Share?
     var viewMode: ViewMode?
     
     //ToProcessOnExistingPlaylist
@@ -47,33 +46,15 @@ class NewPlaylistTableViewController: UITableViewController, UITextFieldDelegate
         setupTextField()
         tableView.isEditing = true
     }
-    /*
-    func setupBorder(forView view: UIView?) {
-        let border = CALayer()
-        let borderWidth = CGFloat(1.0)
-        let color = UIColor(colorLiteralRed: 222.0/255.0, green: 222.0/255.0, blue: 222.0/255.0, alpha: 0.88).cgColor
-        border.borderColor = color
-        if let width = navigationView?.frame.size.width, let height = navigationView?.frame.size.height {
-            border.frame = CGRect(x: 0, y: height - borderWidth, width:  width, height: height)
-            
-            border.borderWidth = borderWidth
-            view?.layer.addSublayer(border)
-            view?.layer.masksToBounds = true
-        }
-    }*/
     
     // MARK: - Text field
     
     func textFieldDidEndEditing(_ textField: UITextField) {
-        print("textFieldDidEndEditing called")
         if let textCount = textField.text?.characters.count, textCount > 1, let name = playlistNameTextField?.text {
-            print("have name for new pl: \(name)")
             self.name = name.capitalized
             buttonsEnabled(allow: true)
         } else if let textCount = textField.text?.characters.count, textCount <= 1 {
             buttonsEnabled(allow: false)
-            print("sorry you need a longer name")
-            //show alert
         }
     }
 
@@ -91,10 +72,8 @@ class NewPlaylistTableViewController: UITableViewController, UITextFieldDelegate
     
     // MARK: - Manage View for PresentingController
     
-    
     func setupDoneButtons() {
-        guard let viewMode = viewMode else { // unableTosetUp
-            print("unable to read viewMode")
+        guard let viewMode = viewMode else {
             return
         }
         switch viewMode {
@@ -133,21 +112,11 @@ class NewPlaylistTableViewController: UITableViewController, UITextFieldDelegate
     }
     
     func handleChanges(editOperation: EditOperation) {
-        print("editOperation before processing: \(tracksEditOperation)")
         if  tracksEditOperation == nil {
             tracksEditOperation = editOperation
-            print("tracksEditOperation set to: \(tracksEditOperation)")
         } else if let edit = tracksEditOperation, edit == editOperation { } else {
             tracksEditOperation = .replace
-            print("tracks editOperation should be replace: \(tracksEditOperation)")
         }
-        // right now moving operation is handle as a replace, but with a large playlist, this could be costly so would have to keep track of indexed and tracks to move, even if I have to make 2 network calls.
-        /*
-        guard self.editOperation == nil else {
-            self.editOperation = .replace
-            return
-        }
-        self.editOperation = editOperation*/
     }
     
     // MARK: - Table view data source
@@ -210,18 +179,9 @@ class NewPlaylistTableViewController: UITableViewController, UITextFieldDelegate
 
     // MARK: - Navigation
     @IBAction func playlistStatusSelected(_ segue:UIStoryboardSegue) {
-        print("unwind segue method being called")
         let playlistPopVC = segue.source as? PlaylistTypePopTableViewController
-        /*if let share = playlistPopVC?.share {
-            print("share in unwind is: \(share)")
-            self.share = share
-            playlistTypeLabel.text = share.rawValue
-            playlistTypeLabel.isHidden = false
-        }*/
         if let isPublic = playlistPopVC?.isPublic {
-            print("share in unwind is: \(isPublic)")
             self.isPublic = isPublic
-            //let shareMode = isPublic ? "public" : "private"
             playlistTypeLabel.text = shareMode(isPublic: isPublic)
             playlistTypeLabel.isHidden = false
         }
@@ -238,26 +198,14 @@ class NewPlaylistTableViewController: UITableViewController, UITextFieldDelegate
         switch segueIdentifierForSegue(segue) {
         case .showPlaylistTypePop:
             if let playlistTypeVC =  segue.destination as? PlaylistTypePopTableViewController, let frame = privacyMenuButton?.frame {
-                print("presenting pop")
                 playlistTypeVC.popoverPresentationController?.delegate = self
                 configurePopOverController(popVC: playlistTypeVC, cgSize: CGSize(width: 108, height: 88), sourceRect: frame, sourceView: view, barButtonItem: nil, backgroundColor: .white)
             }
-        case .saveNewPlaylist:
-            print("name before exit: \(name)")
         default:
             break
         }
     }
     
-    /*
-    override func adaptivePresentationStyle(for controller:UIPresentationController) -> UIModalPresentationStyle {
-        return UIModalPresentationStyle.none
-    }*/
-    // MARK: Status bar
-    /*
-    override var prefersStatusBarHidden: Bool {
-        return true
-    }*/
     enum SegueIdentifier: String {
         case saveChangesToPlaylist = "saveChangesToPlaylist"
         case saveNewPlaylist = "saveNewPlaylist"
@@ -269,6 +217,7 @@ class NewPlaylistTableViewController: UITableViewController, UITextFieldDelegate
         case editPlaylist
         case newPlaylist
     }
+    
     enum EditOperation {
         case add
         case remove

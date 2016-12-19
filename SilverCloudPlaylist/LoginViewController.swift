@@ -39,9 +39,7 @@ class LoginViewController: UIViewController, AuthDelegate {
     
     
     @IBAction func loginToSpotify() {
-        print("requestingLoginUrl")
         guard let loginUrl = auth.spotifyWebAuthenticationURL() else {
-            print("don't have spotifyWebAuthenticationURL() ")
             return
         } 
         openSpotifyLogin(url: loginUrl)
@@ -54,10 +52,8 @@ class LoginViewController: UIViewController, AuthDelegate {
         }
         if #available(iOS 10, *) {
             UIApplication.shared.open(url, options: [:], completionHandler: nil)
-            print("opening from iOS10 to url: \(url)")
         } else {
             UIApplication.shared.openURL(url)
-            print("Opened from olded iOS")
         }
     }
     

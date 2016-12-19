@@ -26,12 +26,4 @@ class SCPListTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-    /*
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        let margin: CGFloat = 20.0
-        let indentPoints = CGFloat(self.indentationLevel) * self.indentationWidth
-        indentConstraint.constant = margin + indentPoints
-    }*/
-
 }

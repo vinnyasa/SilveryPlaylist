@@ -9,13 +9,11 @@
 import Foundation
 
 enum AuthParam: String {
-    case clientId = "80c010b7d70b4ae39d75bf5a1f0bc791"
-    case redirectURI = "silvercloudlogin://spotify/callback"
-    case tokenSwapURL = "https://silvercloudswap.herokuapp.com/swap"
-    case tokenRefreshURL = "https://silvercloudswap.herokuapp.com/refresh"
     case responseType = "code"
-    
-
+    case redirectURI = "redirectURI"
+    case tokenSwapURL = "tokenSwapURL"
+    case tokenRefreshURL = "tokenRefreshURL"
+    case clientId = "client"
 }
 
 enum Session: String {
@@ -24,20 +22,16 @@ enum Session: String {
 
 struct SilverCloudAuth {
     
-    let redirectURI = AuthParam.redirectURI.rawValue
-    let tokenSwapURL = AuthParam.tokenSwapURL.rawValue
-    let tokenRefreshURL = AuthParam.tokenRefreshURL.rawValue
     let responseType = AuthParam.responseType.rawValue
     let scopes = [SPTAuthPlaylistModifyPrivateScope, SPTAuthPlaylistModifyPublicScope, SPTAuthPlaylistReadPrivateScope, SPTAuthPlaylistReadCollaborativeScope, SPTAuthUserReadPrivateScope, SPTAuthUserReadEmailScope]
     let sessionUserDefaultsKey = UserDefaultsKey.spotifySession.rawValue
-    let clientId = AuthParam.clientId.rawValue
 }
 
 enum AuthError: Error {
     case unableToCreateLoginUrl
     case invalidScopes
     case badCallbackUri
-    
+    case invalidClient
 }
 
 enum NotificationIdentifier: String {
@@ -46,26 +40,55 @@ enum NotificationIdentifier: String {
 
 extension AuthDelegate {
     func setUpAuth() {
-        print("settingAuth")
-        /*
-         SPTAuth.defaultInstance().clientID = silverCloudAuth.clientId
-         SPTAuth.defaultInstance().redirectURL = URL(string: silverCloudAuth.redirectURI)
-         SPTAuth.defaultInstance().requestedScopes = silverCloudAuth.scopes
-         
-         SPTAuth.defaultInstance().tokenSwapURL = URL(string: silverCloudAuth.tokenSwapURL)
-         SPTAuth.defaultInstance().tokenRefreshURL = URL(string: silverCloudAuth.tokenRefreshURL)
-         SPTAuth.defaultInstance().sessionUserDefaultsKey = silverCloudAuth.sessionUserDefaultsKey
-         */
-        //auth = SPTAuth.defaultInstance()
-        auth.clientID = silverCloudAuth.clientId
-        auth.redirectURL = URL(string: silverCloudAuth.redirectURI)
         auth.requestedScopes = silverCloudAuth.scopes
-        auth.tokenSwapURL = URL(string: silverCloudAuth.tokenSwapURL)
-        auth.tokenRefreshURL = URL(string: silverCloudAuth.tokenRefreshURL)
         auth.sessionUserDefaultsKey = silverCloudAuth.sessionUserDefaultsKey
+        if let client = client {
+            auth.clientID = client
+            print("auth has client")
+        } else { print("unable to get clientID") }
+        if let redirectUri = redirectURI {
+            auth.redirectURL = URL(string: redirectUri)
+            print("auth has redirectIRI")
+        } else { print("unable to get redirectURI") }
+        if let tokenSwapURL = tokenSwapURL {
+            auth.tokenSwapURL = URL(string: tokenSwapURL)
+            print("auth has tokenSwapURL")
+        } else { print("unable to get tokenSwapURL") }
+        if let tokenRefreshURL = tokenRefreshURL {
+            auth.tokenRefreshURL = URL(string: tokenRefreshURL)
+            print("auth has token refreshURL")
+        } else { print("unable to get tokenRefreshURL") }
+    }
+    
+    
+    var client: String? {
+        if let clientId = fetchPath(key: AuthParam.clientId.rawValue) {
+            return clientId
+        } else { return nil }
+    }
+    func fetchPath(key: String) -> String? {
+        guard let path = Bundle.main.path(forResource: "Client", ofType: "plist"), let id = NSDictionary(contentsOfFile: path) as? [String: Any], let client = id[key] as? String  else {
+            return nil
+        }
+        return client
+    }
+    var redirectURI: String? {
+        if let uri = fetchPath(key: AuthParam.redirectURI.rawValue) {
+            return uri
+        } else { return nil }
+    }
+    
+    var tokenSwapURL: String? {
+        if let uri = fetchPath(key: AuthParam.tokenSwapURL.rawValue) {
+            return uri
+        } else { return nil }
+    }
+    var tokenRefreshURL: String? {
+        if let uri = fetchPath(key: AuthParam.tokenRefreshURL.rawValue) {
+            return uri
+        } else { return nil }
     }
 }
-
 
 extension UIViewController {
     var spotifySession: SPTSession? {
@@ -73,13 +96,4 @@ extension UIViewController {
         guard let session = NSKeyedUnarchiver.unarchiveObject(with: data) as? SPTSession else { return nil }
         return session
     }
-    /*
-    var spotifyUserName: String? {
-        guard let userName = UserDefaults.standard.string(forKey: UserDefaultsKey.user.rawValue) else {
-            print("no unarchivedUserName")
-            return nil
-        }
-        print("unarchivedUserName")
-        return userName
-    }*/
 }

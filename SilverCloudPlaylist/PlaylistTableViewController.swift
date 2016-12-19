@@ -38,20 +38,14 @@ class PlaylistTableViewController: UITableViewController, SegueHandler, SessionH
     }
     
     func loadPlaylist() {
+        let image = playlist?.smallImage ?? UIImage(assetIdentifier: .music)
+        playlistImageView.image = image
         if let name = playlist?.name {
             nameLabel?.text = name
         }
         if let isPublic = playlist?.isPublic {
             statusLabel?.text = isPublic ? Share.publicMode.rawValue : Share.privateMode.rawValue
         }
-        let image = playlist?.smallImage ?? UIImage(assetIdentifier: .music)
-        /*
-        if let image = image {
-            playlistImageView.image = image
-        }*/
-        playlistImageView.image = image
-
-        
         if let tracks = playlist?.tracks  {
             self.tracks.append(contentsOf: tracks)
         }
@@ -97,16 +91,13 @@ class PlaylistTableViewController: UITableViewController, SegueHandler, SessionH
         self.present(alertView, animated: true, completion: nil)
     }
     
-    
     //MARK: Edit Methods
 
     func handleTracks(tracks: [SPTPartialTrack], error: Error?) {
-        print("have changes")
         guard error == nil else {
             unableToSaveChanges()
             return
         }
-        print("loading tracks")
         self.tracks = tracks
         playlist?.tracks = tracks
         tableView.reloadData()
@@ -121,18 +112,14 @@ class PlaylistTableViewController: UITableViewController, SegueHandler, SessionH
                     return
                 }
                 if let name = details[SPTPlaylistSnapshotNameKey] as? String {
-                    print("returned from changing name")
                     self.nameLabel?.text = name
                     self.playlist?.name = self.nameLabel?.text
                 }
                 if let isPublic = details[SPTPlaylistSnapshotPublicKey] as? Bool {
-                    print("returned from changing isPublic to: \(isPublic)")
                     self.statusLabel?.text = self.shareMode(isPublic: isPublic)
                     self.playlist?.isPublic = isPublic
                 }
-                
             }
-            
         }
     }
 
@@ -148,24 +135,16 @@ class PlaylistTableViewController: UITableViewController, SegueHandler, SessionH
                     return
                 }
                 var details: [AnyHashable: Any] = [:]
-                
-                print("edited name: \(name)")
-                print("playlist name is: \(playlistName)")
                 if name != playlistName {
                     //push change to spotify
-                    print("have different name")
-                    //self.changeName(snapshot: snapshot, name: name, accessToken: accessToken)
                     details[SPTPlaylistSnapshotNameKey] = name
                 }
                 if editedIsPublic != isPublic {
-                    print("edited is public: \(editedIsPublic)")
                     details[SPTPlaylistSnapshotPublicKey] = editedIsPublic
                 }
                 if !details.isEmpty {
-                    print("changing details")
                     self.changedetails(snapshot: snapshot, details: details, accessToken: accessToken)
                 }
-                print("checking editOperation")
                 if editPlaylistVC.tracksEditOperation != nil {
                     snapshot.replaceTracks(inPlaylist: editPlaylistVC.tracks, withAccessToken: accessToken) {
                         (error) in
@@ -174,7 +153,6 @@ class PlaylistTableViewController: UITableViewController, SegueHandler, SessionH
                         }
                     }
                 }
-                
             }
         }
         
@@ -188,13 +166,10 @@ class PlaylistTableViewController: UITableViewController, SegueHandler, SessionH
         }
     }
     
-    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
         guard let identifier = segue.identifier, let _ = SegueIdentifier(rawValue: identifier) else {
             fatalError("segue identifier not found in \(self)")
         }
@@ -233,8 +208,6 @@ class PlaylistTableViewController: UITableViewController, SegueHandler, SessionH
         case showEditPlaylist = "showEditPlaylist"
         case showTrack = "showTrack"
     }
-    
-    
 }
 
 

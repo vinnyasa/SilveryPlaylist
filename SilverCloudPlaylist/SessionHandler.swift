@@ -21,27 +21,18 @@ extension SessionHandler {
             return
         }
         guard scpSession.isValid() else {
-            print("session not valid")
             setUpAuth()
-            SPTAuth.defaultInstance().renewSession(scpSession) { (error, session)
-                in
+            SPTAuth.defaultInstance().renewSession(scpSession) {
+                (error, session) in
                 guard let renewedSession = session, let token = renewedSession.accessToken else {
                     completion(error, nil)
-                    print("don't have renewed session, here is error: \(error)")
                     return
                 }
-                //sdk should be saving session to defaults, test this behavior
-                //renewed session is not being saved to NSUserDefaults by sdk, why??
-                print("session has canonical as: \(renewedSession.canonicalUsername)")
                 self.sessionToUserDefaults(session: renewedSession)
                 completion(nil, token)
             }
             return
         }
-        print("session is valid")
-        // have valid session: good to go done with authentication
-        //self.handleSCPUser(session: scpSession)
-        print("user from valid session = \(scpSession.canonicalUsername)")
         completion(nil, scpSession.accessToken)
     }
     

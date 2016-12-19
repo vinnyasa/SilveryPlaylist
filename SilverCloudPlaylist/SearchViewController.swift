@@ -52,7 +52,6 @@ class SearchViewController: UIViewController, UIPopoverPresentationControllerDel
         }
         searchBar.text = nil
         view.endEditing(true)
-        print("searching")
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
@@ -84,10 +83,6 @@ class SearchViewController: UIViewController, UIPopoverPresentationControllerDel
             
             searchBar?.searchBarStyle = .minimal
         }
-    }
-    
-    func handleTableForSearchResults() {
-        
     }
     
     // MARK: - Table view data source
@@ -159,20 +154,6 @@ class SearchViewController: UIViewController, UIPopoverPresentationControllerDel
             tracksToAdd = tracksToAdd.filter() { $0 != track }
         }
     }
-    /*
-    @IBAction func searchTypeSelected(_ segue:UIStoryboardSegue) {
-        let searchTypeVC = segue.source as? SearchTypePopTableViewController
-         if let searchTypeQuery = searchTypeVC?.searchType, let searchType = searchTypeQuery.toString {
-            self.searchType = searchTypeQuery
-            searchTypeLabel.text = searchType
-            searchTypeLabel.isHidden = false
-            introLabel.text = "great now search for \(searchType)"
-         }
-        print("search type return: \(searchType.toString ?? "no return")")
-        //show search bar
-        searchBar.isHidden = false
-        tableView?.isHidden = false
-    }*/
     
     // MARK: - Search 
     
@@ -200,50 +181,8 @@ class SearchViewController: UIViewController, UIPopoverPresentationControllerDel
 
     }
     
-    /*
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
-        guard let identifier = segue.identifier, let _ = SegueIdentifier(rawValue: identifier) else {
-            fatalError("segue identifier not found in \(self)")
-        }
-        switch segueIdentifierForSegue(segue) {
-        
-        case .showSearchMenuPop:
-            if let searchTypeVC =  segue.destination as? SearchTypePopTableViewController, let frame = searchMenuButton?.frame {
-                searchTypeVC.popoverPresentationController?.delegate = self
-                configurePopOverController(popVC: searchTypeVC, cgSize: CGSize(width: 108, height: 132), sourceRect: frame, sourceView: view, barButtonItem: nil, backgroundColor: .white)
-                /*
-                searchTypeVC.modalPresentationStyle = UIModalPresentationStyle.popover
-                searchTypeVC.popoverPresentationController?.delegate = self
-                searchTypeVC.popoverPresentationController?.sourceView = view
-                searchTypeVC.popoverPresentationController?.sourceRect = frame
-                searchTypeVC.preferredContentSize = CGSize(width: 108, height: 132)
-                searchTypeVC.popoverPresentationController?.permittedArrowDirections = UIPopoverArrowDirection.any
-                searchTypeVC.popoverPresentationController?.backgroundColor = .white
-                */
-            }
-        default:
-            break
-        }
-    }*/
-    
-    
-    // Mark: - UIPopoverPresentationControllerDelegate
-    /*
-    func prepareForPopoverPresentation(_ popoverPresentationController: UIPopoverPresentationController) {
-        popoverPresentationController.permittedArrowDirections = UIPopoverArrowDirection.any
-    }
-    
-    func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
-        return UIModalPresentationStyle.none
-    }*/
-    
     enum SegueIdentifier: String {
         case showSearchMenuPop = "showSearchMenuPop"
         case addTracks = "addTracks"
     }
-    
-    
-    
 }

@@ -34,6 +34,25 @@ class SCPListTableViewController: UITableViewController, SessionHandler, SegueHa
         // Dispose of any resources that can be recreated.
     }
     
+    // MARK: ActivityIndicator
+    
+    func addIndicator() {
+        
+        let activityView: UIView = UIView(frame: CGRect(x: 0.0, y: 60.0, width: view.frame.width, height: 32.0))
+        let label: UILabel = UILabel(frame: CGRect(x: 16.0, y: 0.0, width: activityView.frame.width - 32.0, height: 28.0))
+        label.font = label.font.withSize(12.0)
+        label.textAlignment = NSTextAlignment.center
+        label.textColor = .white
+        label.text = "Fetching Your Spotify Playlists"
+        activityView.addSubview(label)
+        activityView.backgroundColor = .lightGray
+        self.tableView.tableHeaderView = activityView
+        
+    }
+    
+    func hideIndicator() {
+        tableView.tableHeaderView = nil
+    }
     // MARK: Session
     
     func sessionUpdate() {
@@ -44,26 +63,23 @@ class SCPListTableViewController: UITableViewController, SessionHandler, SegueHa
         // firstLoginDidHappen
         handleSession() {
             (error, accessToken) in
-            guard error == nil, let token = accessToken else {
-                print("have error getting a good validSession, error: \(error?.localizedDescription)")
+            guard let token = accessToken else {
+                //self.hideIndicator()
                 self.unableToUpdatePlaylists(description: error?.localizedDescription)
                 return
             }
-            print("this is token: \(token), finished there")
             self.updatePlaylists(withtoken: token)
         }
     }
     
     func handleUpdateError(error: Error?) {
-        print("scpServiceHandler has error: \(error)")
+        //hideIndicator()
         guard  let playlistError = error as? SCPListServiceError else {
-            print ("error in request, error: \(error)")
             self.unableToUpdatePlaylists(description: nil)
             return
         }
         switch playlistError {
         case .missing(let identifier):
-            print("scpServiceHandler has error at: \(identifier)")
             //could have if identifier == "items", invite them to create playlist feature
             if identifier == ErrorIdentifier.sptPlaylistListItems.rawValue {
                 self.playlistCreateInvite()
@@ -79,16 +95,13 @@ class SCPListTableViewController: UITableViewController, SessionHandler, SegueHa
                 (error, scpPlaylists) in
                 
                 DispatchQueue.main.async {
-                    print("in main delivering update")
-                    self.activityIndicator.stopAnimating()
+                    self.hideIndicator()
                     guard let playlists = scpPlaylists else {
                         self.handleUpdateError(error: error)
                         return
                     }
-                    
                     self.playlists = playlists
                     self.tableView.reloadData()
-                    
                 }
             }
         }
@@ -118,8 +131,20 @@ class SCPListTableViewController: UITableViewController, SessionHandler, SegueHa
         title = Title.playlists.rawValue
         navigationItem.leftBarButtonItem = self.editButtonItem
         activityIndicator.center = CGPoint(x: view.center.x, y: view.center.y - 60.0)
-        //activityIndicator.startAnimating()
         view.addSubview(activityIndicator)
+        if isInitial {
+            addIndicator()
+        }
+        /*
+        if let isHiden = tableView.tableHeaderView?.isHidden, isHiden == true {
+            adjustTable()
+        }*/
+   
+    }
+    
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        
+        return nil
     }
     
     // MARK: - Table view data source
@@ -136,7 +161,6 @@ class SCPListTableViewController: UITableViewController, SessionHandler, SegueHa
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "silverCloudCell", for: indexPath) as! SCPListTableViewCell
-        print("loading cell")
         let playlist = playlists[indexPath.row]
         if let name = playlist.name {
             cell.scpNameLabel?.text = name
@@ -145,8 +169,6 @@ class SCPListTableViewController: UITableViewController, SessionHandler, SegueHa
         if let image = image {
             cell.scpImageView?.image = image
         }
-        
-        
         return cell
     }
     
@@ -156,7 +178,6 @@ class SCPListTableViewController: UITableViewController, SessionHandler, SegueHa
             // Delete the row from the data source
             let playlist = playlists.remove(at: indexPath.row)
             playlistsToDelete.append(playlist)
-            // delete from spotify, the notion of deleting a playlist is not relevant within the Spotify’s playlist system. Even if you are the playlist’s owner and you choose to manually remove it from your own list of playlists, you are simply unfollowing it. 
             if let username = spotifySession?.canonicalUsername, let playlistId = playlist.id {
                 let playlistService = PlaylistService()
                 playlistService.unfollowPlaylist(username: username , playlist: playlistId) {
@@ -172,20 +193,13 @@ class SCPListTableViewController: UITableViewController, SessionHandler, SegueHa
         }
     }
     
-    /*
-    @IBAction func loginSuccessFul(_ segue:UIStoryboardSegue) {
-    }*/
-    
     @IBAction func savePlaylist(_ segue:UIStoryboardSegue) {
          let newPlaylistVC = segue.source as? NewPlaylistTableViewController
         activityIndicator.startAnimating()
-        print("saving new playlist")
          if let name = newPlaylistVC?.name?.capitalized, let tracks = newPlaylistVC?.tracks {
             handleSession() {
                 (error, token) in
                 if let accessToken = token {
-                    print("requesting save")
-                    print("public Flag at newPlaylist request: \(newPlaylistVC?.isPublic ?? true)")
                     PlaylistService().handleCreateNewPlaylist(withName: name, accessToken: accessToken, tracks: tracks, publicFlag: newPlaylistVC?.isPublic ?? true) {
                         (error, scpPlaylist) in
                         //enter main thread
@@ -194,7 +208,6 @@ class SCPListTableViewController: UITableViewController, SessionHandler, SegueHa
                         guard error == nil, let playlist = scpPlaylist else {
                             return
                         }
-                        print("adding playlist: ")
                         let indexPath = IndexPath(row: self.playlists.count, section: 0)
                         self.playlists.append(playlist)
                         self.tableView.insertRows(at: [indexPath], with: .automatic)
@@ -230,7 +243,6 @@ class SCPListTableViewController: UITableViewController, SessionHandler, SegueHa
         case .showNewPlaylist:
             (segue.destination as? NewPlaylistTableViewController)?.title = Title.newPlaylist.rawValue
             (segue.destination as? NewPlaylistTableViewController)?.viewMode = NewPlaylistTableViewController.ViewMode.newPlaylist
-            
         default:
             break
         }
@@ -240,6 +252,7 @@ class SCPListTableViewController: UITableViewController, SessionHandler, SegueHa
         case showLogin = "showLogin"
         case showPlaylist = "showPlaylist"
         case showNewPlaylist = "showNewPlaylist"
+        case showAlert = "showAlert"
     }
 }
 

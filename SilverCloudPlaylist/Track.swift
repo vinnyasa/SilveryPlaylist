@@ -22,13 +22,9 @@ struct Track {
             return nil
         }
         self.name = name
-        print("getting album name:")
         if let album = track.album, let albumName = track.album?.name {
             self.album = albumName
-            print(albumName)
-            print("getting images:")
             if let smallImage = album.smallestCover, let largeImage = album.largestCover {
-                print("there should be images")
                 self.smallImage = smallImage.toImage
                 self.largeImage = largeImage.toImage
             }
@@ -39,7 +35,5 @@ struct Track {
                 self.artist = artists.first?.name
             }
         } else { artist = nil }
-        
-        
     }
 }

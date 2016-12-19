@@ -11,18 +11,10 @@ import UIKit
 class PlaylistTypePopTableViewController: UITableViewController {
     
     let playlistStatus: [Share] = [.publicMode, .privateMode]
-    //var share: Share?
     var isPublic: Bool?
-    
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
 
     override func didReceiveMemoryWarning() {
@@ -74,8 +66,7 @@ class PlaylistTypePopTableViewController: UITableViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        
         guard let identifier = segue.identifier, let _ = SegueIdentifier(rawValue: identifier) else {
             fatalError("segue identifier not found in \(self)")
         }

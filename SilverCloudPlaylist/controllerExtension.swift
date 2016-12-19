@@ -8,8 +8,6 @@
 
 import Foundation
 
-
-
 enum Title: String {
     case album = "Album"
     case playlist = "Playlist"
@@ -30,7 +28,7 @@ extension SegueHandler where Self: UIViewController, SegueIdentifier.RawValue ==
         }
         return segueIdentifier
     }
-}
+}  
 
 enum AssetIdentifier: String {
     case menu = "menu"
@@ -102,15 +100,8 @@ extension UIViewController {
         return UIModalPresentationStyle.none
     }
     
-    /*
-     func adaptivePresentationStyle(for controller:UIPresentationController) -> UIModalPresentationStyle {
-     return UIModalPresentationStyle.none
-     }
-     */
-    
     func configurePopOverController(popVC: UIViewController, cgSize: CGSize, sourceRect: CGRect?, sourceView: UIView?, barButtonItem: UIBarButtonItem?, backgroundColor: UIColor?) {
         popVC.modalPresentationStyle = UIModalPresentationStyle.popover
-        //popVC.popoverPresentationController?.delegate = self
         popVC.preferredContentSize = cgSize
         popVC.popoverPresentationController?.permittedArrowDirections = UIPopoverArrowDirection.any
         
@@ -141,7 +132,6 @@ extension UIImage {
 
 extension UIImageView {
     func rounded() {
-        //self.layer.masksToBounds = false
         self.layer.cornerRadius = self.frame.width / 2
         self.layer.masksToBounds = true
     }

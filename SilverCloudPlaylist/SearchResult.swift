@@ -32,9 +32,7 @@ struct SearchResult {
         
         switch searchType {
         case .queryTypeTrack:
-            print("query tracks")
             if let tracks = musicResults as? [SPTPartialTrack] {
-                print("have tracks")
                 self.tracks = tracks
             }
         case .queryTypeAlbum:

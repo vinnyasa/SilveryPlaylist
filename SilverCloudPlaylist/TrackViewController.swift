@@ -21,7 +21,6 @@ class TrackViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("print loading track View")
         // Do any additional setup after loading the view.
         configureView()
     }
@@ -36,18 +35,12 @@ class TrackViewController: UIViewController {
             fatalError("no track available")
             //return
         }
-        print("track name is \(track.name)")
         trackNameLabel.text = track.name
         if let image = track.largeImage {
-            print(image)
             trackImageView.image = image
         }
         if let artist = track.artist {
             artistLabel.text = "by \(artist)"
         }
-    }
-    
-    func setupNameBackground() {
-    
     }
 }
