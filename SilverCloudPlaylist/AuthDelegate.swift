@@ -1,4 +1,9 @@
-//
+/*********************************************************************
+ ** Program name: SilverCloudPlaylist - Spotify playlists
+ ** Author: Vinny Harris-Riviello
+ ** Date: Dec 1, 2016
+ ** Description: AuthDelegate.swift 
+ *********************************************************************/
 //  AuthDelegate.swift
 //  SilverCloudPlaylist
 //

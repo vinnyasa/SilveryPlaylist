@@ -1,10 +1,11 @@
-//
-//  LoginViewController.swift
-//  SilverCloudPlaylist
-//
-//  Created by Ayah Effi-yah on 11/27/16.
-//  Copyright © 2016 TrhUArrayLUV. All rights reserved.
-//
+/*********************************************************************
+ ** Program name: SilverCloudPlaylist - Spotify playlists
+ ** Author: Vinny Harris-Riviello
+ ** Date: November 27, 2016
+ ** Description: LoginViewController - user has to authenticate using
+ Spotify authentication credentials. 
+ *********************************************************************/
+
 
 import UIKit
 

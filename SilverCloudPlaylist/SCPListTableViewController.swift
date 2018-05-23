@@ -1,10 +1,12 @@
-//
-//  SCPListTableViewController.swift
-//  SilverCloudPlaylist
-//
-//  Created by Ayah Effi-yah on 12/1/16.
-//  Copyright © 2016 TrhUArrayLUV. All rights reserved.
-//
+/*********************************************************************
+ ** Program name: SilverCloudPlaylist - Spotify playlists
+ ** Author: Vinny Harris-Riviello
+ ** Date: Dec 1, 2016
+ ** Description: SCPListTableViewController app has several tables, to
+ see the playlists created, see the songs to add to playlists, etc.
+ This contoller is for the main list of playlists.
+ *********************************************************************/
+
 
 import UIKit
 

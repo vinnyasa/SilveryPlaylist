@@ -1,10 +1,11 @@
-//
-//  TrackViewController.swift
-//  SilverCloudPlaylist
-//
-//  Created by Ayah Effi-yah on 12/11/16.
-//  Copyright © 2016 TrhUArrayLUV. All rights reserved.
-//
+/*********************************************************************
+ ** Program name: SilverCloudPlaylist - Spotify playlists
+ ** Author: Vinny Harris-Riviello
+ ** Date: Dec 4, 2016
+ ** Description: TrackViewController.swift - when a song is
+ selected, you can see the title and cover art in a pop.
+ *********************************************************************/
+
 
 import UIKit
 

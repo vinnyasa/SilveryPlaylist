@@ -43,8 +43,6 @@
 		27D43D2F1DE8FB980034DA05 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 27D43D2D1DE8FB980034DA05 /* Main.storyboard */; };
 		27D43D311DE8FB980034DA05 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 27D43D301DE8FB980034DA05 /* Assets.xcassets */; };
 		27D43D341DE8FB980034DA05 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 27D43D321DE8FB980034DA05 /* LaunchScreen.storyboard */; };
-		27D43D3F1DE8FB9A0034DA05 /* SilverCloudPlaylistTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D43D3E1DE8FB9A0034DA05 /* SilverCloudPlaylistTests.swift */; };
-		27D43D4A1DE8FB9A0034DA05 /* SilverCloudPlaylistUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D43D491DE8FB9A0034DA05 /* SilverCloudPlaylistUITests.swift */; };
 		27D43D591DE8FE890034DA05 /* Track.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D43D581DE8FE890034DA05 /* Track.swift */; };
 		27D43D5E1DE94E8A0034DA05 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27D43D5D1DE94E890034DA05 /* SystemConfiguration.framework */; };
 		27E2FC651DECAB9500E3251A /* SilverCloudAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27E2FC641DECAB9500E3251A /* SilverCloudAuth.swift */; };
@@ -98,11 +96,7 @@
 		27D43D331DE8FB980034DA05 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		27D43D351DE8FB980034DA05 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		27D43D3A1DE8FB9A0034DA05 /* SilverCloudPlaylistTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SilverCloudPlaylistTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		27D43D3E1DE8FB9A0034DA05 /* SilverCloudPlaylistTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SilverCloudPlaylistTests.swift; sourceTree = "<group>"; };
-		27D43D401DE8FB9A0034DA05 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		27D43D451DE8FB9A0034DA05 /* SilverCloudPlaylistUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SilverCloudPlaylistUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		27D43D491DE8FB9A0034DA05 /* SilverCloudPlaylistUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SilverCloudPlaylistUITests.swift; sourceTree = "<group>"; };
-		27D43D4B1DE8FB9A0034DA05 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		27D43D581DE8FE890034DA05 /* Track.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Track.swift; sourceTree = "<group>"; };
 		27D43D5D1DE94E890034DA05 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		27E2FC641DECAB9500E3251A /* SilverCloudAuth.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SilverCloudAuth.swift; sourceTree = "<group>"; };
@@ -188,8 +182,6 @@
 			isa = PBXGroup;
 			children = (
 				27D43D281DE8FB980034DA05 /* SilverCloudPlaylist */,
-				27D43D3D1DE8FB9A0034DA05 /* SilverCloudPlaylistTests */,
-				27D43D481DE8FB9A0034DA05 /* SilverCloudPlaylistUITests */,
 				27D43D271DE8FB980034DA05 /* Products */,
 				27D43D5C1DE94E880034DA05 /* Frameworks */,
 			);
@@ -218,24 +210,6 @@
 				27FD05F01E05CA2600B6E56C /* Client.plist */,
 			);
 			path = SilverCloudPlaylist;
-			sourceTree = "<group>";
-		};
-		27D43D3D1DE8FB9A0034DA05 /* SilverCloudPlaylistTests */ = {
-			isa = PBXGroup;
-			children = (
-				27D43D3E1DE8FB9A0034DA05 /* SilverCloudPlaylistTests.swift */,
-				27D43D401DE8FB9A0034DA05 /* Info.plist */,
-			);
-			path = SilverCloudPlaylistTests;
-			sourceTree = "<group>";
-		};
-		27D43D481DE8FB9A0034DA05 /* SilverCloudPlaylistUITests */ = {
-			isa = PBXGroup;
-			children = (
-				27D43D491DE8FB9A0034DA05 /* SilverCloudPlaylistUITests.swift */,
-				27D43D4B1DE8FB9A0034DA05 /* Info.plist */,
-			);
-			path = SilverCloudPlaylistUITests;
 			sourceTree = "<group>";
 		};
 		27D43D571DE8FE6C0034DA05 /* Model */ = {
@@ -442,7 +416,6 @@
 				27D3053F1DEF31A700930744 /* AuthDelegate.swift in Sources */,
 				2740E9FA1DF22863003F9461 /* SCPlaylist.swift in Sources */,
 				2740E9F31DF1104E003F9461 /* SCPListTableViewController.swift in Sources */,
-				27D43D3F1DE8FB9A0034DA05 /* SilverCloudPlaylistTests.swift in Sources */,
 				2740EA191DF4B281003F9461 /* SearchViewController.swift in Sources */,
 				27D305481DEF52D200930744 /* NetworkOperation.swift in Sources */,
 				2702623D1E00A07F00B90BB1 /* PlaylistTypePopTableViewController.swift in Sources */,
@@ -458,7 +431,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				27D43D4A1DE8FB9A0034DA05 /* SilverCloudPlaylistUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

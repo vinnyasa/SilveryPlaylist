@@ -1,10 +1,12 @@
-//
-//  Track.swift
-//  SilverCloudPlaylist
-//
-//  Created by Ayah Effi-yah on 11/25/16.
-//  Copyright © 2016 TrhUArrayLUV. All rights reserved.
-//
+/*********************************************************************
+ ** Program name: SilverCloudPlaylist - Spotify playlists
+ ** Author: Vinny Harris-Riviello
+ ** Date: Nov 25, 2016
+ ** Description: Track struct. Part of the Model, a Track represents
+ ** a song or track in an album. SearchViewController.swift -
+ ** View controller to handle the serach of a track.
+ *********************************************************************/
+
 
 import Foundation
 

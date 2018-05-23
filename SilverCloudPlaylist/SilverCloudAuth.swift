@@ -1,10 +1,10 @@
-//
-//  AuthParam.swift
-//  SilverCloudPlaylist
-//
-//  Created by Ayah Effi-yah on 11/28/16.
-//  Copyright © 2016 TrhUArrayLUV. All rights reserved.
-//
+/*********************************************************************
+ ** Program name: SilverCloudPlaylist - Spotify playlists
+ ** Author: Vinny Harris-Riviello
+ ** Date: Dec 1, 2016
+ ** Description: SilverCloudAuth struct. Handles the autherization
+ ** and swaping of keys.
+ *********************************************************************/
 
 import Foundation
 

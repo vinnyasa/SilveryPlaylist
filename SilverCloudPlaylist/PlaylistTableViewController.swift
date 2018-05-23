@@ -1,10 +1,11 @@
-//
-//  PlaylistTableViewController.swift
-//  SilverCloudPlaylist
-//
-//  Created by Ayah Effi-yah on 12/4/16.
-//  Copyright © 2016 TrhUArrayLUV. All rights reserved.
-//
+/*********************************************************************
+ ** Program name: SilverCloudPlaylist - Spotify playlists
+ ** Author: Vinny Harris-Riviello
+ ** Date: Dec 2, 2016
+ ** Description: PlaylistTableViewController. This table contoller is
+ ** for a playlist.
+ *********************************************************************/
+
 
 import UIKit
 

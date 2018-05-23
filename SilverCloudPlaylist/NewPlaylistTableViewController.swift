@@ -1,3 +1,10 @@
+/*********************************************************************
+ ** Program name: SilverCloudPlaylist - Spotify playlists
+ ** Author: Vinny Harris-Riviello
+ ** Date: Dec 1, 2016
+ ** Description: NewPlaylistTableViewController. This contoller is
+ for the editing and creadting a new playlist.
+ *********************************************************************/
 //
 //  NewPlaylistTableViewController.swift
 //  SilverCloudPlaylist

@@ -1,10 +1,10 @@
-//
-//  AppDelegate.swift
-//  SilverCloudPlaylist
-//
-//  Created by Ayah Effi-yah on 11/25/16.
-//  Copyright © 2016 TrhUArrayLUV. All rights reserved.
-//
+/*********************************************************************
+ ** Program name: SilverCloudPlaylist - Spotify playlists
+ ** Author: Vinny Harris-Riviello
+ ** Date: Nov 25, 2016
+ ** Description: AppDelegate.swift 
+ *********************************************************************/
+
 
 import UIKit
 

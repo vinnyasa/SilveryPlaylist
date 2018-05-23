@@ -1,10 +1,11 @@
-//
-//  NetworkOperation.swift
-//  SilverCloudPlaylist
-//
-//  Created by Ayah Effi-yah on 11/30/16.
-//  Copyright © 2016 TrhUArrayLUV. All rights reserved.
-//
+/*********************************************************************
+ ** Program name: SilverCloudPlaylist - Spotify playlists
+ ** Author: Vinny Harris-Riviello
+ ** Date: Nov 30, 2016
+ ** Description: NetworkOperation.swift and SilverCloudService to
+ ** manage the network calls.
+ *********************************************************************/
+
 
 import Foundation
 

@@ -1,10 +1,11 @@
-//
-//  SCPPlaylist.swift
-//  SilverCloudPlaylist
-//
-//  Created by Ayah Effi-yah on 12/2/16.
-//  Copyright © 2016 TrhUArrayLUV. All rights reserved.
-//
+/*********************************************************************
+ ** Program name: SilverCloudPlaylist - Spotify playlists
+ ** Author: Vinny Harris-Riviello
+ ** Date: Dec 1, 2016
+ ** Description: Playlist struct. Part of the Model, a Playlist
+ ** represents a list of tracks.  
+ *********************************************************************/
+
 
 import Foundation
 

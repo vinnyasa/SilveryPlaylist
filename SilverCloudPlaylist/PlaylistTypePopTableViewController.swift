@@ -1,10 +1,10 @@
-//
-//  PlaylistTypePopTableViewController.swift
-//  SilverCloudPlaylist
-//
-//  Created by Ayah Effi-yah on 12/13/16.
-//  Copyright © 2016 TrhUArrayLUV. All rights reserved.
-//
+/*********************************************************************
+ ** Program name: SilverCloudPlaylist - Spotify playlists
+ ** Author: Vinny Harris-Riviello
+ ** Date: Dec 4, 2016
+ ** Description: PlaylistTypePopTableViewController  
+ *********************************************************************/
+
 
 import UIKit
 
