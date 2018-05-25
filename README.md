@@ -1,4 +1,4 @@
-# SilverCloudPlaylist
+# SilveryPlaylist
 
 An iOS app for creating local Spotify playlists using Spotify API and authentication. 
 Authentication is also using a server to hide secret key.
